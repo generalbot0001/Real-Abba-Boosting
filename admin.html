@@ -345,6 +345,25 @@ font-size:11px;
 margin-top:4px;
 }
 
+/* SECTION */
+
+.section-header{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin:25px 0 12px;
+}
+
+.section-header h3{
+font-size:17px;
+}
+
+.section-header span{
+font-size:10px;
+color:var(--muted);
+}
+
 /* TOOLBAR */
 
 .toolbar{
@@ -431,6 +450,20 @@ background:rgba(255,82,99,.12);
 color:#ff7d89;
 }
 
+/* FUNDING STATUS */
+
+.status.approved{
+background:rgba(25,195,125,.12);
+color:#5ce0a8;
+}
+
+.status.rejected{
+background:rgba(255,82,99,.12);
+color:#ff7d89;
+}
+
+/* DETAILS */
+
 .order-details{
 color:var(--muted);
 font-size:11px;
@@ -451,6 +484,8 @@ font-size:10px;
 color:#58acff;
 word-break:break-all;
 }
+
+/* ORDER ACTIONS */
 
 .order-actions{
 border-top:1px solid var(--border);
@@ -506,6 +541,90 @@ outline:none;
 
 .note-input:focus{
 border-color:var(--blue);
+}
+
+/* FUNDING */
+
+.funding-card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:19px;
+padding:17px;
+margin-bottom:12px;
+}
+
+.funding-top{
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+gap:10px;
+margin-bottom:13px;
+}
+
+.funding-title{
+font-size:15px;
+font-weight:800;
+}
+
+.funding-amount{
+font-size:20px;
+font-weight:900;
+color:#58acff;
+margin-top:4px;
+}
+
+.funding-details{
+color:var(--muted);
+font-size:11px;
+line-height:1.9;
+word-break:break-word;
+}
+
+.funding-details strong{
+color:#fff;
+}
+
+.reference{
+color:#58acff!important;
+word-break:break-all;
+}
+
+.funding-actions{
+border-top:1px solid var(--border);
+margin-top:14px;
+padding-top:14px;
+}
+
+.funding-buttons{
+display:flex;
+gap:8px;
+}
+
+.approve-btn{
+flex:1;
+border:0;
+padding:12px;
+border-radius:11px;
+background:var(--green);
+color:#061a12;
+font-weight:900;
+}
+
+.reject-btn{
+flex:1;
+border:0;
+padding:12px;
+border-radius:11px;
+background:rgba(255,82,99,.14);
+border:1px solid rgba(255,82,99,.25);
+color:#ff7d89;
+font-weight:900;
+}
+
+.approve-btn:disabled,
+.reject-btn:disabled{
+opacity:.5;
+cursor:not-allowed;
 }
 
 .loading{
@@ -707,7 +826,7 @@ Admin Dashboard
 </h2>
 
 <p class="page-subtitle">
-Manage customer orders and update their status.
+Manage customer orders and top up requests.
 </p>
 
 
@@ -732,7 +851,7 @@ Loading...
 id="liveStatus"
 class="live-status"
 >
-🟢 Live order monitoring active
+🟢 Live order and funding monitoring active
 </div>
 
 </div>
@@ -770,7 +889,7 @@ Total Orders
 </strong>
 
 <span>
-Pending
+Pending Orders
 </span>
 
 </div>
@@ -796,15 +915,15 @@ Processing
 <div class="stat-card">
 
 <div class="stat-icon">
-✅
+💰
 </div>
 
-<strong id="completedOrders">
+<strong id="pendingFunding">
 0
 </strong>
 
 <span>
-Completed
+Pending Top Ups
 </span>
 
 </div>
@@ -812,7 +931,84 @@ Completed
 </div>
 
 
-<!-- TOOLBAR -->
+<!-- TOP UP REQUESTS -->
+
+<div class="section-header">
+
+<h3>
+💰 Top Up Requests
+</h3>
+
+<span>
+Customer funding
+</span>
+
+</div>
+
+
+<div class="toolbar">
+
+<select
+id="fundingFilter"
+class="filter-select"
+onchange="renderFundingRequests()"
+>
+
+<option value="all">
+All Top Ups
+</option>
+
+<option value="pending">
+Pending
+</option>
+
+<option value="approved">
+Approved
+</option>
+
+<option value="rejected">
+Rejected
+</option>
+
+</select>
+
+
+<button
+id="fundingRefreshBtn"
+class="refresh-btn"
+onclick="loadFundingRequests()"
+>
+🔄 Refresh
+</button>
+
+</div>
+
+
+<div
+id="fundingList"
+>
+
+<div class="loading">
+Loading top up requests...
+</div>
+
+</div>
+
+
+<!-- ORDERS -->
+
+<div class="section-header">
+
+<h3>
+📦 Customer Orders
+</h3>
+
+<span>
+Live orders
+</span>
+
+</div>
+
 
 <div class="toolbar">
 
@@ -862,8 +1058,6 @@ class="last-updated"
 Last updated: —
 </div>
 
-
-<!-- ORDERS -->
 
 <div id="ordersList">
 
@@ -922,9 +1116,14 @@ const ADMIN_EMAIL =
 "abdulmajeedyunusaaliyu@gmail.com";
 
 let currentUser = null;
+
 let orders = [];
 
+let fundingRequests = [];
+
 let loadingOrders = false;
+
+let loadingFunding = false;
 
 
 /* =========================================================
@@ -1016,6 +1215,7 @@ const button =
 document.getElementById("loginBtn");
 
 button.disabled = true;
+
 button.textContent =
 "Signing in...";
 
@@ -1036,6 +1236,7 @@ error.message
 );
 
 button.disabled = false;
+
 button.textContent =
 "Admin Login";
 
@@ -1053,6 +1254,7 @@ showMessage(
 );
 
 button.disabled = false;
+
 button.textContent =
 "Admin Login";
 
@@ -1080,6 +1282,7 @@ showMessage(
 );
 
 button.disabled = false;
+
 button.textContent =
 "Admin Login";
 
@@ -1101,6 +1304,7 @@ error.message ||
 }
 
 button.disabled = false;
+
 button.textContent =
 "Admin Login";
 
@@ -1129,7 +1333,10 @@ document
 currentUser.email ||
 ADMIN_EMAIL;
 
-await loadOrders();
+await Promise.all([
+loadOrders(),
+loadFundingRequests()
+]);
 
 startAutoRefresh();
 
@@ -1152,6 +1359,7 @@ await supabaseClient
 if(error){
 
 console.error(error);
+
 return;
 
 }
@@ -1313,14 +1521,6 @@ Loading orders...
 
 try{
 
-/*
-IMPORTANT:
-Use select("*") so this page does
-not break if the existing orders
-table contains the older "amount"
-column.
-*/
-
 const {data,error} =
 await supabaseClient
 .from("orders")
@@ -1367,20 +1567,12 @@ return;
 
 }
 
-
 orders =
 Array.isArray(data)
 ?
 data
 :
 [];
-
-
-/*
-Newest first again in JavaScript.
-This protects the display even if
-the database ordering changes.
-*/
 
 orders.sort(
 function(a,b){
@@ -1393,7 +1585,6 @@ a.created_at || 0
 );
 
 });
-
 
 updateStats();
 
@@ -1411,8 +1602,7 @@ new Date()
 document
 .getElementById("liveStatus")
 .textContent =
-"🟢 Live order monitoring active";
-
+"🟢 Live order and funding monitoring active";
 
 }catch(error){
 
@@ -1463,6 +1653,163 @@ refreshButton.textContent =
 
 
 /* =========================================================
+   LOAD FUNDING REQUESTS
+========================================================= */
+
+async function loadFundingRequests(){
+
+if(!currentUser){
+
+return;
+
+}
+
+if(loadingFunding){
+
+return;
+
+}
+
+loadingFunding = true;
+
+const box =
+document.getElementById(
+"fundingList"
+);
+
+const refreshButton =
+document.getElementById(
+"fundingRefreshBtn"
+);
+
+refreshButton.disabled = true;
+
+refreshButton.textContent =
+"⏳ Loading...";
+
+if(
+fundingRequests.length === 0
+){
+
+box.innerHTML =
+`
+<div class="loading">
+Loading top up requests...
+</div>
+`;
+
+}
+
+try{
+
+const {data,error} =
+await supabaseClient
+.from("funding_requests")
+.select("*")
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+if(error){
+
+console.error(
+"FUNDING LOAD ERROR:",
+error
+);
+
+box.innerHTML =
+`
+<div class="empty">
+
+<div class="empty-icon">
+⚠️
+</div>
+
+<strong>
+Unable to load top up requests
+</strong>
+
+<p style="margin-top:8px">
+${escapeHTML(error.message)}
+</p>
+
+</div>
+`;
+
+return;
+
+}
+
+fundingRequests =
+Array.isArray(data)
+?
+data
+:
+[];
+
+fundingRequests.sort(
+function(a,b){
+
+return new Date(
+b.created_at || 0
+) -
+new Date(
+a.created_at || 0
+);
+
+});
+
+updateStats();
+
+renderFundingRequests();
+
+}catch(error){
+
+console.error(
+"LOAD FUNDING ERROR:",
+error
+);
+
+box.innerHTML =
+`
+<div class="empty">
+
+<div class="empty-icon">
+⚠️
+</div>
+
+<strong>
+Unable to load top up requests
+</strong>
+
+<p style="margin-top:8px">
+${escapeHTML(
+error.message ||
+"Unknown error"
+)}
+</p>
+
+</div>
+`;
+
+}finally{
+
+loadingFunding = false;
+
+refreshButton.disabled = false;
+
+refreshButton.textContent =
+"🔄 Refresh";
+
+}
+
+}
+
+
+/* =========================================================
    AUTO REFRESH
 ========================================================= */
 
@@ -1476,11 +1823,11 @@ autoRefreshTimer =
 setInterval(
 function(){
 
-if(
-currentUser
-){
+if(currentUser){
 
 loadOrders();
+
+loadFundingRequests();
 
 }
 
@@ -1493,9 +1840,7 @@ loadOrders();
 
 function stopAutoRefresh(){
 
-if(
-autoRefreshTimer
-){
+if(autoRefreshTimer){
 
 clearInterval(
 autoRefreshTimer
@@ -1541,14 +1886,14 @@ order.status || ""
 }
 ).length;
 
-const completed =
-orders.filter(
-function(order){
+const pendingFunding =
+fundingRequests.filter(
+function(request){
 
 return String(
-order.status || ""
+request.status || ""
 ).toLowerCase() ===
-"completed";
+"pending";
 
 }
 ).length;
@@ -1569,15 +1914,15 @@ document
 processing;
 
 document
-.getElementById("completedOrders")
+.getElementById("pendingFunding")
 .textContent =
-completed;
+pendingFunding;
 
 }
 
 
 /* =========================================================
-   RENDER
+   RENDER ORDERS
 ========================================================= */
 
 function renderOrders(){
@@ -1655,6 +2000,86 @@ return createOrderHTML(order);
 
 
 /* =========================================================
+   RENDER FUNDING
+========================================================= */
+
+function renderFundingRequests(){
+
+const box =
+document.getElementById(
+"fundingList"
+);
+
+const filter =
+document.getElementById(
+"fundingFilter"
+).value;
+
+let filtered =
+fundingRequests;
+
+if(
+filter !== "all"
+){
+
+filtered =
+fundingRequests.filter(
+function(request){
+
+return String(
+request.status || ""
+).toLowerCase() ===
+filter;
+
+}
+);
+
+}
+
+if(
+filtered.length === 0
+){
+
+box.innerHTML =
+`
+<div class="empty">
+
+<div class="empty-icon">
+💰
+</div>
+
+<strong>
+No top up requests
+</strong>
+
+<p style="margin-top:7px">
+There are no funding requests in this category.
+</p>
+
+</div>
+`;
+
+return;
+
+}
+
+box.innerHTML =
+filtered
+.map(
+function(request){
+
+return createFundingHTML(
+request
+);
+
+}
+)
+.join("");
+
+}
+
+
+/* =========================================================
    ORDER HTML
 ========================================================= */
 
@@ -1700,7 +2125,6 @@ status
 .toUpperCase() +
 status.slice(1);
 
-
 const created =
 order.created_at
 ?
@@ -1711,7 +2135,6 @@ order.created_at
 )
 :
 "—";
-
 
 const updated =
 order.updated_at
@@ -1724,7 +2147,6 @@ order.updated_at
 :
 "—";
 
-
 const amount =
 Number(
 order.total_amount ??
@@ -1732,20 +2154,17 @@ order.amount ??
 0
 );
 
-
 const unitPrice =
 Number(
 order.unit_price ??
 0
 );
 
-
 const quantity =
 Number(
 order.quantity ??
 0
 );
-
 
 return `
 
@@ -1967,6 +2386,219 @@ order.admin_note || ""
 
 
 /* =========================================================
+   FUNDING HTML
+========================================================= */
+
+function createFundingHTML(request){
+
+const status =
+String(
+request.status || "pending"
+).toLowerCase();
+
+let statusClass = "";
+
+if(
+status === "approved"
+){
+
+statusClass =
+"approved";
+
+}
+
+if(
+status === "rejected"
+){
+
+statusClass =
+"rejected";
+
+}
+
+const statusText =
+status
+.charAt(0)
+.toUpperCase() +
+status.slice(1);
+
+const amount =
+Number(
+request.amount || 0
+);
+
+const created =
+request.created_at
+?
+new Date(
+request.created_at
+).toLocaleString(
+"en-NG"
+)
+:
+"—";
+
+return `
+
+<div class="funding-card">
+
+<div class="funding-top">
+
+<div>
+
+<div class="funding-title">
+Top Up Request
+</div>
+
+<div class="funding-amount">
+${formatMoney(amount)}
+</div>
+
+</div>
+
+<div
+class="status ${statusClass}"
+>
+${escapeHTML(statusText)}
+</div>
+
+</div>
+
+
+<div class="funding-details">
+
+Request ID:
+
+<strong class="order-id">
+${escapeHTML(request.id)}
+</strong>
+
+<br>
+
+Customer ID:
+
+<strong>
+${escapeHTML(request.user_id)}
+</strong>
+
+<br>
+
+Customer Bank:
+
+<strong>
+${escapeHTML(
+request.customer_bank_name || "—"
+)}
+</strong>
+
+<br>
+
+Customer Account Name:
+
+<strong>
+${escapeHTML(
+request.customer_account_name || "—"
+)}
+</strong>
+
+<br>
+
+Amount:
+
+<strong style="color:#58acff">
+${formatMoney(amount)}
+</strong>
+
+<br>
+
+Transaction Reference:
+
+<strong class="reference">
+${escapeHTML(
+request.transaction_reference || "—"
+)}
+</strong>
+
+<br>
+
+Requested:
+
+${escapeHTML(created)}
+
+${
+request.admin_note
+?
+`
+<br>
+
+Admin Note:
+
+<strong>
+${escapeHTML(
+request.admin_note
+)}
+</strong>
+`
+:
+""
+}
+
+</div>
+
+
+${
+status === "pending"
+?
+`
+
+<div class="funding-actions">
+
+<div class="action-label">
+Review Funding Request
+</div>
+
+<input
+class="note-input"
+id="funding-note-${escapeHTML(request.id)}"
+type="text"
+placeholder="Admin note (optional)"
+>
+
+<div class="funding-buttons">
+
+<button
+class="approve-btn"
+id="approve-${escapeHTML(request.id)}"
+onclick="approveFunding('${escapeJS(request.id)}')"
+>
+✓ Approve & Credit
+</button>
+
+<button
+class="reject-btn"
+id="reject-${escapeHTML(request.id)}"
+onclick="rejectFunding('${escapeJS(request.id)}')"
+>
+✕ Reject
+</button>
+
+</div>
+
+</div>
+
+`
+:
+""
+}
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
    UPDATE ORDER
 ========================================================= */
 
@@ -2088,6 +2720,324 @@ toast(
 error.message ||
 "Unable to update order."
 );
+
+}
+
+}
+
+
+/* =========================================================
+   APPROVE FUNDING
+========================================================= */
+
+async function approveFunding(requestId){
+
+if(!currentUser){
+
+toast(
+"Please log in first."
+);
+
+return;
+
+}
+
+const button =
+document.getElementById(
+"approve-" + requestId
+);
+
+const rejectButton =
+document.getElementById(
+"reject-" + requestId
+);
+
+const noteInput =
+document.getElementById(
+"funding-note-" + requestId
+);
+
+const note =
+noteInput
+?
+noteInput.value.trim()
+:
+"";
+
+if(button){
+
+button.disabled = true;
+
+button.textContent =
+"Approving...";
+
+}
+
+if(rejectButton){
+
+rejectButton.disabled = true;
+
+}
+
+try{
+
+const {data,error} =
+await supabaseClient
+.rpc(
+"approve_funding_request",
+{
+p_request_id:requestId,
+p_admin_note:note
+}
+);
+
+if(error){
+
+console.error(
+"APPROVE FUNDING ERROR:",
+error
+);
+
+toast(
+error.message ||
+"Unable to approve funding."
+);
+
+if(button){
+
+button.disabled = false;
+
+button.textContent =
+"✓ Approve & Credit";
+
+}
+
+if(rejectButton){
+
+rejectButton.disabled = false;
+
+}
+
+return;
+
+}
+
+if(!data){
+
+toast(
+"Funding request was not approved."
+);
+
+if(button){
+
+button.disabled = false;
+
+button.textContent =
+"✓ Approve & Credit";
+
+}
+
+if(rejectButton){
+
+rejectButton.disabled = false;
+
+}
+
+return;
+
+}
+
+toast(
+"Top up approved. Customer wallet credited successfully."
+);
+
+await loadFundingRequests();
+
+}catch(error){
+
+console.error(
+"APPROVE FUNDING ERROR:",
+error
+);
+
+toast(
+error.message ||
+"Unable to approve funding."
+);
+
+if(button){
+
+button.disabled = false;
+
+button.textContent =
+"✓ Approve & Credit";
+
+}
+
+if(rejectButton){
+
+rejectButton.disabled = false;
+
+}
+
+}
+
+}
+
+
+/* =========================================================
+   REJECT FUNDING
+========================================================= */
+
+async function rejectFunding(requestId){
+
+if(!currentUser){
+
+toast(
+"Please log in first."
+);
+
+return;
+
+}
+
+const button =
+document.getElementById(
+"reject-" + requestId
+);
+
+const approveButton =
+document.getElementById(
+"approve-" + requestId
+);
+
+const noteInput =
+document.getElementById(
+"funding-note-" + requestId
+);
+
+const note =
+noteInput
+?
+noteInput.value.trim()
+:
+"";
+
+if(button){
+
+button.disabled = true;
+
+button.textContent =
+"Rejecting...";
+
+}
+
+if(approveButton){
+
+approveButton.disabled = true;
+
+}
+
+try{
+
+const {data,error} =
+await supabaseClient
+.rpc(
+"reject_funding_request",
+{
+p_request_id:requestId,
+p_admin_note:note
+}
+);
+
+if(error){
+
+console.error(
+"REJECT FUNDING ERROR:",
+error
+);
+
+toast(
+error.message ||
+"Unable to reject funding."
+);
+
+if(button){
+
+button.disabled = false;
+
+button.textContent =
+"✕ Reject";
+
+}
+
+if(approveButton){
+
+approveButton.disabled = false;
+
+}
+
+return;
+
+}
+
+if(!data){
+
+toast(
+"Funding request was not rejected."
+);
+
+if(button){
+
+button.disabled = false;
+
+button.textContent =
+"✕ Reject";
+
+}
+
+if(approveButton){
+
+approveButton.disabled = false;
+
+}
+
+return;
+
+}
+
+toast(
+"Top up request rejected."
+);
+
+await loadFundingRequests();
+
+}catch(error){
+
+console.error(
+"REJECT FUNDING ERROR:",
+error
+);
+
+toast(
+error.message ||
+"Unable to reject funding."
+);
+
+if(button){
+
+button.disabled = false;
+
+button.textContent =
+"✕ Reject";
+
+}
+
+if(approveButton){
+
+approveButton.disabled = false;
+
+}
 
 }
 
