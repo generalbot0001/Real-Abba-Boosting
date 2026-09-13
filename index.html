@@ -1,591 +1,1962 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ABDUL VIRAL BOOSTER</title>
+<title>ABDUL VIRAL BOOSTER</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+<meta name="description" content="ABDUL VIRAL BOOSTER - Professional Social Media Boosting">
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+:root{
+    --blue:#1683ff;
+    --blue-dark:#0864d8;
+    --blue-light:#3ca0ff;
+    --bg:#07111f;
+    --card:#0d1b2d;
+    --card2:#11243a;
+    --text:#ffffff;
+    --muted:#91a4ba;
+    --border:rgba(255,255,255,.08);
+    --green:#19c37d;
+    --red:#ff5263;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#020914;
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,
+input,
+select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* MOBILE APP */
+
+.app{
+    width:100%;
+    max-width:480px;
+    min-height:100vh;
+    margin:auto;
+    background:var(--bg);
+    position:relative;
+    overflow:hidden;
+}
+
+/* AUTH */
+
+.auth{
+    min-height:100vh;
+    padding:35px 22px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.logo-icon{
+    width:76px;
+    height:76px;
+    border-radius:22px;
+    background:linear-gradient(135deg,var(--blue),#0054c7);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+    box-shadow:0 12px 35px rgba(22,131,255,.3);
+    font-size:32px;
+    font-weight:900;
+}
+
+.logo h1{
+    font-size:25px;
+    margin-top:15px;
+    letter-spacing:.5px;
+}
+
+.logo p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:7px;
+}
+
+.auth-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:24px;
+    padding:22px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.tabs{
+    display:flex;
+    background:#071321;
+    border-radius:13px;
+    padding:4px;
+    margin-bottom:22px;
+}
+
+.tab{
+    flex:1;
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    padding:12px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.tab.active{
+    background:var(--blue);
+    color:#fff;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+    color:#b7c6d7;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    border:1px solid var(--border);
+    background:#081523;
+    color:#fff;
+    padding:14px;
+    border-radius:12px;
+    outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:var(--blue);
+}
+
+.primary-btn{
+    width:100%;
+    border:0;
+    padding:15px;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--blue),var(--blue-dark));
+    color:#fff;
+    font-weight:bold;
+    box-shadow:0 8px 25px rgba(22,131,255,.22);
+}
+
+.secondary-btn{
+    width:100%;
+    border:1px solid var(--border);
+    padding:14px;
+    border-radius:13px;
+    background:var(--card2);
+    color:#fff;
+    font-weight:bold;
+}
+
+.small-link{
+    text-align:right;
+    margin:3px 0 18px;
+}
+
+.small-link button{
+    border:0;
+    background:none;
+    color:#55a9ff;
+    font-size:13px;
+}
+
+.hidden{
+    display:none !important;
+}
+
+.message{
+    margin-bottom:15px;
+    padding:12px;
+    border-radius:10px;
+    font-size:13px;
+    display:none;
+}
+
+.message.show{
+    display:block;
+}
+
+.message.success{
+    background:rgba(25,195,125,.12);
+    color:#5ce0a8;
+}
+
+.message.error{
+    background:rgba(255,82,99,.12);
+    color:#ff7d89;
+}
+
+/* APP */
+
+.main-app{
+    min-height:100vh;
+    padding-bottom:82px;
+}
+
+.topbar{
+    padding:22px 18px 15px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand-icon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--blue),#0054c7);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+}
+
+.brand-text strong{
+    display:block;
+    font-size:14px;
+}
+
+.brand-text span{
+    display:block;
+    color:var(--muted);
+    font-size:10px;
+    margin-top:2px;
+}
+
+.logout-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:#fff;
+    width:40px;
+    height:40px;
+    border-radius:12px;
+}
+
+/* PAGES */
+
+.page{
+    display:none;
+    padding:5px 17px 25px;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-title{
+    font-size:25px;
+    font-weight:800;
+    margin:10px 0 5px;
+}
+
+.page-subtitle{
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+/* BALANCE */
+
+.balance-card{
+    background:linear-gradient(135deg,#0d70df,#084b9c);
+    border-radius:22px;
+    padding:22px;
+    margin-bottom:18px;
+    position:relative;
+    overflow:hidden;
+}
+
+.balance-card:after{
+    content:"";
+    position:absolute;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    border:25px solid rgba(255,255,255,.06);
+    right:-45px;
+    top:-45px;
+}
+
+.balance-label{
+    color:#d8eaff;
+    font-size:13px;
+}
+
+.balance{
+    font-size:34px;
+    font-weight:900;
+    margin:8px 0 17px;
+}
+
+.topup-btn{
+    background:#fff;
+    color:#0864d8;
+    border:0;
+    padding:11px 18px;
+    border-radius:11px;
+    font-weight:800;
+}
+
+/* QUICK ACTIONS */
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-bottom:22px;
+}
+
+.quick-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:18px;
+}
+
+.quick-icon{
+    font-size:23px;
+    margin-bottom:12px;
+}
+
+.quick-card strong{
+    display:block;
+    font-size:14px;
+}
+
+.quick-card span{
+    color:var(--muted);
+    font-size:11px;
+}
+
+/* SERVICE */
+
+.service-list{
+    display:flex;
+    flex-direction:column;
+    gap:11px;
+}
+
+.service{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.service-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.service-icon{
+    width:43px;
+    height:43px;
+    border-radius:13px;
+    background:#102942;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+}
+
+.service-info strong{
+    display:block;
+    font-size:14px;
+}
+
+.service-info span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
+}
+
+.service-price{
+    text-align:right;
+    color:#5db1ff;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* ORDER */
+
+.order-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:18px;
+}
+
+.price-box{
+    background:#081a2e;
+    border:1px solid rgba(22,131,255,.2);
+    border-radius:14px;
+    padding:16px;
+    margin:5px 0 17px;
+}
+
+.price-box span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.price-box strong{
+    display:block;
+    color:#58acff;
+    font-size:24px;
+    margin-top:4px;
+}
+
+/* ORDERS */
+
+.order-item{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:17px;
+    padding:16px;
+    margin-bottom:11px;
+}
+
+.order-top{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.order-name{
+    font-weight:bold;
+    font-size:14px;
+}
+
+.status{
+    font-size:10px;
+    padding:5px 9px;
+    border-radius:20px;
+    background:rgba(255,193,7,.12);
+    color:#ffd45a;
+}
+
+.order-details{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.8;
+}
+
+/* TOPUP */
+
+.topup-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+}
+
+.amount-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+    margin-bottom:17px;
+}
+
+.amount-btn{
+    background:#09182a;
+    color:#fff;
+    border:1px solid var(--border);
+    border-radius:11px;
+    padding:11px 5px;
+    font-size:12px;
+}
+
+.amount-btn:hover{
+    border-color:var(--blue);
+}
+
+.payment-note{
+    background:rgba(22,131,255,.08);
+    border:1px solid rgba(22,131,255,.15);
+    border-radius:13px;
+    padding:14px;
+    color:#a9cfff;
+    font-size:12px;
+    line-height:1.6;
+    margin-bottom:17px;
+}
+
+/* ACCOUNT */
+
+.account-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+}
+
+.avatar{
+    width:70px;
+    height:70px;
+    border-radius:22px;
+    background:linear-gradient(135deg,var(--blue),#0054c7);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    font-weight:900;
+    margin-bottom:15px;
+}
+
+.account-name{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.account-email{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+.info-row{
+    padding:15px 0;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+}
+
+.info-row:last-child{
+    border-bottom:0;
+}
+
+.info-row span{
+    color:var(--muted);
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:480px;
+    background:rgba(7,17,31,.96);
+    backdrop-filter:blur(15px);
+    border-top:1px solid var(--border);
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    padding:9px 7px calc(9px + env(safe-area-inset-bottom));
+    z-index:50;
+}
+
+.nav-btn{
+    border:0;
+    background:none;
+    color:#6e8299;
+    font-size:10px;
+    padding:5px;
+}
+
+.nav-icon{
+    display:block;
+    font-size:19px;
+    margin-bottom:4px;
+}
+
+.nav-btn.active{
+    color:#48a5ff;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.7);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:100;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:480px;
+    background:#0c1b2d;
+    border-radius:25px 25px 0 0;
+    padding:23px;
+    border-top:1px solid var(--border);
+}
+
+.modal-title{
+    font-size:21px;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+.modal-subtitle{
+    color:var(--muted);
+    font-size:12px;
+    margin-bottom:20px;
+}
+
+.close-btn{
+    width:100%;
+    margin-top:10px;
+    background:transparent;
+    border:1px solid var(--border);
+    color:#fff;
+    padding:13px;
+    border-radius:12px;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:95px;
+    transform:translateX(-50%) translateY(20px);
+    background:#15283d;
+    border:1px solid var(--border);
+    color:#fff;
+    padding:12px 17px;
+    border-radius:12px;
+    font-size:12px;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    z-index:200;
+    width:max-content;
+    max-width:90%;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* DESKTOP */
+
+@media(min-width:600px){
+    body{
+        padding:20px 0;
     }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #eef4ff;
-      color: #111827;
+    .app{
+        border-radius:28px;
+        min-height:calc(100vh - 40px);
+        box-shadow:0 0 60px rgba(0,0,0,.45);
     }
 
-    .phone {
-      width: 100%;
-      max-width: 430px;
-      min-height: 100vh;
-      margin: auto;
-      background: #f8fbff;
-      position: relative;
-      overflow: hidden;
+    .bottom-nav{
+        bottom:20px;
+        border-radius:18px;
+        width:480px;
     }
 
-    /* HEADER */
-    .header {
-      background: linear-gradient(135deg, #0757d9, #1685ff);
-      color: white;
-      padding: 22px 20px 26px;
-      border-radius: 0 0 28px 28px;
+    .modal{
+        align-items:center;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .modal-box{
+        border-radius:25px;
     }
-
-    .logo {
-      width: 48px;
-      height: 48px;
-      background: white;
-      color: #0757d9;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      font-weight: 900;
-    }
-
-    .brand h1 {
-      font-size: 20px;
-      font-weight: 900;
-    }
-
-    .brand p {
-      font-size: 12px;
-      opacity: .85;
-      margin-top: 3px;
-    }
-
-    /* AUTH */
-    .auth {
-      padding: 24px 18px 35px;
-    }
-
-    .welcome {
-      text-align: center;
-      padding: 20px 0 25px;
-    }
-
-    .welcome .big-logo {
-      width: 78px;
-      height: 78px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, #0757d9, #1685ff);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: auto;
-      font-size: 31px;
-      font-weight: 900;
-      box-shadow: 0 12px 30px rgba(7, 87, 217, .25);
-    }
-
-    .welcome h2 {
-      margin-top: 18px;
-      font-size: 25px;
-      font-weight: 900;
-    }
-
-    .welcome p {
-      margin-top: 8px;
-      color: #64748b;
-      font-size: 14px;
-    }
-
-    .auth-card {
-      background: white;
-      border-radius: 24px;
-      padding: 22px;
-      box-shadow: 0 8px 30px rgba(15, 23, 42, .08);
-    }
-
-    .tabs {
-      display: flex;
-      background: #edf4ff;
-      border-radius: 14px;
-      padding: 4px;
-      margin-bottom: 22px;
-    }
-
-    .tab {
-      flex: 1;
-      border: 0;
-      background: transparent;
-      padding: 13px;
-      border-radius: 11px;
-      font-size: 14px;
-      font-weight: 800;
-      color: #64748b;
-    }
-
-    .tab.active {
-      background: #0757d9;
-      color: white;
-      box-shadow: 0 5px 15px rgba(7, 87, 217, .22);
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 7px;
-    }
-
-    .form-group input {
-      width: 100%;
-      border: 1px solid #dbe5f2;
-      border-radius: 13px;
-      padding: 14px;
-      outline: none;
-      font-size: 14px;
-      background: #f9fbff;
-    }
-
-    .form-group input:focus {
-      border-color: #1685ff;
-      background: white;
-    }
-
-    .primary-btn {
-      width: 100%;
-      border: 0;
-      background: linear-gradient(135deg, #0757d9, #1685ff);
-      color: white;
-      padding: 15px;
-      border-radius: 14px;
-      font-size: 15px;
-      font-weight: 900;
-      margin-top: 5px;
-      box-shadow: 0 8px 20px rgba(7, 87, 217, .22);
-    }
-
-    .forgot {
-      display: block;
-      text-align: right;
-      margin: 2px 0 16px;
-      color: #0757d9;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    /* APP */
-    .app {
-      display: none;
-      padding-bottom: 90px;
-    }
-
-    .balance-card {
-      margin: 18px;
-      padding: 22px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, #0757d9, #1685ff);
-      color: white;
-      box-shadow: 0 12px 30px rgba(7, 87, 217, .22);
-    }
-
-    .balance-card small {
-      opacity: .85;
-      font-size: 12px;
-    }
-
-    .balance {
-      font-size: 30px;
-      font-weight: 900;
-      margin: 8px 0 18px;
-    }
-
-    .topup-btn {
-      border: 0;
-      background: white;
-      color: #0757d9;
-      padding: 11px 18px;
-      border-radius: 12px;
-      font-weight: 900;
-    }
-
-    .section {
-      padding: 0 18px;
-      margin-top: 22px;
-    }
-
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 13px;
-    }
-
-    .section-title h3 {
-      font-size: 18px;
-      font-weight: 900;
-    }
-
-    .section-title span {
-      color: #0757d9;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .service-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .service {
-      background: white;
-      border-radius: 18px;
-      padding: 18px 14px;
-      box-shadow: 0 6px 20px rgba(15, 23, 42, .06);
-    }
-
-    .service-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 13px;
-      background: #e8f1ff;
-      color: #0757d9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      margin-bottom: 12px;
-    }
-
-    .service h4 {
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
-
-    .service p {
-      color: #64748b;
-      font-size: 11px;
-    }
-
-    /* BOTTOM NAV */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      max-width: 430px;
-      background: white;
-      border-top: 1px solid #e5eaf2;
-      display: flex;
-      justify-content: space-around;
-      padding: 11px 5px calc(11px + env(safe-area-inset-bottom));
-      z-index: 10;
-    }
-
-    .nav-btn {
-      border: 0;
-      background: transparent;
-      color: #94a3b8;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .nav-btn.active {
-      color: #0757d9;
-    }
-
-    .nav-icon {
-      display: block;
-      font-size: 20px;
-      margin-bottom: 3px;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-<div class="phone">
+<div class="app">
 
-  <!-- AUTH SCREEN -->
-  <div id="authScreen">
+<!-- ================= AUTH ================= -->
 
-    <div class="header">
-      <div class="brand">
-        <div class="logo">AV</div>
-        <div>
-          <h1>ABDUL VIRAL BOOSTER</h1>
-          <p>Grow your social presence faster</p>
-        </div>
-      </div>
+<section id="authScreen" class="auth">
+
+    <div class="logo">
+        <div class="logo-icon">AV</div>
+        <h1>ABDUL VIRAL BOOSTER</h1>
+        <p>Professional Social Media Growth</p>
     </div>
 
-    <div class="auth">
-
-      <div class="welcome">
-        <div class="big-logo">AV</div>
-        <h2>Welcome Back 👋</h2>
-        <p>Boost your social media presence with us.</p>
-      </div>
-
-      <div class="auth-card">
+    <div class="auth-card">
 
         <div class="tabs">
-          <button class="tab active" id="loginTab" onclick="showLogin()">Login</button>
-          <button class="tab" id="signupTab" onclick="showSignup()">Sign Up</button>
+            <button id="loginTab" class="tab active" onclick="showAuth('login')">
+                Login
+            </button>
+
+            <button id="signupTab" class="tab" onclick="showAuth('signup')">
+                Sign Up
+            </button>
         </div>
 
+        <div id="authMessage" class="message"></div>
+
         <!-- LOGIN -->
+
         <form id="loginForm">
 
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" id="loginEmail" placeholder="Enter your email">
-          </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input id="loginEmail" type="email" placeholder="Enter your email" required>
+            </div>
 
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="loginPassword" placeholder="Enter your password">
-          </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input id="loginPassword" type="password" placeholder="Enter your password" required>
+            </div>
 
-          <span class="forgot">Forgot password?</span>
+            <div class="small-link">
+                <button type="button" onclick="forgotPassword()">
+                    Forgot password?
+                </button>
+            </div>
 
-          <button type="button" class="primary-btn" onclick="loginUser()">
-            Login
-          </button>
+            <button class="primary-btn" type="submit">
+                Login
+            </button>
 
         </form>
 
         <!-- SIGN UP -->
+
         <form id="signupForm" class="hidden">
 
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" id="signupName" placeholder="Enter your name">
-          </div>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input id="signupName" type="text" placeholder="Your full name" required>
+            </div>
 
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" id="signupEmail" placeholder="Enter your email">
-          </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input id="signupEmail" type="email" placeholder="Your email" required>
+            </div>
 
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" id="signupPassword" placeholder="Create a password">
-          </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input id="signupPassword" type="password" placeholder="Create password" required>
+            </div>
 
-          <div class="form-group">
-            <label>Confirm Password</label>
-            <input type="password" id="signupConfirm" placeholder="Confirm your password">
-          </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input id="signupConfirm" type="password" placeholder="Confirm password" required>
+            </div>
 
-          <button type="button" class="primary-btn" onclick="signupUser()">
-            Create Account
-          </button>
+            <button class="primary-btn" type="submit">
+                Create Account
+            </button>
 
         </form>
 
-      </div>
-    </div>
-  </div>
-
-
-  <!-- MAIN APP -->
-  <div id="appScreen" class="app">
-
-    <div class="header">
-      <div class="brand">
-        <div class="logo">AV</div>
-        <div>
-          <h1>ABDUL VIRAL BOOSTER</h1>
-          <p>Welcome back!</p>
-        </div>
-      </div>
     </div>
 
-    <div class="balance-card">
-      <small>Wallet Balance</small>
-      <div class="balance">₦0.00</div>
-      <button class="topup-btn" onclick="topUp()">
-        + Top Up
-      </button>
+</section>
+
+
+<!-- ================= MAIN APP ================= -->
+
+<section id="mainApp" class="main-app hidden">
+
+    <header class="topbar">
+
+        <div class="brand">
+            <div class="brand-icon">AV</div>
+
+            <div class="brand-text">
+                <strong>ABDUL VIRAL BOOSTER</strong>
+                <span>Grow your social media</span>
+            </div>
+        </div>
+
+        <button class="logout-btn" onclick="logout()">↪</button>
+
+    </header>
+
+
+    <!-- HOME -->
+
+    <main id="homePage" class="page active">
+
+        <h2 class="page-title">
+            Welcome, <span id="welcomeName">Customer</span> 👋
+        </h2>
+
+        <p class="page-subtitle">
+            Boost your social media with ease.
+        </p>
+
+        <div class="balance-card">
+
+            <div class="balance-label">
+                Wallet Balance
+            </div>
+
+            <div class="balance" id="balanceDisplay">
+                ₦0
+            </div>
+
+            <button class="topup-btn" onclick="openTopup()">
+                + Fund Account
+            </button>
+
+        </div>
+
+
+        <div class="quick-grid">
+
+            <div class="quick-card" onclick="goTo('services')">
+                <div class="quick-icon">🚀</div>
+                <strong>Buy Services</strong>
+                <span>Boost your account</span>
+            </div>
+
+            <div class="quick-card" onclick="openTopup()">
+                <div class="quick-icon">💳</div>
+                <strong>Top Up</strong>
+                <span>Add money to wallet</span>
+            </div>
+
+            <div class="quick-card" onclick="goTo('orders')">
+                <div class="quick-icon">📦</div>
+                <strong>My Orders</strong>
+                <span>Track your orders</span>
+            </div>
+
+            <div class="quick-card" onclick="goTo('account')">
+                <div class="quick-icon">👤</div>
+                <strong>My Account</strong>
+                <span>Account information</span>
+            </div>
+
+        </div>
+
+
+        <h3 style="margin-bottom:12px;">
+            Popular Services
+        </h3>
+
+        <div class="service-list">
+
+            <div class="service">
+                <div class="service-left">
+                    <div class="service-icon">🎵</div>
+                    <div class="service-info">
+                        <strong>TikTok Followers</strong>
+                        <span>1,000 followers</span>
+                    </div>
+                </div>
+                <div class="service-price">₦6,000</div>
+            </div>
+
+            <div class="service">
+                <div class="service-left">
+                    <div class="service-icon">📸</div>
+                    <div class="service-info">
+                        <strong>Instagram Followers</strong>
+                        <span>1,000 followers</span>
+                    </div>
+                </div>
+                <div class="service-price">₦5,500</div>
+            </div>
+
+            <div class="service">
+                <div class="service-left">
+                    <div class="service-icon">▶️</div>
+                    <div class="service-info">
+                        <strong>YouTube Subscribers</strong>
+                        <span>1,000 subscribers</span>
+                    </div>
+                </div>
+                <div class="service-price">₦65,000</div>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- SERVICES -->
+
+    <main id="servicesPage" class="page">
+
+        <h2 class="page-title">Services</h2>
+
+        <p class="page-subtitle">
+            Choose a service to place your order.
+        </p>
+
+        <div class="service-list">
+
+            <div class="service" onclick="selectService('TikTok Followers',6000)">
+                <div class="service-left">
+                    <div class="service-icon">🎵</div>
+                    <div class="service-info">
+                        <strong>TikTok Followers</strong>
+                        <span>₦6,000 / 1,000</span>
+                    </div>
+                </div>
+                <div class="service-price">₦6,000</div>
+            </div>
+
+            <div class="service" onclick="selectService('TikTok Likes',1000)">
+                <div class="service-left">
+                    <div class="service-icon">❤️</div>
+                    <div class="service-info">
+                        <strong>TikTok Likes</strong>
+                        <span>₦1,000 / 1,000</span>
+                    </div>
+                </div>
+                <div class="service-price">₦1,000</div>
+            </div>
+
+            <div class="service" onclick="selectService('TikTok Views',400)">
+                <div class="service-left">
+                    <div class="service-icon">👁️</div>
+                    <div class="service-info">
+                        <strong>TikTok Views</strong>
+                        <span>₦400 / 1,000</span>
+                    </div>
+                </div>
+                <div class="service-price">₦400</div>
+            </div>
+
+            <div class="service" onclick="selectService('Instagram Followers',5500)">
+                <div class="service-left">
+                    <div class="service-icon">📸</div>
+                    <div class="service-info">
+                        <strong>Instagram Followers</strong>
+                        <span>₦5,500 / 1,000</span>
+                    </div>
+                </div>
+                <div class="service-price">₦5,500</div>
+            </div>
+
+            <div class="service" onclick="selectService('Instagram Likes',800)">
+                <div class="service-left">
+                    <div class="service-icon">❤️</div>
+                    <div class="service-info">
+                        <strong>Instagram Likes</strong>
+                        <span>₦800 / 1,000</span>
+                    </div>
+                </div>
+                <div class="service-price">₦800</div>
+            </div>
+
+            <div class="service" onclick="selectService('Instagram Views',300)">
+                <div class="service-left">
+                    <div class="service-icon">👁️</div>
+                    <div class="service-info">
+                        <strong>Instagram Views</strong>
+                        <span>₦300 / 1,000</span>
+                    </div>
+                </div>
+                <div class="service-price">₦300</div>
+            </div>
+
+            <div class="service" onclick="selectService('YouTube Subscribers',65000)">
+                <div class="service-left">
+                    <div class="service-icon">▶️</div>
+                    <div class="service-info">
+                        <strong>YouTube Subscribers</strong>
+                        <span>₦65,000 / 1,000</span>
+                    </div>
+                </div>
+                <div class="service-price">₦65,000</div>
+            </div>
+
+            <div class="service" onclick="selectService('YouTube Views',2500)">
+                <div class="service-left">
+                    <div class="service-icon">▶️</div>
+                    <div class="service-info">
+                        <strong>YouTube Views</strong>
+                        <span>₦2,500 / 1,000</span>
+                    </div>
+                </div>
+                <div class="service-price">₦2,500</div>
+            </div>
+
+            <div class="service" onclick="selectService('Facebook Followers',5300)">
+                <div class="service-left">
+                    <div class="service-icon">f</div>
+                    <div class="service-info">
+                        <strong>Facebook Followers</strong>
+                        <span>₦5,300 / 1,000</span>
+                    </div>
+                </div>
+                <div class="service-price">₦5,300</div>
+            </div>
+
+            <div class="service" onclick="selectService('Telegram Members',5000)">
+                <div class="service-left">
+                    <div class="service-icon">✈️</div>
+                    <div class="service-info">
+                        <strong>Telegram Members</strong>
+                        <span>₦5,000 / 1,000</span>
+                    </div>
+                </div>
+                <div class="service-price">₦5,000</div>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ORDER -->
+
+    <main id="orderPage" class="page">
+
+        <h2 class="page-title">New Order</h2>
+
+        <p class="page-subtitle">
+            Enter your order details below.
+        </p>
+
+        <div class="order-card">
+
+            <div class="form-group">
+                <label>Service</label>
+
+                <select id="orderService" onchange="updatePrice()">
+                    <option value="">Select service</option>
+                    <option value="TikTok Followers|6000">TikTok Followers</option>
+                    <option value="TikTok Likes|1000">TikTok Likes</option>
+                    <option value="TikTok Views|400">TikTok Views</option>
+                    <option value="Instagram Followers|5500">Instagram Followers</option>
+                    <option value="Instagram Likes|800">Instagram Likes</option>
+                    <option value="Instagram Views|300">Instagram Views</option>
+                    <option value="YouTube Subscribers|65000">YouTube Subscribers</option>
+                    <option value="YouTube Views|2500">YouTube Views</option>
+                    <option value="Facebook Followers|5300">Facebook Followers</option>
+                    <option value="Telegram Members|5000">Telegram Members</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Quantity</label>
+
+                <input
+                    id="orderQuantity"
+                    type="number"
+                    min="100"
+                    step="100"
+                    value="1000"
+                    oninput="updatePrice()"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Profile / Post / Channel Link</label>
+
+                <input
+                    id="orderLink"
+                    type="url"
+                    placeholder="https://..."
+                >
+            </div>
+
+            <div class="price-box">
+                <span>Total Price</span>
+                <strong id="orderTotal">₦0</strong>
+            </div>
+
+            <button class="primary-btn" onclick="placeOrder()">
+                Place Order
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- ORDERS -->
+
+    <main id="ordersPage" class="page">
+
+        <h2 class="page-title">My Orders</h2>
+
+        <p class="page-subtitle">
+            View your recent orders.
+        </p>
+
+        <div id="ordersList"></div>
+
+    </main>
+
+
+    <!-- ACCOUNT -->
+
+    <main id="accountPage" class="page">
+
+        <h2 class="page-title">My Account</h2>
+
+        <p class="page-subtitle">
+            Your account information.
+        </p>
+
+        <div class="account-card">
+
+            <div class="avatar" id="accountAvatar">
+                A
+            </div>
+
+            <div class="account-name" id="accountName">
+                Customer
+            </div>
+
+            <div class="account-email" id="accountEmail">
+                customer@example.com
+            </div>
+
+            <div style="margin-top:20px;">
+
+                <div class="info-row">
+                    <span>Wallet Balance</span>
+                    <strong id="accountBalance">₦0</strong>
+                </div>
+
+                <div class="info-row">
+                    <span>Account Status</span>
+                    <strong style="color:#4edc9d;">Active</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- BOTTOM NAV -->
+
+    <nav class="bottom-nav">
+
+        <button class="nav-btn active" onclick="goTo('home')" id="navHome">
+            <span class="nav-icon">⌂</span>
+            Home
+        </button>
+
+        <button class="nav-btn" onclick="goTo('services')" id="navServices">
+            <span class="nav-icon">🚀</span>
+            Services
+        </button>
+
+        <button class="nav-btn" onclick="goTo('order')" id="navOrder">
+            <span class="nav-icon">＋</span>
+            Order
+        </button>
+
+        <button class="nav-btn" onclick="goTo('orders')" id="navOrders">
+            <span class="nav-icon">📦</span>
+            Orders
+        </button>
+
+        <button class="nav-btn" onclick="goTo('account')" id="navAccount">
+            <span class="nav-icon">👤</span>
+            Account
+        </button>
+
+    </nav>
+
+</section>
+
+
+<!-- TOP UP MODAL -->
+
+<div id="topupModal" class="modal">
+
+    <div class="modal-box">
+
+        <div class="modal-title">
+            Fund Your Account 💰
+        </div>
+
+        <div class="modal-subtitle">
+            Select or enter the amount you want to add.
+        </div>
+
+        <div class="amount-grid">
+
+            <button class="amount-btn" onclick="setAmount(1000)">
+                ₦1,000
+            </button>
+
+            <button class="amount-btn" onclick="setAmount(2000)">
+                ₦2,000
+            </button>
+
+            <button class="amount-btn" onclick="setAmount(5000)">
+                ₦5,000
+            </button>
+
+            <button class="amount-btn" onclick="setAmount(10000)">
+                ₦10,000
+            </button>
+
+            <button class="amount-btn" onclick="setAmount(20000)">
+                ₦20,000
+            </button>
+
+            <button class="amount-btn" onclick="setAmount(50000)">
+                ₦50,000
+            </button>
+
+        </div>
+
+        <div class="form-group">
+
+            <label>Custom Amount</label>
+
+            <input
+                id="topupAmount"
+                type="number"
+                min="100"
+                placeholder="Enter amount"
+            >
+
+        </div>
+
+        <div class="payment-note">
+            💳 Your selected amount will be used for the account funding process.
+            Payment integration will be connected in the next stage.
+        </div>
+
+        <button class="primary-btn" onclick="startTopup()">
+            Continue to Payment
+        </button>
+
+        <button class="close-btn" onclick="closeTopup()">
+            Cancel
+        </button>
+
     </div>
-
-    <div class="section">
-      <div class="section-title">
-        <h3>Popular Services</h3>
-        <span>View all</span>
-      </div>
-
-      <div class="service-grid">
-
-        <div class="service">
-          <div class="service-icon">T</div>
-          <h4>TikTok Followers</h4>
-          <p>₦6,000 / 1,000</p>
-        </div>
-
-        <div class="service">
-          <div class="service-icon">T</div>
-          <h4>TikTok Likes</h4>
-          <p>₦1,000 / 1,000</p>
-        </div>
-
-        <div class="service">
-          <div class="service-icon">T</div>
-          <h4>TikTok Views</h4>
-          <p>₦400 / 1,000</p>
-        </div>
-
-        <div class="service">
-          <div class="service-icon">I</div>
-          <h4>Instagram Followers</h4>
-          <p>₦5,500 / 1,000</p>
-        </div>
-
-        <div class="service">
-          <div class="service-icon">I</div>
-          <h4>Instagram Likes</h4>
-          <p>₦800 / 1,000</p>
-        </div>
-
-        <div class="service">
-          <div class="service-icon">I</div>
-          <h4>Instagram Views</h4>
-          <p>₦300 / 1,000</p>
-        </div>
-
-        <div class="service">
-          <div class="service-icon">Y</div>
-          <h4>YouTube Subscribers</h4>
-          <p>₦65,000 / 1,000</p>
-        </div>
-
-        <div class="service">
-          <div class="service-icon">Y</div>
-          <h4>YouTube Views</h4>
-          <p>₦2,500 / 1,000</p>
-        </div>
-
-        <div class="service">
-          <div class="service-icon">F</div>
-          <h4>Facebook Followers</h4>
-          <p>₦5,300 / 1,000</p>
-        </div>
-
-        <div class="service">
-          <div class="service-icon">TG</div>
-          <h4>Telegram Members</h4>
-          <p>₦5,000 / 1,000</p>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="bottom-nav">
-
-      <button class="nav-btn active">
-        <span class="nav-icon">⌂</span>
-        Home
-      </button>
-
-      <button class="nav-btn">
-        <span class="nav-icon">＋</span>
-        Order
-      </button>
-
-      <button class="nav-btn">
-        <span class="nav-icon">▣</span>
-        Orders
-      </button>
-
-      <button class="nav-btn">
-        <span class="nav-icon">◎</span>
-        Account
-      </button>
-
-    </div>
-
-  </div>
 
 </div>
 
 
+<div id="toast" class="toast"></div>
+
+
 <script>
 
-  function showLogin() {
-    document.getElementById("loginForm").classList.remove("hidden");
-    document.getElementById("signupForm").classList.add("hidden");
+/* ================= DATA ================= */
 
-    document.getElementById("loginTab").classList.add("active");
-    document.getElementById("signupTab").classList.remove("active");
-  }
+const SERVICES = {
+    "TikTok Followers":6000,
+    "TikTok Likes":1000,
+    "TikTok Views":400,
 
-  function showSignup() {
-    document.getElementById("loginForm").classList.add("hidden");
-    document.getElementById("signupForm").classList.remove("hidden");
+    "Instagram Followers":5500,
+    "Instagram Likes":800,
+    "Instagram Views":300,
 
-    document.getElementById("loginTab").classList.remove("active");
-    document.getElementById("signupTab").classList.add("active");
-  }
+    "YouTube Subscribers":65000,
+    "YouTube Views":2500,
 
-  function signupUser() {
+    "Facebook Followers":5300,
 
-    const name = document.getElementById("signupName").value.trim();
-    const email = document.getElementById("signupEmail").value.trim();
-    const password = document.getElementById("signupPassword").value;
-    const confirm = document.getElementById("signupConfirm").value;
+    "Telegram Members":5000
+};
 
-    if (!name || !email || !password || !confirm) {
-      alert("Please fill in all fields.");
-      return;
+
+/* ================= STORAGE ================= */
+
+let currentUser =
+    JSON.parse(localStorage.getItem("abdulUser")) || null;
+
+let balance =
+    Number(localStorage.getItem("abdulBalance")) || 0;
+
+let orders =
+    JSON.parse(localStorage.getItem("abdulOrders")) || [];
+
+
+/* ================= AUTH ================= */
+
+function showAuth(type){
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const signupForm =
+        document.getElementById("signupForm");
+
+    const loginTab =
+        document.getElementById("loginTab");
+
+    const signupTab =
+        document.getElementById("signupTab");
+
+    clearMessage();
+
+    if(type === "signup"){
+
+        loginForm.classList.add("hidden");
+        signupForm.classList.remove("hidden");
+
+        loginTab.classList.remove("active");
+        signupTab.classList.add("active");
+
+    }else{
+
+        signupForm.classList.add("hidden");
+        loginForm.classList.remove("hidden");
+
+        signupTab.classList.remove("active");
+        loginTab.classList.add("active");
+
+    }
+}
+
+
+function showMessage(text,type="error"){
+
+    const box =
+        document.getElementById("authMessage");
+
+    box.textContent = text;
+
+    box.className =
+        "message show " + type;
+}
+
+
+function clearMessage(){
+
+    const box =
+        document.getElementById("authMessage");
+
+    box.className = "message";
+
+    box.textContent = "";
+}
+
+
+/* SIGN UP */
+
+document.getElementById("signupForm")
+.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    const name =
+        document.getElementById("signupName").value.trim();
+
+    const email =
+        document.getElementById("signupEmail").value.trim();
+
+    const password =
+        document.getElementById("signupPassword").value;
+
+    const confirm =
+        document.getElementById("signupConfirm").value;
+
+    if(password !== confirm){
+
+        showMessage("Passwords do not match.");
+
+        return;
     }
 
-    if (password !== confirm) {
-      alert("Passwords do not match.");
-      return;
+    if(password.length < 6){
+
+        showMessage("Password must contain at least 6 characters.");
+
+        return;
     }
 
-    if (password.length < 6) {
-      alert("Password must be at least 6 characters.");
-      return;
+    currentUser = {
+        name:name,
+        email:email
+    };
+
+    localStorage.setItem(
+        "abdulUser",
+        JSON.stringify(currentUser)
+    );
+
+    balance = 0;
+
+    localStorage.setItem(
+        "abdulBalance",
+        "0"
+    );
+
+    showMessage(
+        "Account created successfully!",
+        "success"
+    );
+
+    setTimeout(function(){
+
+        enterApp();
+
+    },700);
+
+});
+
+
+/* LOGIN */
+
+document.getElementById("loginForm")
+.addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+    const email =
+        document.getElementById("loginEmail").value.trim();
+
+    const password =
+        document.getElementById("loginPassword").value;
+
+    if(!email || !password){
+
+        showMessage("Please enter your email and password.");
+
+        return;
     }
 
-    alert("Account form is working. We will connect the real account system next.");
-  }
+    currentUser = {
+        name:email.split("@")[0],
+        email:email
+    };
 
-  function loginUser() {
+    localStorage.setItem(
+        "abdulUser",
+        JSON.stringify(currentUser)
+    );
 
-    const email = document.getElementById("loginEmail").value.trim();
-    const password = document.getElementById("loginPassword").value;
+    enterApp();
 
-    if (!email || !password) {
-      alert("Please enter your email and password.");
-      return;
+});
+
+
+function forgotPassword(){
+
+    const email =
+        document.getElementById("loginEmail").value.trim();
+
+    if(!email){
+
+        showMessage(
+            "Enter your email address first."
+        );
+
+        return;
     }
 
-    document.getElementById("authScreen").style.display = "none";
-    document.getElementById("appScreen").style.display = "block";
-  }
+    showMessage(
+        "Password reset will be connected when the secure account system is added.",
+        "success"
+    );
+}
 
-  function topUp() {
-    alert("Top Up system will be connected next.");
-  }
+
+/* ================= APP ================= */
+
+function enterApp(){
+
+    document
+        .getElementById("authScreen")
+        .classList.add("hidden");
+
+    document
+        .getElementById("mainApp")
+        .classList.remove("hidden");
+
+    updateUser();
+
+    updateBalance();
+
+    loadOrders();
+
+}
+
+
+function updateUser(){
+
+    if(!currentUser) return;
+
+    const name =
+        currentUser.name || "Customer";
+
+    const email =
+        currentUser.email || "";
+
+    document.getElementById("welcomeName")
+        .textContent = name;
+
+    document.getElementById("accountName")
+        .textContent = name;
+
+    document.getElementById("accountEmail")
+        .textContent = email;
+
+    document.getElementById("accountAvatar")
+        .textContent =
+        name.charAt(0).toUpperCase();
+
+}
+
+
+function logout(){
+
+    localStorage.removeItem("abdulUser");
+
+    currentUser = null;
+
+    document
+        .getElementById("mainApp")
+        .classList.add("hidden");
+
+    document
+        .getElementById("authScreen")
+        .classList.remove("hidden");
+
+    showAuth("login");
+
+}
+
+
+/* ================= NAVIGATION ================= */
+
+function goTo(page){
+
+    document
+        .querySelectorAll(".page")
+        .forEach(p => p.classList.remove("active"));
+
+    const target =
+        document.getElementById(page + "Page");
+
+    if(target){
+
+        target.classList.add("active");
+
+    }
+
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(btn => btn.classList.remove("active"));
+
+    const nav =
+        document.getElementById("nav" +
+            page.charAt(0).toUpperCase() +
+            page.slice(1));
+
+    if(nav){
+
+        nav.classList.add("active");
+
+    }
+
+    if(page === "orders"){
+
+        loadOrders();
+
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ================= BALANCE ================= */
+
+function updateBalance(){
+
+    document.getElementById("balanceDisplay")
+        .textContent = formatMoney(balance);
+
+    document.getElementById("accountBalance")
+        .textContent = formatMoney(balance);
+
+    localStorage.setItem(
+        "abdulBalance",
+        balance
+    );
+
+}
+
+
+function formatMoney(amount){
+
+    return "₦" +
+        Number(amount).toLocaleString("en-NG");
+
+}
+
+
+/* ================= SERVICES ================= */
+
+function selectService(name,price){
+
+    const select =
+        document.getElementById("orderService");
+
+    select.value =
+        name + "|" + price;
+
+    updatePrice();
+
+    goTo("order");
+
+}
+
+
+function updatePrice(){
+
+    const selected =
+        document.getElementById("orderService").value;
+
+    const quantity =
+        Number(
+            document.getElementById("orderQuantity").value
+        ) || 0;
+
+    if(!selected){
+
+        document.getElementById("orderTotal")
+            .textContent = "₦0";
+
+        return;
+    }
+
+    const parts =
+        selected.split("|");
+
+    const price =
+        Number(parts[1]);
+
+    const total =
+        price * (quantity / 1000);
+
+    document.getElementById("orderTotal")
+        .textContent =
+        formatMoney(total);
+
+}
+
+
+/* ================= ORDER ================= */
+
+function placeOrder(){
+
+    const selected =
+        document.getElementById("orderService").value;
+
+    const quantity =
+        Number(
+            document.getElementById("orderQuantity").value
+        );
+
+    const link =
+        document.getElementById("orderLink").value.trim();
+
+    if(!selected){
+
+        toast("Please select a service.");
+
+        return;
+    }
+
+    if(!quantity || quantity < 100){
+
+        toast("Minimum quantity is 100.");
+
+        return;
+    }
+
+    if(!link){
+
+        toast("Please enter your link.");
+
+        return;
+    }
+
+    const parts =
+        selected.split("|");
+
+    const service =
+        parts[0];
+
+    const price =
+        Number(parts[1]);
+
+    const total =
+        price * (quantity / 1000);
+
+    if(balance < total){
+
+        toast("Insufficient wallet balance. Please fund your account.");
+
+        openTopup();
+
+        return;
+    }
+
+    balance -= total;
+
+    const order = {
+
+        id:"AV" + Date.now(),
+
+        service:service,
+
+        quantity:quantity,
+
+        link:link,
+
+        total:total,
+
+        status:"Pending",
+
+        date:new Date().toLocaleString()
+
+    };
+
+    orders.unshift(order);
+
+    localStorage.setItem(
+        "abdulOrders",
+        JSON.stringify(orders)
+    );
+
+    updateBalance();
+
+    document.getElementById("orderLink")
+        .value = "";
+
+    toast("Order placed successfully!");
+
+    setTimeout(function(){
+
+        goTo("orders");
+
+    },700);
+
+}
+
+
+/* ================= ORDERS ================= */
+
+function loadOrders(){
+
+    const box =
+        document.getElementById("ordersList");
+
+    if(orders.length === 0){
+
+        box.innerHTML = `
+            <div class="order-card" style="text-align:center;">
+                <div style="font-size:35px;margin-bottom:10px;">
+                    📦
+                </div>
+
+                <strong>No orders yet</strong>
+
+                <p style="color:#91a4ba;font-size:12px;margin-top:7px;">
+                    Your orders will appear here.
+                </p>
+            </div>
+        `;
+
+        return;
+    }
+
+    box.innerHTML =
+        orders.map(order => `
+
+            <div class="order-item">
+
+                <div class="order-top">
+
+                    <div class="order-name">
+                        ${escapeHTML(order.service)}
+                    </div>
+
+                    <div class="status">
+                        ${escapeHTML(order.status)}
+                    </div>
+
+                </div>
+
+                <div class="order-details">
+
+                    Order ID: ${escapeHTML(order.id)}<br>
+
+                    Quantity:
+                    ${Number(order.quantity).toLocaleString()}<br>
+
+                    Amount:
+                    ${formatMoney(order.total)}<br>
+
+                    Date:
+                    ${escapeHTML(order.date)}
+
+                </div>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ================= TOP UP ================= */
+
+function openTopup(){
+
+    document
+        .getElementById("topupModal")
+        .classList.add("show");
+
+}
+
+
+function closeTopup(){
+
+    document
+        .getElementById("topupModal")
+        .classList.remove("show");
+
+}
+
+
+function setAmount(amount){
+
+    document.getElementById("topupAmount")
+        .value = amount;
+
+}
+
+
+function startTopup(){
+
+    const amount =
+        Number(
+            document.getElementById("topupAmount").value
+        );
+
+    if(!amount || amount < 100){
+
+        toast("Enter a valid amount.");
+
+        return;
+    }
+
+    /*
+       PAYMENT GATEWAY WILL BE CONNECTED
+       IN THE NEXT BACKEND/PAYMENT STEP.
+
+       We intentionally do NOT fake a successful
+       payment here.
+    */
+
+    closeTopup();
+
+    toast(
+        "Payment system will be connected next."
+    );
+
+}
+
+
+/* ================= TOAST ================= */
+
+let toastTimer;
+
+function toast(message){
+
+    const box =
+        document.getElementById("toast");
+
+    box.textContent = message;
+
+    box.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(function(){
+
+            box.classList.remove("show");
+
+        },3000);
+
+}
+
+
+/* ================= START ================= */
+
+if(currentUser){
+
+    enterApp();
+
+}
 
 </script>
 
 </body>
-</html>
+                  </html>
