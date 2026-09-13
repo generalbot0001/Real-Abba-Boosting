@@ -70,9 +70,7 @@ position:relative;
 overflow:hidden;
 }
 
-/* =========================
-   LOGIN
-========================= */
+/* LOGIN */
 
 .auth{
 min-height:100vh;
@@ -137,9 +135,7 @@ font-size:13px;
 margin-bottom:7px;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea{
+.form-group input{
 width:100%;
 border:1px solid var(--border);
 background:#081523;
@@ -149,14 +145,7 @@ border-radius:12px;
 outline:none;
 }
 
-.form-group textarea{
-min-height:90px;
-resize:vertical;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
+.form-group input:focus{
 border-color:var(--blue);
 }
 
@@ -195,19 +184,12 @@ line-height:1.5;
 display:block;
 }
 
-.message.success{
-background:rgba(25,195,125,.12);
-color:#5ce0a8;
-}
-
 .message.error{
 background:rgba(255,82,99,.12);
 color:#ff7d89;
 }
 
-/* =========================
-   ADMIN APP
-========================= */
+/* MAIN */
 
 .main-app{
 min-height:100vh;
@@ -280,9 +262,7 @@ font-size:13px;
 margin-bottom:20px;
 }
 
-/* =========================
-   ADMIN HEADER
-========================= */
+/* ADMIN CARD */
 
 .admin-card{
 background:
@@ -326,14 +306,17 @@ color:#d8eaff;
 margin-top:6px;
 }
 
-/* =========================
-   STATS
-========================= */
+.live-status{
+margin-top:10px;
+font-size:10px;
+color:#d8eaff;
+}
+
+/* STATS */
 
 .stats-grid{
 display:grid;
-grid-template-columns:
-repeat(2,1fr);
+grid-template-columns:repeat(2,1fr);
 gap:10px;
 margin-bottom:20px;
 }
@@ -362,14 +345,12 @@ font-size:11px;
 margin-top:4px;
 }
 
-/* =========================
-   TOOLBAR
-========================= */
+/* TOOLBAR */
 
 .toolbar{
 display:flex;
 gap:9px;
-margin-bottom:15px;
+margin-bottom:8px;
 }
 
 .refresh-btn{
@@ -382,6 +363,10 @@ border-radius:12px;
 font-weight:bold;
 }
 
+.refresh-btn:disabled{
+opacity:.5;
+}
+
 .filter-select{
 flex:1;
 border:1px solid var(--border);
@@ -392,9 +377,14 @@ border-radius:12px;
 outline:none;
 }
 
-/* =========================
-   ORDER CARD
-========================= */
+.last-updated{
+text-align:right;
+font-size:10px;
+color:var(--muted);
+margin-bottom:15px;
+}
+
+/* ORDER */
 
 .order-card{
 background:var(--card);
@@ -540,9 +530,7 @@ font-size:38px;
 margin-bottom:10px;
 }
 
-/* =========================
-   TOAST
-========================= */
+/* TOAST */
 
 .toast{
 position:fixed;
@@ -596,9 +584,7 @@ box-shadow:
 
 <div class="app">
 
-<!-- =========================
-     ADMIN LOGIN
-========================= -->
+<!-- LOGIN -->
 
 <section
 id="authScreen"
@@ -675,9 +661,7 @@ Admin Login
 </section>
 
 
-<!-- =========================
-     ADMIN APP
-========================= -->
+<!-- ADMIN APP -->
 
 <section
 id="mainApp"
@@ -727,17 +711,13 @@ Manage customer orders and update their status.
 </p>
 
 
-<!-- ADMIN INFO -->
-
 <div class="admin-card">
 
 <div class="admin-label">
 Administrator
 </div>
 
-<div
-class="admin-title"
->
+<div class="admin-title">
 ABDUL VIRAL BOOSTER
 </div>
 
@@ -746,6 +726,13 @@ id="adminEmail"
 class="admin-email"
 >
 Loading...
+</div>
+
+<div
+id="liveStatus"
+class="live-status"
+>
+🟢 Live order monitoring active
 </div>
 
 </div>
@@ -859,12 +846,20 @@ Failed
 
 
 <button
+id="refreshBtn"
 class="refresh-btn"
 onclick="loadOrders()"
 >
 🔄 Refresh
 </button>
 
+</div>
+
+<div
+id="lastUpdated"
+class="last-updated"
+>
+Last updated: —
 </div>
 
 
@@ -890,8 +885,6 @@ id="toast"
 class="toast"
 ></div>
 
-
-<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -928,9 +921,10 @@ detectSessionInUrl:true
 const ADMIN_EMAIL =
 "abdulmajeedyunusaaliyu@gmail.com";
 
-
 let currentUser = null;
 let orders = [];
+
+let loadingOrders = false;
 
 
 /* =========================================================
@@ -1005,12 +999,6 @@ return;
 
 }
 
-
-/*
-Only the configured administrator
-email is allowed to use this page.
-*/
-
 if(
 email.toLowerCase() !==
 ADMIN_EMAIL.toLowerCase()
@@ -1024,13 +1012,12 @@ return;
 
 }
 
-
 const button =
 document.getElementById("loginBtn");
 
 button.disabled = true;
-button.textContent = "Signing in...";
-
+button.textContent =
+"Signing in...";
 
 try{
 
@@ -1038,12 +1025,9 @@ const {data,error} =
 await supabaseClient
 .auth
 .signInWithPassword({
-
 email:email,
 password:password
-
 });
-
 
 if(error){
 
@@ -1058,7 +1042,6 @@ button.textContent =
 return;
 
 }
-
 
 if(
 !data ||
@@ -1077,14 +1060,8 @@ return;
 
 }
 
-
 currentUser =
 data.user;
-
-
-/*
-Double-check the logged-in email.
-*/
 
 if(
 (currentUser.email || "")
@@ -1110,9 +1087,7 @@ return;
 
 }
 
-
 await enterAdmin();
-
 
 }catch(error){
 
@@ -1140,7 +1115,6 @@ async function enterAdmin(){
 
 if(!currentUser) return;
 
-
 document
 .getElementById("authScreen")
 .classList.add("hidden");
@@ -1149,20 +1123,21 @@ document
 .getElementById("mainApp")
 .classList.remove("hidden");
 
-
 document
 .getElementById("adminEmail")
 .textContent =
-currentUser.email || ADMIN_EMAIL;
-
+currentUser.email ||
+ADMIN_EMAIL;
 
 await loadOrders();
+
+startAutoRefresh();
 
 }
 
 
 /* =========================================================
-   SESSION CHECK
+   SESSION
 ========================================================= */
 
 async function checkSession(){
@@ -1174,14 +1149,12 @@ await supabaseClient
 .auth
 .getSession();
 
-
 if(error){
 
 console.error(error);
 return;
 
 }
-
 
 if(
 data.session &&
@@ -1193,7 +1166,6 @@ const email =
 data.session.user.email ||
 ""
 ).toLowerCase();
-
 
 if(
 email ===
@@ -1239,6 +1211,8 @@ event === "SIGNED_OUT"
 
 currentUser = null;
 
+stopAutoRefresh();
+
 document
 .getElementById("mainApp")
 .classList.add("hidden");
@@ -1257,6 +1231,8 @@ document
 ========================================================= */
 
 async function logout(){
+
+stopAutoRefresh();
 
 try{
 
@@ -1295,19 +1271,36 @@ async function loadOrders(){
 
 if(!currentUser){
 
-toast(
-"Please log in as administrator."
-);
+return;
+
+}
+
+if(loadingOrders){
 
 return;
 
 }
 
+loadingOrders = true;
 
 const box =
 document.getElementById(
 "ordersList"
 );
+
+const refreshButton =
+document.getElementById(
+"refreshBtn"
+);
+
+refreshButton.disabled = true;
+
+refreshButton.textContent =
+"⏳ Loading...";
+
+if(
+orders.length === 0
+){
 
 box.innerHTML =
 `
@@ -1316,27 +1309,22 @@ Loading orders...
 </div>
 `;
 
+}
 
 try{
+
+/*
+IMPORTANT:
+Use select("*") so this page does
+not break if the existing orders
+table contains the older "amount"
+column.
+*/
 
 const {data,error} =
 await supabaseClient
 .from("orders")
-.select(`
-id,
-user_id,
-platform,
-service,
-quantity,
-link,
-amount,
-unit_price,
-total_amount,
-status,
-admin_note,
-created_at,
-updated_at
-`)
+.select("*")
 .order(
 "created_at",
 {
@@ -1344,11 +1332,10 @@ ascending:false
 }
 );
 
-
 if(error){
 
 console.error(
-"Orders error:",
+"ORDERS LOAD ERROR:",
 error
 );
 
@@ -1360,7 +1347,9 @@ box.innerHTML =
 ⚠️
 </div>
 
-Unable to load orders.
+<strong>
+Unable to load orders
+</strong>
 
 <p style="margin-top:8px">
 ${escapeHTML(error.message)}
@@ -1369,21 +1358,68 @@ ${escapeHTML(error.message)}
 </div>
 `;
 
+document
+.getElementById("liveStatus")
+.textContent =
+"🔴 Order connection error";
+
 return;
 
 }
 
 
-orders = data || [];
+orders =
+Array.isArray(data)
+?
+data
+:
+[];
+
+
+/*
+Newest first again in JavaScript.
+This protects the display even if
+the database ordering changes.
+*/
+
+orders.sort(
+function(a,b){
+
+return new Date(
+b.created_at || 0
+) -
+new Date(
+a.created_at || 0
+);
+
+});
+
 
 updateStats();
 
 renderOrders();
 
+document
+.getElementById("lastUpdated")
+.textContent =
+"Last updated: " +
+new Date()
+.toLocaleTimeString(
+"en-NG"
+);
+
+document
+.getElementById("liveStatus")
+.textContent =
+"🟢 Live order monitoring active";
+
 
 }catch(error){
 
-console.error(error);
+console.error(
+"LOAD ORDERS ERROR:",
+error
+);
 
 box.innerHTML =
 `
@@ -1393,10 +1429,79 @@ box.innerHTML =
 ⚠️
 </div>
 
-Unable to load orders.
+<strong>
+Unable to load orders
+</strong>
+
+<p style="margin-top:8px">
+${escapeHTML(
+error.message ||
+"Unknown error"
+)}
+</p>
 
 </div>
 `;
+
+document
+.getElementById("liveStatus")
+.textContent =
+"🔴 Order connection error";
+
+}finally{
+
+loadingOrders = false;
+
+refreshButton.disabled = false;
+
+refreshButton.textContent =
+"🔄 Refresh";
+
+}
+
+}
+
+
+/* =========================================================
+   AUTO REFRESH
+========================================================= */
+
+let autoRefreshTimer = null;
+
+function startAutoRefresh(){
+
+stopAutoRefresh();
+
+autoRefreshTimer =
+setInterval(
+function(){
+
+if(
+currentUser
+){
+
+loadOrders();
+
+}
+
+},
+5000
+);
+
+}
+
+
+function stopAutoRefresh(){
+
+if(
+autoRefreshTimer
+){
+
+clearInterval(
+autoRefreshTimer
+);
+
+autoRefreshTimer = null;
 
 }
 
@@ -1414,40 +1519,54 @@ orders.length;
 
 const pending =
 orders.filter(
-order =>
-order.status === "pending"
+function(order){
+
+return String(
+order.status || ""
+).toLowerCase() ===
+"pending";
+
+}
 ).length;
 
 const processing =
 orders.filter(
-order =>
-order.status === "processing"
+function(order){
+
+return String(
+order.status || ""
+).toLowerCase() ===
+"processing";
+
+}
 ).length;
 
 const completed =
 orders.filter(
-order =>
-order.status === "completed"
-).length;
+function(order){
 
+return String(
+order.status || ""
+).toLowerCase() ===
+"completed";
+
+}
+).length;
 
 document
 .getElementById("totalOrders")
 .textContent =
 total;
 
-
 document
 .getElementById("pendingOrders")
 .textContent =
 pending;
 
-
 document
 .getElementById("processingOrders")
 .textContent =
 processing;
-
 
 document
 .getElementById("completedOrders")
@@ -1458,7 +1577,7 @@ completed;
 
 
 /* =========================================================
-   RENDER ORDERS
+   RENDER
 ========================================================= */
 
 function renderOrders(){
@@ -1473,23 +1592,30 @@ document.getElementById(
 "statusFilter"
 ).value;
 
-
 let filtered =
 orders;
 
-
-if(filter !== "all"){
+if(
+filter !== "all"
+){
 
 filtered =
 orders.filter(
-order =>
-order.status === filter
+function(order){
+
+return String(
+order.status || ""
+).toLowerCase() ===
+filter;
+
+}
 );
 
 }
 
-
-if(filtered.length === 0){
+if(
+filtered.length === 0
+){
 
 box.innerHTML =
 `
@@ -1514,12 +1640,14 @@ return;
 
 }
 
-
 box.innerHTML =
 filtered
 .map(
-order =>
-createOrderHTML(order)
+function(order){
+
+return createOrderHTML(order);
+
+}
 )
 .join("");
 
@@ -1535,27 +1663,36 @@ function createOrderHTML(order){
 const status =
 String(
 order.status || "pending"
-)
-.toLowerCase();
-
+).toLowerCase();
 
 let statusClass = "";
 
-if(status === "processing"){
+if(
+status === "processing"
+){
+
 statusClass =
 "processing";
+
 }
 
-if(status === "completed"){
+if(
+status === "completed"
+){
+
 statusClass =
 "completed";
+
 }
 
-if(status === "failed"){
+if(
+status === "failed"
+){
+
 statusClass =
 "failed";
-}
 
+}
 
 const statusText =
 status
@@ -1598,25 +1735,32 @@ order.amount ??
 
 const unitPrice =
 Number(
-order.unit_price || 0
+order.unit_price ??
+0
+);
+
+
+const quantity =
+Number(
+order.quantity ??
+0
 );
 
 
 return `
 
-<div
-class="order-card"
-id="order-${escapeHTML(order.id)}"
->
+<div class="order-card">
 
 <div class="order-top">
 
 <div class="order-name">
 
 ${escapeHTML(
-order.platform
-)} ${escapeHTML(
-order.service
+order.platform || "Unknown"
+)}
+${order.service ? " " : ""}
+${escapeHTML(
+order.service || ""
 )}
 
 </div>
@@ -1624,11 +1768,7 @@ order.service
 <div
 class="status ${statusClass}"
 >
-
-${escapeHTML(
-statusText
-)}
-
+${escapeHTML(statusText)}
 </div>
 
 </div>
@@ -1655,7 +1795,9 @@ ${escapeHTML(order.user_id)}
 Platform:
 
 <strong>
-${escapeHTML(order.platform)}
+${escapeHTML(
+order.platform || "—"
+)}
 </strong>
 
 <br>
@@ -1663,7 +1805,9 @@ ${escapeHTML(order.platform)}
 Service:
 
 <strong>
-${escapeHTML(order.service)}
+${escapeHTML(
+order.service || "—"
+)}
 </strong>
 
 <br>
@@ -1671,9 +1815,7 @@ ${escapeHTML(order.service)}
 Quantity:
 
 <strong>
-${Number(
-order.quantity || 0
-).toLocaleString()}
+${quantity.toLocaleString()}
 </strong>
 
 <br>
@@ -1711,11 +1853,13 @@ Link:
 
 <a
 class="order-link"
-href="${escapeHTML(order.link)}"
+href="${safeURL(order.link)}"
 target="_blank"
 rel="noopener noreferrer"
 >
-${escapeHTML(order.link)}
+${escapeHTML(
+order.link || "No link"
+)}
 </a>
 
 ${
@@ -1723,6 +1867,7 @@ order.admin_note
 ?
 `
 <br>
+
 Admin Note:
 
 <strong>
@@ -1754,28 +1899,36 @@ id="status-${escapeHTML(order.id)}"
 
 <option
 value="pending"
-${status === "pending" ? "selected" : ""}
+${status === "pending"
+? "selected"
+: ""}
 >
 Pending
 </option>
 
 <option
 value="processing"
-${status === "processing" ? "selected" : ""}
+${status === "processing"
+? "selected"
+: ""}
 >
 Processing
 </option>
 
 <option
 value="completed"
-${status === "completed" ? "selected" : ""}
+${status === "completed"
+? "selected"
+: ""}
 >
 Completed
 </option>
 
 <option
 value="failed"
-${status === "failed" ? "selected" : ""}
+${status === "failed"
+? "selected"
+: ""}
 >
 Failed
 </option>
@@ -1799,7 +1952,9 @@ class="note-input"
 id="note-${escapeHTML(order.id)}"
 type="text"
 placeholder="Admin note (optional)"
-value="${escapeHTML(order.admin_note || "")}"
+value="${escapeHTML(
+order.admin_note || ""
+)}"
 >
 
 </div>
@@ -1827,7 +1982,6 @@ return;
 
 }
 
-
 const statusSelect =
 document.getElementById(
 "status-" + orderId
@@ -1843,7 +1997,6 @@ document.getElementById(
 "update-" + orderId
 );
 
-
 if(!statusSelect){
 
 toast(
@@ -1853,7 +2006,6 @@ toast(
 return;
 
 }
-
 
 const status =
 statusSelect.value;
@@ -1865,11 +2017,10 @@ noteInput.value.trim()
 :
 "";
 
-
 button.disabled = true;
+
 button.textContent =
 "Saving...";
-
 
 try{
 
@@ -1884,11 +2035,10 @@ p_admin_note:note
 }
 );
 
-
 if(error){
 
 console.error(
-"Update order error:",
+"UPDATE ERROR:",
 error
 );
 
@@ -1898,13 +2048,13 @@ error.message ||
 );
 
 button.disabled = false;
+
 button.textContent =
 "Update";
 
 return;
 
 }
-
 
 if(!data){
 
@@ -1913,6 +2063,7 @@ toast(
 );
 
 button.disabled = false;
+
 button.textContent =
 "Update";
 
@@ -1920,23 +2071,18 @@ return;
 
 }
 
-
 toast(
 "Order updated successfully."
 );
 
-
-/*
-Reload from Supabase so the admin
-panel always shows the database value.
-*/
-
 await loadOrders();
-
 
 }catch(error){
 
-console.error(error);
+console.error(
+"UPDATE ORDER ERROR:",
+error
+);
 
 toast(
 error.message ||
@@ -1944,11 +2090,6 @@ error.message ||
 );
 
 }
-
-
-button.disabled = false;
-button.textContent =
-"Update";
 
 }
 
@@ -1970,6 +2111,45 @@ minimumFractionDigits:0,
 maximumFractionDigits:2
 }
 );
+
+}
+
+
+/* =========================================================
+   SAFE URL
+========================================================= */
+
+function safeURL(url){
+
+if(!url){
+
+return "#";
+
+}
+
+try{
+
+const parsed =
+new URL(url);
+
+if(
+parsed.protocol === "http:" ||
+parsed.protocol === "https:"
+){
+
+return escapeHTML(
+parsed.href
+);
+
+}
+
+return "#";
+
+}catch(error){
+
+return "#";
+
+}
 
 }
 
@@ -2086,4 +2266,4 @@ checkSession();
 </script>
 
 </body>
-  </html>
+   </html>
