@@ -8,116 +8,741 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+
 :root{
---blue:#1683ff;--blue-dark:#0864d8;--bg:#07111f;--card:#0d1b2d;
---card2:#11243a;--text:#fff;--muted:#91a4ba;
---border:rgba(255,255,255,.08);--green:#19c37d;--red:#ff5263
+--blue:#1683ff;
+--blue-dark:#0864d8;
+--bg:#07111f;
+--card:#0d1b2d;
+--card2:#11243a;
+--text:#fff;
+--muted:#91a4ba;
+--border:rgba(255,255,255,.08);
+--green:#19c37d;
+--red:#ff5263
 }
-body{font-family:Arial,Helvetica,sans-serif;background:#020914;color:var(--text);min-height:100vh}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#020914;
+color:var(--text);
+min-height:100vh
+}
+
 button,input,select{font:inherit}
 button{cursor:pointer}
-.app{width:100%;max-width:480px;min-height:100vh;margin:auto;background:var(--bg);position:relative;overflow:hidden}
-.auth{min-height:100vh;padding:35px 22px;display:flex;flex-direction:column;justify-content:center}
-.logo{text-align:center;margin-bottom:35px}
+
+.app{
+width:100%;
+max-width:480px;
+min-height:100vh;
+margin:auto;
+background:var(--bg);
+position:relative;
+overflow:hidden
+}
+
+.auth{
+min-height:100vh;
+padding:35px 22px;
+display:flex;
+flex-direction:column;
+justify-content:center
+}
+
+.logo{
+text-align:center;
+margin-bottom:35px
+}
+
 .logo-icon,.brand-icon,.avatar{
 background:linear-gradient(135deg,var(--blue),#0054c7)
 }
-.logo-icon{width:76px;height:76px;border-radius:22px;display:flex;align-items:center;justify-content:center;margin:auto;box-shadow:0 12px 35px rgba(22,131,255,.3);font-size:32px;font-weight:900}
-.logo h1{font-size:25px;margin-top:15px;letter-spacing:.5px}
-.logo p{color:var(--muted);font-size:13px;margin-top:7px}
-.auth-card,.account-card,.order-card,.topup-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
-.tabs{display:flex;background:#071321;border-radius:13px;padding:4px;margin-bottom:22px}
-.tab{flex:1;border:0;background:transparent;color:var(--muted);padding:12px;border-radius:10px;font-weight:bold}
-.tab.active{background:var(--blue);color:#fff}
-.form-group{margin-bottom:15px}
-.form-group label{display:block;color:#b7c6d7;font-size:13px;margin-bottom:7px}
-.form-group input,.form-group select{
-width:100%;border:1px solid var(--border);background:#081523;color:#fff;
-padding:14px;border-radius:12px;outline:none
+
+.logo-icon{
+width:76px;
+height:76px;
+border-radius:22px;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:auto;
+box-shadow:0 12px 35px rgba(22,131,255,.3);
+font-size:32px;
+font-weight:900
 }
-.form-group input:focus,.form-group select:focus{border-color:var(--blue)}
-.primary-btn{width:100%;border:0;padding:15px;border-radius:13px;background:linear-gradient(135deg,var(--blue),var(--blue-dark));color:#fff;font-weight:bold;box-shadow:0 8px 25px rgba(22,131,255,.22)}
-.secondary-btn{width:100%;border:1px solid var(--border);padding:14px;border-radius:13px;background:var(--card2);color:#fff;font-weight:bold}
-.small-link{text-align:right;margin:3px 0 18px}
-.small-link button{border:0;background:none;color:#55a9ff;font-size:13px}
-.hidden{display:none!important}
-.message{margin-bottom:15px;padding:12px;border-radius:10px;font-size:13px;display:none;line-height:1.5}
-.message.show{display:block}
-.message.success{background:rgba(25,195,125,.12);color:#5ce0a8}
-.message.error{background:rgba(255,82,99,.12);color:#ff7d89}
-.main-app{min-height:100vh;padding-bottom:82px}
-.topbar{padding:22px 18px 15px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:10px}
-.brand-icon{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-weight:900}
-.brand-text strong{display:block;font-size:14px}
-.brand-text span{display:block;color:var(--muted);font-size:10px;margin-top:2px}
-.logout-btn{border:1px solid var(--border);background:var(--card);color:#fff;width:40px;height:40px;border-radius:12px}
-.page{display:none;padding:5px 17px 25px}
-.page.active{display:block}
-.page-title{font-size:25px;font-weight:800;margin:10px 0 5px}
-.page-subtitle{color:var(--muted);font-size:13px;margin-bottom:20px}
-.balance-card{background:linear-gradient(135deg,#0d70df,#084b9c);border-radius:22px;padding:22px;margin-bottom:18px;position:relative;overflow:hidden}
-.balance-card:after{content:"";position:absolute;width:140px;height:140px;border-radius:50%;border:25px solid rgba(255,255,255,.06);right:-45px;top:-45px}
-.balance-label{color:#d8eaff;font-size:13px}
-.balance{font-size:34px;font-weight:900;margin:8px 0 17px}
-.topup-btn{background:#fff;color:#0864d8;border:0;padding:11px 18px;border-radius:11px;font-weight:800}
-.quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:22px}
-.quick-card{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:18px}
-.quick-icon{font-size:23px;margin-bottom:12px}
-.quick-card strong{display:block;font-size:14px}
-.quick-card span{color:var(--muted);font-size:11px}
-.service-list{display:flex;flex-direction:column;gap:11px}
-.service{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:16px;display:flex;align-items:center;justify-content:space-between}
-.service-left{display:flex;align-items:center;gap:12px}
-.service-icon{width:43px;height:43px;border-radius:13px;background:#102942;display:flex;align-items:center;justify-content:center;font-size:20px}
-.service-info strong{display:block;font-size:14px}
-.service-info span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
-.service-price{text-align:right;color:#5db1ff;font-size:12px;font-weight:bold}
-.price-box{background:#081a2e;border:1px solid rgba(22,131,255,.2);border-radius:14px;padding:16px;margin:5px 0 17px}
-.price-box span{color:var(--muted);font-size:12px}
-.price-box strong{display:block;color:#58acff;font-size:24px;margin-top:4px}
-.order-item{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:16px;margin-bottom:11px}
-.order-top{display:flex;justify-content:space-between;margin-bottom:10px}
-.order-name{font-weight:bold;font-size:14px}
-.status{font-size:10px;padding:5px 9px;border-radius:20px;background:rgba(255,193,7,.12);color:#ffd45a}
-.status.approved{background:rgba(25,195,125,.12);color:#5ce0a8}
-.status.rejected{background:rgba(255,82,99,.12);color:#ff7d89}
-.order-details{color:var(--muted);font-size:11px;line-height:1.8}
-.amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:17px}
-.amount-btn{background:#09182a;color:#fff;border:1px solid var(--border);border-radius:11px;padding:11px 5px;font-size:12px}
-.payment-note{background:rgba(22,131,255,.08);border:1px solid rgba(22,131,255,.15);border-radius:13px;padding:14px;color:#a9cfff;font-size:12px;line-height:1.6;margin-bottom:17px}
-.bank-box{background:#081a2e;border:1px solid rgba(22,131,255,.25);border-radius:15px;padding:15px;margin-bottom:17px}
-.bank-box div{padding:7px 0;font-size:13px}
-.bank-box span{color:var(--muted);display:inline-block;width:115px}
-.bank-box strong{color:#fff}
-.account-card{padding:20px}
-.avatar{width:70px;height:70px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;margin-bottom:15px}
-.account-name{font-size:20px;font-weight:bold}
-.account-email{color:var(--muted);font-size:12px;margin-top:5px}
-.info-row{padding:15px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px}
-.info-row:last-child{border-bottom:0}
-.info-row span{color:var(--muted)}
-.section-heading{font-size:17px;font-weight:800;margin:24px 0 12px}
-.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(7,17,31,.96);backdrop-filter:blur(15px);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(5,1fr);padding:9px 7px calc(9px + env(safe-area-inset-bottom));z-index:50}
-.nav-btn{border:0;background:none;color:#6e8299;font-size:10px;padding:5px}
-.nav-icon{display:block;font-size:19px;margin-bottom:4px}
-.nav-btn.active{color:#48a5ff}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:flex-end;justify-content:center;z-index:100}
-.modal.show{display:flex}
-.modal-box{width:100%;max-width:480px;background:#0c1b2d;border-radius:25px 25px 0 0;padding:23px;border-top:1px solid var(--border);max-height:92vh;overflow-y:auto}
-.modal-title{font-size:21px;font-weight:800;margin-bottom:7px}
-.modal-subtitle{color:var(--muted);font-size:12px;margin-bottom:20px}
-.close-btn{width:100%;margin-top:10px;background:transparent;border:1px solid var(--border);color:#fff;padding:13px;border-radius:12px}
-.toast{position:fixed;left:50%;bottom:95px;transform:translateX(-50%) translateY(20px);background:#15283d;border:1px solid var(--border);color:#fff;padding:12px 17px;border-radius:12px;font-size:12px;opacity:0;pointer-events:none;transition:.25s;z-index:200;width:max-content;max-width:90%;text-align:center}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.loading{text-align:center;color:var(--muted);padding:25px;font-size:13px}
-.empty{background:var(--card);border:1px solid var(--border);border-radius:17px;padding:25px;text-align:center;color:var(--muted);font-size:12px}
+
+.logo h1{
+font-size:25px;
+margin-top:15px;
+letter-spacing:.5px
+}
+
+.logo p{
+color:var(--muted);
+font-size:13px;
+margin-top:7px
+}
+
+.auth-card,
+.account-card,
+.order-card,
+.topup-card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:20px;
+padding:20px;
+box-shadow:0 20px 60px rgba(0,0,0,.25)
+}
+
+.tabs{
+display:flex;
+background:#071321;
+border-radius:13px;
+padding:4px;
+margin-bottom:22px
+}
+
+.tab{
+flex:1;
+border:0;
+background:transparent;
+color:var(--muted);
+padding:12px;
+border-radius:10px;
+font-weight:bold
+}
+
+.tab.active{
+background:var(--blue);
+color:#fff
+}
+
+.form-group{
+margin-bottom:15px
+}
+
+.form-group label{
+display:block;
+color:#b7c6d7;
+font-size:13px;
+margin-bottom:7px
+}
+
+.form-group input,
+.form-group select{
+width:100%;
+border:1px solid var(--border);
+background:#081523;
+color:#fff;
+padding:14px;
+border-radius:12px;
+outline:none
+}
+
+.form-group input:focus,
+.form-group select:focus{
+border-color:var(--blue)
+}
+
+.primary-btn{
+width:100%;
+border:0;
+padding:15px;
+border-radius:13px;
+background:linear-gradient(135deg,var(--blue),var(--blue-dark));
+color:#fff;
+font-weight:bold;
+box-shadow:0 8px 25px rgba(22,131,255,.22)
+}
+
+.primary-btn:disabled{
+opacity:.6;
+cursor:not-allowed
+}
+
+.secondary-btn{
+width:100%;
+border:1px solid var(--border);
+padding:14px;
+border-radius:13px;
+background:var(--card2);
+color:#fff;
+font-weight:bold
+}
+
+.small-link{
+text-align:right;
+margin:3px 0 18px
+}
+
+.small-link button{
+border:0;
+background:none;
+color:#55a9ff;
+font-size:13px
+}
+
+.hidden{
+display:none!important
+}
+
+.message{
+margin-bottom:15px;
+padding:12px;
+border-radius:10px;
+font-size:13px;
+display:none;
+line-height:1.5
+}
+
+.message.show{
+display:block
+}
+
+.message.success{
+background:rgba(25,195,125,.12);
+color:#5ce0a8
+}
+
+.message.error{
+background:rgba(255,82,99,.12);
+color:#ff7d89
+}
+
+.main-app{
+min-height:100vh;
+padding-bottom:82px
+}
+
+.topbar{
+padding:22px 18px 15px;
+display:flex;
+align-items:center;
+justify-content:space-between
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:10px
+}
+
+.brand-icon{
+width:42px;
+height:42px;
+border-radius:13px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900
+}
+
+.brand-text strong{
+display:block;
+font-size:14px
+}
+
+.brand-text span{
+display:block;
+color:var(--muted);
+font-size:10px;
+margin-top:2px
+}
+
+.logout-btn{
+border:1px solid var(--border);
+background:var(--card);
+color:#fff;
+width:40px;
+height:40px;
+border-radius:12px
+}
+
+.page{
+display:none;
+padding:5px 17px 25px
+}
+
+.page.active{
+display:block
+}
+
+.page-title{
+font-size:25px;
+font-weight:800;
+margin:10px 0 5px
+}
+
+.page-subtitle{
+color:var(--muted);
+font-size:13px;
+margin-bottom:20px
+}
+
+.balance-card{
+background:linear-gradient(135deg,#0d70df,#084b9c);
+border-radius:22px;
+padding:22px;
+margin-bottom:18px;
+position:relative;
+overflow:hidden
+}
+
+.balance-card:after{
+content:"";
+position:absolute;
+width:140px;
+height:140px;
+border-radius:50%;
+border:25px solid rgba(255,255,255,.06);
+right:-45px;
+top:-45px
+}
+
+.balance-label{
+color:#d8eaff;
+font-size:13px
+}
+
+.balance{
+font-size:34px;
+font-weight:900;
+margin:8px 0 17px
+}
+
+.topup-btn{
+background:#fff;
+color:#0864d8;
+border:0;
+padding:11px 18px;
+border-radius:11px;
+font-weight:800
+}
+
+.quick-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+margin-bottom:22px
+}
+
+.quick-card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:17px;
+padding:18px
+}
+
+.quick-icon{
+font-size:23px;
+margin-bottom:12px
+}
+
+.quick-card strong{
+display:block;
+font-size:14px
+}
+
+.quick-card span{
+color:var(--muted);
+font-size:11px
+}
+
+.service-list{
+display:flex;
+flex-direction:column;
+gap:11px
+}
+
+.service{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:17px;
+padding:16px;
+display:flex;
+align-items:center;
+justify-content:space-between
+}
+
+.service-left{
+display:flex;
+align-items:center;
+gap:12px
+}
+
+.service-icon{
+width:43px;
+height:43px;
+border-radius:13px;
+background:#102942;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px
+}
+
+.service-info strong{
+display:block;
+font-size:14px
+}
+
+.service-info span{
+display:block;
+color:var(--muted);
+font-size:11px;
+margin-top:4px
+}
+
+.service-price{
+text-align:right;
+color:#5db1ff;
+font-size:12px;
+font-weight:bold
+}
+
+.price-box{
+background:#081a2e;
+border:1px solid rgba(22,131,255,.2);
+border-radius:14px;
+padding:16px;
+margin:5px 0 17px
+}
+
+.price-box span{
+color:var(--muted);
+font-size:12px
+}
+
+.price-box strong{
+display:block;
+color:#58acff;
+font-size:24px;
+margin-top:4px
+}
+
+.order-item{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:17px;
+padding:16px;
+margin-bottom:11px
+}
+
+.order-top{
+display:flex;
+justify-content:space-between;
+gap:10px;
+margin-bottom:10px
+}
+
+.order-name{
+font-weight:bold;
+font-size:14px
+}
+
+.status{
+font-size:10px;
+padding:5px 9px;
+border-radius:20px;
+background:rgba(255,193,7,.12);
+color:#ffd45a;
+white-space:nowrap
+}
+
+.status.processing{
+background:rgba(22,131,255,.12);
+color:#58acff
+}
+
+.status.completed,
+.status.approved{
+background:rgba(25,195,125,.12);
+color:#5ce0a8
+}
+
+.status.failed,
+.status.rejected{
+background:rgba(255,82,99,.12);
+color:#ff7d89
+}
+
+.order-details{
+color:var(--muted);
+font-size:11px;
+line-height:1.8;
+word-break:break-word
+}
+
+.order-details strong{
+color:#fff
+}
+
+.order-id{
+color:#58acff;
+font-size:10px;
+word-break:break-all
+}
+
+.admin-note{
+margin-top:10px;
+padding:10px;
+border-radius:10px;
+background:rgba(22,131,255,.08);
+border:1px solid rgba(22,131,255,.15);
+color:#b8d9ff;
+font-size:11px;
+line-height:1.5
+}
+
+.amount-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:9px;
+margin-bottom:17px
+}
+
+.amount-btn{
+background:#09182a;
+color:#fff;
+border:1px solid var(--border);
+border-radius:11px;
+padding:11px 5px;
+font-size:12px
+}
+
+.payment-note{
+background:rgba(22,131,255,.08);
+border:1px solid rgba(22,131,255,.15);
+border-radius:13px;
+padding:14px;
+color:#a9cfff;
+font-size:12px;
+line-height:1.6;
+margin-bottom:17px
+}
+
+.bank-box{
+background:#081a2e;
+border:1px solid rgba(22,131,255,.25);
+border-radius:15px;
+padding:15px;
+margin-bottom:17px
+}
+
+.bank-box div{
+padding:7px 0;
+font-size:13px
+}
+
+.bank-box span{
+color:var(--muted);
+display:inline-block;
+width:115px
+}
+
+.bank-box strong{
+color:#fff
+}
+
+.account-card{
+padding:20px
+}
+
+.avatar{
+width:70px;
+height:70px;
+border-radius:22px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+font-weight:900;
+margin-bottom:15px
+}
+
+.account-name{
+font-size:20px;
+font-weight:bold
+}
+
+.account-email{
+color:var(--muted);
+font-size:12px;
+margin-top:5px
+}
+
+.info-row{
+padding:15px 0;
+border-bottom:1px solid var(--border);
+display:flex;
+justify-content:space-between;
+font-size:13px
+}
+
+.info-row:last-child{
+border-bottom:0
+}
+
+.info-row span{
+color:var(--muted)
+}
+
+.section-heading{
+font-size:17px;
+font-weight:800;
+margin:24px 0 12px
+}
+
+.bottom-nav{
+position:fixed;
+bottom:0;
+left:50%;
+transform:translateX(-50%);
+width:100%;
+max-width:480px;
+background:rgba(7,17,31,.96);
+backdrop-filter:blur(15px);
+border-top:1px solid var(--border);
+display:grid;
+grid-template-columns:repeat(5,1fr);
+padding:9px 7px calc(9px + env(safe-area-inset-bottom));
+z-index:50
+}
+
+.nav-btn{
+border:0;
+background:none;
+color:#6e8299;
+font-size:10px;
+padding:5px
+}
+
+.nav-icon{
+display:block;
+font-size:19px;
+margin-bottom:4px
+}
+
+.nav-btn.active{
+color:#48a5ff
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.7);
+display:none;
+align-items:flex-end;
+justify-content:center;
+z-index:100
+}
+
+.modal.show{
+display:flex
+}
+
+.modal-box{
+width:100%;
+max-width:480px;
+background:#0c1b2d;
+border-radius:25px 25px 0 0;
+padding:23px;
+border-top:1px solid var(--border);
+max-height:92vh;
+overflow-y:auto
+}
+
+.modal-title{
+font-size:21px;
+font-weight:800;
+margin-bottom:7px
+}
+
+.modal-subtitle{
+color:var(--muted);
+font-size:12px;
+margin-bottom:20px
+}
+
+.close-btn{
+width:100%;
+margin-top:10px;
+background:transparent;
+border:1px solid var(--border);
+color:#fff;
+padding:13px;
+border-radius:12px
+}
+
+.toast{
+position:fixed;
+left:50%;
+bottom:95px;
+transform:translateX(-50%) translateY(20px);
+background:#15283d;
+border:1px solid var(--border);
+color:#fff;
+padding:12px 17px;
+border-radius:12px;
+font-size:12px;
+opacity:0;
+pointer-events:none;
+transition:.25s;
+z-index:200;
+width:max-content;
+max-width:90%;
+text-align:center
+}
+
+.toast.show{
+opacity:1;
+transform:translateX(-50%) translateY(0)
+}
+
+.loading{
+text-align:center;
+color:var(--muted);
+padding:25px;
+font-size:13px
+}
+
+.empty{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:17px;
+padding:25px;
+text-align:center;
+color:var(--muted);
+font-size:12px
+}
+
 @media(min-width:600px){
-body{padding:20px 0}
-.app{border-radius:28px;min-height:calc(100vh - 40px);box-shadow:0 0 60px rgba(0,0,0,.45)}
-.bottom-nav{bottom:20px;border-radius:18px;width:480px}
-.modal{align-items:center}
-.modal-box{border-radius:25px}
+
+body{
+padding:20px 0
+}
+
+.app{
+border-radius:28px;
+min-height:calc(100vh - 40px);
+box-shadow:0 0 60px rgba(0,0,0,.45)
+}
+
+.bottom-nav{
+bottom:20px;
+border-radius:18px;
+width:480px
+}
+
+.modal{
+align-items:center
+}
+
+.modal-box{
+border-radius:25px
+}
+
 }
 </style>
 </head>
@@ -198,11 +823,17 @@ body{padding:20px 0}
 <header class="topbar">
 
 <div class="brand">
+
 <div class="brand-icon">AV</div>
+
 <div class="brand-text">
+
 <strong>ABDUL VIRAL BOOSTER</strong>
+
 <span>Grow your social media</span>
+
 </div>
+
 </div>
 
 <button class="logout-btn" onclick="logout()">↪</button>
@@ -216,17 +847,26 @@ body{padding:20px 0}
 Welcome, <span id="welcomeName">Customer</span> 👋
 </h2>
 
-<p class="page-subtitle">Boost your social media with ease.</p>
+<p class="page-subtitle">
+Boost your social media with ease.
+</p>
 
 <div class="balance-card">
 
-<div class="balance-label">Wallet Balance</div>
+<div class="balance-label">
+Wallet Balance
+</div>
 
-<div class="balance" id="balanceDisplay">₦0</div>
+<div class="balance" id="balanceDisplay">
+₦0
+</div>
 
-<button class="topup-btn" onclick="openTopup()">+ Fund Account</button>
+<button class="topup-btn" onclick="openTopup()">
++ Fund Account
+</button>
 
 </div>
+
 
 <div class="quick-grid">
 
@@ -256,7 +896,10 @@ Welcome, <span id="welcomeName">Customer</span> 👋
 
 </div>
 
-<h3 style="margin-bottom:12px">Popular Services</h3>
+
+<h3 style="margin-bottom:12px">
+Popular Services
+</h3>
 
 <div class="service-list">
 
@@ -294,137 +937,309 @@ Welcome, <span id="welcomeName">Customer</span> 👋
 </div>
 
 </div>
+
 </main>
 
 
 <main id="servicesPage" class="page">
 
-<h2 class="page-title">Services</h2>
-<p class="page-subtitle">Choose a service to place your order.</p>
+<h2 class="page-title">
+Services
+</h2>
+
+<p class="page-subtitle">
+Choose a service to place your order.
+</p>
 
 <div class="service-list">
 
-<div class="service" onclick="selectService('TikTok Followers',6000)">
-<div class="service-left"><div class="service-icon">🎵</div><div class="service-info"><strong>TikTok Followers</strong><span>₦6,000 / 1,000</span></div></div>
+<div class="service" onclick="selectService('TikTok Followers')">
+<div class="service-left">
+<div class="service-icon">🎵</div>
+<div class="service-info">
+<strong>TikTok Followers</strong>
+<span>₦6,000 / 1,000</span>
+</div>
+</div>
 <div class="service-price">₦6,000</div>
 </div>
 
-<div class="service" onclick="selectService('TikTok Likes',1000)">
-<div class="service-left"><div class="service-icon">❤️</div><div class="service-info"><strong>TikTok Likes</strong><span>₦1,000 / 1,000</span></div></div>
+<div class="service" onclick="selectService('TikTok Likes')">
+<div class="service-left">
+<div class="service-icon">❤️</div>
+<div class="service-info">
+<strong>TikTok Likes</strong>
+<span>₦1,000 / 1,000</span>
+</div>
+</div>
 <div class="service-price">₦1,000</div>
 </div>
 
-<div class="service" onclick="selectService('TikTok Views',400)">
-<div class="service-left"><div class="service-icon">👁️</div><div class="service-info"><strong>TikTok Views</strong><span>₦400 / 1,000</span></div></div>
+<div class="service" onclick="selectService('TikTok Views')">
+<div class="service-left">
+<div class="service-icon">👁️</div>
+<div class="service-info">
+<strong>TikTok Views</strong>
+<span>₦400 / 1,000</span>
+</div>
+</div>
 <div class="service-price">₦400</div>
 </div>
 
-<div class="service" onclick="selectService('Instagram Followers',5500)">
-<div class="service-left"><div class="service-icon">📸</div><div class="service-info"><strong>Instagram Followers</strong><span>₦5,500 / 1,000</span></div></div>
+<div class="service" onclick="selectService('Instagram Followers')">
+<div class="service-left">
+<div class="service-icon">📸</div>
+<div class="service-info">
+<strong>Instagram Followers</strong>
+<span>₦5,500 / 1,000</span>
+</div>
+</div>
 <div class="service-price">₦5,500</div>
 </div>
 
-<div class="service" onclick="selectService('Instagram Likes',800)">
-<div class="service-left"><div class="service-icon">❤️</div><div class="service-info"><strong>Instagram Likes</strong><span>₦800 / 1,000</span></div></div>
+<div class="service" onclick="selectService('Instagram Likes')">
+<div class="service-left">
+<div class="service-icon">❤️</div>
+<div class="service-info">
+<strong>Instagram Likes</strong>
+<span>₦800 / 1,000</span>
+</div>
+</div>
 <div class="service-price">₦800</div>
 </div>
 
-<div class="service" onclick="selectService('Instagram Views',300)">
-<div class="service-left"><div class="service-icon">👁️</div><div class="service-info"><strong>Instagram Views</strong><span>₦300 / 1,000</span></div></div>
+<div class="service" onclick="selectService('Instagram Views')">
+<div class="service-left">
+<div class="service-icon">👁️</div>
+<div class="service-info">
+<strong>Instagram Views</strong>
+<span>₦300 / 1,000</span>
+</div>
+</div>
 <div class="service-price">₦300</div>
 </div>
 
-<div class="service" onclick="selectService('YouTube Subscribers',65000)">
-<div class="service-left"><div class="service-icon">▶️</div><div class="service-info"><strong>YouTube Subscribers</strong><span>₦65,000 / 1,000</span></div></div>
+<div class="service" onclick="selectService('YouTube Subscribers')">
+<div class="service-left">
+<div class="service-icon">▶️</div>
+<div class="service-info">
+<strong>YouTube Subscribers</strong>
+<span>₦65,000 / 1,000</span>
+</div>
+</div>
 <div class="service-price">₦65,000</div>
 </div>
 
-<div class="service" onclick="selectService('YouTube Views',2500)">
-<div class="service-left"><div class="service-icon">▶️</div><div class="service-info"><strong>YouTube Views</strong><span>₦2,500 / 1,000</span></div></div>
+<div class="service" onclick="selectService('YouTube Views')">
+<div class="service-left">
+<div class="service-icon">▶️</div>
+<div class="service-info">
+<strong>YouTube Views</strong>
+<span>₦2,500 / 1,000</span>
+</div>
+</div>
 <div class="service-price">₦2,500</div>
 </div>
 
-<div class="service" onclick="selectService('Facebook Followers',5300)">
-<div class="service-left"><div class="service-icon">f</div><div class="service-info"><strong>Facebook Followers</strong><span>₦5,300 / 1,000</span></div></div>
+<div class="service" onclick="selectService('Facebook Followers')">
+<div class="service-left">
+<div class="service-icon">f</div>
+<div class="service-info">
+<strong>Facebook Followers</strong>
+<span>₦5,300 / 1,000</span>
+</div>
+</div>
 <div class="service-price">₦5,300</div>
 </div>
 
-<div class="service" onclick="selectService('Telegram Members',5000)">
-<div class="service-left"><div class="service-icon">✈️</div><div class="service-info"><strong>Telegram Members</strong><span>₦5,000 / 1,000</span></div></div>
+<div class="service" onclick="selectService('Telegram Members')">
+<div class="service-left">
+<div class="service-icon">✈️</div>
+<div class="service-info">
+<strong>Telegram Members</strong>
+<span>₦5,000 / 1,000</span>
+</div>
+</div>
 <div class="service-price">₦5,000</div>
 </div>
 
 </div>
+
 </main>
 
 
 <main id="orderPage" class="page">
 
-<h2 class="page-title">New Order</h2>
-<p class="page-subtitle">Enter your order details below.</p>
+<h2 class="page-title">
+New Order
+</h2>
+
+<p class="page-subtitle">
+Enter your order details below.
+</p>
 
 <div class="order-card">
 
 <div class="form-group">
-<label>Service</label>
+
+<label>
+Service
+</label>
+
 <select id="orderService" onchange="updatePrice()">
-<option value="">Select service</option>
-<option value="TikTok Followers|6000">TikTok Followers</option>
-<option value="TikTok Likes|1000">TikTok Likes</option>
-<option value="TikTok Views|400">TikTok Views</option>
-<option value="Instagram Followers|5500">Instagram Followers</option>
-<option value="Instagram Likes|800">Instagram Likes</option>
-<option value="Instagram Views|300">Instagram Views</option>
-<option value="YouTube Subscribers|65000">YouTube Subscribers</option>
-<option value="YouTube Views|2500">YouTube Views</option>
-<option value="Facebook Followers|5300">Facebook Followers</option>
-<option value="Telegram Members|5000">Telegram Members</option>
+
+<option value="">
+Select service
+</option>
+
+<option value="TikTok Followers">
+TikTok Followers
+</option>
+
+<option value="TikTok Likes">
+TikTok Likes
+</option>
+
+<option value="TikTok Views">
+TikTok Views
+</option>
+
+<option value="Instagram Followers">
+Instagram Followers
+</option>
+
+<option value="Instagram Likes">
+Instagram Likes
+</option>
+
+<option value="Instagram Views">
+Instagram Views
+</option>
+
+<option value="YouTube Subscribers">
+YouTube Subscribers
+</option>
+
+<option value="YouTube Views">
+YouTube Views
+</option>
+
+<option value="Facebook Followers">
+Facebook Followers
+</option>
+
+<option value="Telegram Members">
+Telegram Members
+</option>
+
 </select>
+
 </div>
 
-<div class="form-group">
-<label>Quantity</label>
-<input id="orderQuantity" type="number" min="100" step="100" value="1000" oninput="updatePrice()">
-</div>
 
 <div class="form-group">
-<label>Profile / Post / Channel Link</label>
-<input id="orderLink" type="url" placeholder="https://...">
+
+<label>
+Quantity
+</label>
+
+<input
+id="orderQuantity"
+type="number"
+min="100"
+step="100"
+value="1000"
+oninput="updatePrice()"
+>
+
 </div>
+
+
+<div class="form-group">
+
+<label>
+Profile / Post / Channel Link
+</label>
+
+<input
+id="orderLink"
+type="url"
+placeholder="https://..."
+>
+
+</div>
+
 
 <div class="price-box">
-<span>Total Price</span>
-<strong id="orderTotal">₦0</strong>
+
+<span>
+Estimated Total Price
+</span>
+
+<strong id="orderTotal">
+₦0
+</strong>
+
 </div>
 
-<button class="primary-btn" onclick="placeOrder()">Place Order</button>
+
+<button
+id="placeOrderBtn"
+class="primary-btn"
+onclick="placeOrder()"
+>
+Place Order
+</button>
 
 </div>
+
 </main>
 
 
 <main id="ordersPage" class="page">
 
-<h2 class="page-title">My Orders</h2>
-<p class="page-subtitle">View your recent orders.</p>
+<h2 class="page-title">
+My Orders
+</h2>
 
-<div id="ordersList"></div>
+<p class="page-subtitle">
+View your recent orders.
+</p>
+
+<div id="ordersList">
+
+<div class="loading">
+Loading orders...
+</div>
+
+</div>
 
 </main>
 
 
 <main id="accountPage" class="page">
 
-<h2 class="page-title">My Account</h2>
-<p class="page-subtitle">Your account information.</p>
+<h2 class="page-title">
+My Account
+</h2>
+
+<p class="page-subtitle">
+Your account information.
+</p>
 
 <div class="account-card">
 
-<div class="avatar" id="accountAvatar">A</div>
+<div class="avatar" id="accountAvatar">
+A
+</div>
 
-<div class="account-name" id="accountName">Customer</div>
+<div class="account-name" id="accountName">
+Customer
+</div>
 
-<div class="account-email" id="accountEmail">customer@example.com</div>
+<div class="account-email" id="accountEmail">
+customer@example.com
+</div>
 
 <div style="margin-top:20px">
 
@@ -442,10 +1257,17 @@ Welcome, <span id="welcomeName">Customer</span> 👋
 
 </div>
 
-<div class="section-heading">Funding History</div>
+
+<div class="section-heading">
+Funding History
+</div>
 
 <div id="fundingHistory">
-<div class="loading">Loading funding history...</div>
+
+<div class="loading">
+Loading funding history...
+</div>
+
 </div>
 
 </main>
@@ -453,24 +1275,49 @@ Welcome, <span id="welcomeName">Customer</span> 👋
 
 <nav class="bottom-nav">
 
-<button class="nav-btn active" onclick="goTo('home')" id="navHome">
-<span class="nav-icon">⌂</span>Home
+<button
+class="nav-btn active"
+onclick="goTo('home')"
+id="navHome"
+>
+<span class="nav-icon">⌂</span>
+Home
 </button>
 
-<button class="nav-btn" onclick="goTo('services')" id="navServices">
-<span class="nav-icon">🚀</span>Services
+<button
+class="nav-btn"
+onclick="goTo('services')"
+id="navServices"
+>
+<span class="nav-icon">🚀</span>
+Services
 </button>
 
-<button class="nav-btn" onclick="goTo('order')" id="navOrder">
-<span class="nav-icon">＋</span>Order
+<button
+class="nav-btn"
+onclick="goTo('order')"
+id="navOrder"
+>
+<span class="nav-icon">＋</span>
+Order
 </button>
 
-<button class="nav-btn" onclick="goTo('orders')" id="navOrders">
-<span class="nav-icon">📦</span>Orders
+<button
+class="nav-btn"
+onclick="goTo('orders')"
+id="navOrders"
+>
+<span class="nav-icon">📦</span>
+Orders
 </button>
 
-<button class="nav-btn" onclick="goTo('account')" id="navAccount">
-<span class="nav-icon">👤</span>Account
+<button
+class="nav-btn"
+onclick="goTo('account')"
+id="navAccount"
+>
+<span class="nav-icon">👤</span>
+Account
 </button>
 
 </nav>
@@ -484,7 +1331,9 @@ Welcome, <span id="welcomeName">Customer</span> 👋
 
 <div class="modal-box">
 
-<div class="modal-title">Fund Your Account 💰</div>
+<div class="modal-title">
+Fund Your Account 💰
+</div>
 
 <div class="modal-subtitle">
 Transfer the amount to the account below, then submit your transaction details.
@@ -492,70 +1341,156 @@ Transfer the amount to the account below, then submit your transaction details.
 
 <div class="bank-box">
 
-<div><span>Bank</span><strong>Opay</strong></div>
-<div><span>Account Name</span><strong>Abdulmajeed Yunusa Aliyu</strong></div>
-<div><span>Account Number</span><strong>8103397413</strong></div>
+<div>
+<span>Bank</span>
+<strong>Opay</strong>
+</div>
+
+<div>
+<span>Account Name</span>
+<strong>Abdulmajeed Yunusa Aliyu</strong>
+</div>
+
+<div>
+<span>Account Number</span>
+<strong>8103397413</strong>
+</div>
 
 </div>
+
 
 <div class="amount-grid">
 
-<button class="amount-btn" onclick="setAmount(1000)">₦1,000</button>
-<button class="amount-btn" onclick="setAmount(2000)">₦2,000</button>
-<button class="amount-btn" onclick="setAmount(5000)">₦5,000</button>
-<button class="amount-btn" onclick="setAmount(10000)">₦10,000</button>
-<button class="amount-btn" onclick="setAmount(20000)">₦20,000</button>
-<button class="amount-btn" onclick="setAmount(50000)">₦50,000</button>
+<button class="amount-btn" onclick="setAmount(1000)">
+₦1,000
+</button>
+
+<button class="amount-btn" onclick="setAmount(2000)">
+₦2,000
+</button>
+
+<button class="amount-btn" onclick="setAmount(5000)">
+₦5,000
+</button>
+
+<button class="amount-btn" onclick="setAmount(10000)">
+₦10,000
+</button>
+
+<button class="amount-btn" onclick="setAmount(20000)">
+₦20,000
+</button>
+
+<button class="amount-btn" onclick="setAmount(50000)">
+₦50,000
+</button>
 
 </div>
+
 
 <div class="form-group">
-<label>Amount Sent</label>
-<input id="topupAmount" type="number" min="100" placeholder="Enter amount transferred">
+
+<label>
+Amount Sent
+</label>
+
+<input
+id="topupAmount"
+type="number"
+min="100"
+placeholder="Enter amount transferred"
+>
+
 </div>
 
-<div class="form-group">
-<label>Your Bank Name</label>
-<input id="customerBankName" type="text" placeholder="e.g. Opay, PalmPay, GTBank">
-</div>
 
 <div class="form-group">
-<label>Your Account Name</label>
-<input id="customerAccountName" type="text" placeholder="Name on your bank account">
+
+<label>
+Your Bank Name
+</label>
+
+<input
+id="customerBankName"
+type="text"
+placeholder="e.g. Opay, PalmPay, GTBank"
+>
+
 </div>
 
+
 <div class="form-group">
-<label>Transaction Reference</label>
-<input id="transactionReference" type="text" placeholder="Enter transaction reference">
+
+<label>
+Your Account Name
+</label>
+
+<input
+id="customerAccountName"
+type="text"
+placeholder="Name on your bank account"
+>
+
 </div>
+
+
+<div class="form-group">
+
+<label>
+Transaction Reference
+</label>
+
+<input
+id="transactionReference"
+type="text"
+placeholder="Enter transaction reference"
+>
+
+</div>
+
 
 <div class="payment-note">
-💳 <strong>Important:</strong> After transferring the money, submit the transaction details above. Your wallet will remain pending until an admin verifies and approves the payment.
+
+💳 <strong>Important:</strong>
+After transferring the money, submit the transaction details above.
+Your wallet will remain pending until an admin verifies and approves the payment.
+
 </div>
+
 
 <div id="fundingMessage" class="message"></div>
 
-<button id="submitFundingBtn" class="primary-btn" onclick="submitFundingRequest()">
+
+<button
+id="submitFundingBtn"
+class="primary-btn"
+onclick="submitFundingRequest()"
+>
 Submit Funding Request
 </button>
 
-<button class="close-btn" onclick="closeTopup()">Cancel</button>
+
+<button
+class="close-btn"
+onclick="closeTopup()"
+>
+Cancel
+</button>
 
 </div>
+
 </div>
 
 
 <div id="toast" class="toast"></div>
 
 
-<!-- SUPABASE -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
 /* =========================================================
-   SUPABASE CONNECTION
+   SUPABASE
 ========================================================= */
 
 const SUPABASE_URL =
@@ -583,16 +1518,67 @@ detectSessionInUrl:true
 ========================================================= */
 
 const SERVICES = {
-"TikTok Followers":6000,
-"TikTok Likes":1000,
-"TikTok Views":400,
-"Instagram Followers":5500,
-"Instagram Likes":800,
-"Instagram Views":300,
-"YouTube Subscribers":65000,
-"YouTube Views":2500,
-"Facebook Followers":5300,
-"Telegram Members":5000
+
+"TikTok Followers":{
+platform:"TikTok",
+service:"Followers",
+price:6000
+},
+
+"TikTok Likes":{
+platform:"TikTok",
+service:"Likes",
+price:1000
+},
+
+"TikTok Views":{
+platform:"TikTok",
+service:"Views",
+price:400
+},
+
+"Instagram Followers":{
+platform:"Instagram",
+service:"Followers",
+price:5500
+},
+
+"Instagram Likes":{
+platform:"Instagram",
+service:"Likes",
+price:800
+},
+
+"Instagram Views":{
+platform:"Instagram",
+service:"Views",
+price:300
+},
+
+"YouTube Subscribers":{
+platform:"YouTube",
+service:"Subscribers",
+price:65000
+},
+
+"YouTube Views":{
+platform:"YouTube",
+service:"Views",
+price:2500
+},
+
+"Facebook Followers":{
+platform:"Facebook",
+service:"Followers",
+price:5300
+},
+
+"Telegram Members":{
+platform:"Telegram",
+service:"Members",
+price:5000
+}
+
 };
 
 
@@ -602,9 +1588,6 @@ const SERVICES = {
 
 let currentUser = null;
 let balance = 0;
-
-let orders =
-JSON.parse(localStorage.getItem("abdulOrders")) || [];
 
 
 /* =========================================================
@@ -678,6 +1661,7 @@ const box =
 document.getElementById("fundingMessage");
 
 box.textContent = text;
+
 box.className =
 "message show " + type;
 
@@ -690,34 +1674,47 @@ box.className =
 
 document
 .getElementById("signupForm")
-.addEventListener("submit",async function(e){
+.addEventListener(
+"submit",
+async function(e){
 
 e.preventDefault();
 
 clearMessage();
 
 const name =
-document.getElementById("signupName")
-.value.trim();
+document
+.getElementById("signupName")
+.value
+.trim();
 
 const email =
-document.getElementById("signupEmail")
-.value.trim();
+document
+.getElementById("signupEmail")
+.value
+.trim();
 
 const password =
-document.getElementById("signupPassword")
+document
+.getElementById("signupPassword")
 .value;
 
 const confirm =
-document.getElementById("signupConfirm")
+document
+.getElementById("signupConfirm")
 .value;
+
 
 if(password !== confirm){
 
-showMessage("Passwords do not match.");
+showMessage(
+"Passwords do not match."
+);
+
 return;
 
 }
+
 
 if(password.length < 6){
 
@@ -728,6 +1725,7 @@ showMessage(
 return;
 
 }
+
 
 try{
 
@@ -751,6 +1749,7 @@ emailRedirectTo:redirectUrl
 
 });
 
+
 if(error){
 
 showMessage(error.message);
@@ -758,15 +1757,11 @@ return;
 
 }
 
-/*
-If email confirmation is enabled,
-Supabase normally returns a user without
-an active session.
-*/
 
 if(data.session){
 
-currentUser = data.user;
+currentUser =
+data.user;
 
 await enterApp();
 
@@ -782,12 +1777,14 @@ showMessage(
 }catch(error){
 
 showMessage(
-error.message || "Unable to create account."
+error.message ||
+"Unable to create account."
 );
 
 }
 
-});
+}
+);
 
 
 /* =========================================================
@@ -796,19 +1793,25 @@ error.message || "Unable to create account."
 
 document
 .getElementById("loginForm")
-.addEventListener("submit",async function(e){
+.addEventListener(
+"submit",
+async function(e){
 
 e.preventDefault();
 
 clearMessage();
 
 const email =
-document.getElementById("loginEmail")
-.value.trim();
+document
+.getElementById("loginEmail")
+.value
+.trim();
 
 const password =
-document.getElementById("loginPassword")
+document
+.getElementById("loginPassword")
 .value;
+
 
 if(!email || !password){
 
@@ -820,6 +1823,7 @@ return;
 
 }
 
+
 try{
 
 const {data,error} =
@@ -830,12 +1834,14 @@ password:password
 
 });
 
+
 if(error){
 
 showMessage(error.message);
 return;
 
 }
+
 
 if(!data.user){
 
@@ -844,19 +1850,23 @@ return;
 
 }
 
-currentUser = data.user;
+
+currentUser =
+data.user;
 
 await enterApp();
 
 }catch(error){
 
 showMessage(
-error.message || "Unable to log in."
+error.message ||
+"Unable to log in."
 );
 
 }
 
-});
+}
+);
 
 
 /* =========================================================
@@ -866,8 +1876,11 @@ error.message || "Unable to log in."
 async function forgotPassword(){
 
 const email =
-document.getElementById("loginEmail")
-.value.trim();
+document
+.getElementById("loginEmail")
+.value
+.trim();
+
 
 if(!email){
 
@@ -879,6 +1892,7 @@ return;
 
 }
 
+
 try{
 
 const redirectUrl =
@@ -886,12 +1900,15 @@ window.location.origin +
 window.location.pathname;
 
 const {error} =
-await supabaseClient.auth.resetPasswordForEmail(
+await supabaseClient
+.auth
+.resetPasswordForEmail(
 email,
 {
 redirectTo:redirectUrl
 }
 );
+
 
 if(error){
 
@@ -899,6 +1916,7 @@ showMessage(error.message);
 return;
 
 }
+
 
 showMessage(
 "Password reset email sent. Check your inbox.",
@@ -908,7 +1926,8 @@ showMessage(
 }catch(error){
 
 showMessage(
-error.message || "Unable to send reset email."
+error.message ||
+"Unable to send password reset email."
 );
 
 }
@@ -917,7 +1936,7 @@ error.message || "Unable to send reset email."
 
 
 /* =========================================================
-   AUTH SESSION CHECK
+   SESSION
 ========================================================= */
 
 async function checkSession(){
@@ -925,7 +1944,10 @@ async function checkSession(){
 try{
 
 const {data,error} =
-await supabaseClient.auth.getSession();
+await supabaseClient
+.auth
+.getSession();
+
 
 if(error){
 
@@ -934,7 +1956,11 @@ return;
 
 }
 
-if(data.session && data.session.user){
+
+if(
+data.session &&
+data.session.user
+){
 
 currentUser =
 data.session.user;
@@ -963,13 +1989,18 @@ console.error(error);
 
 
 /* =========================================================
-   AUTH STATE LISTENER
+   AUTH STATE
 ========================================================= */
 
-supabaseClient.auth.onAuthStateChange(
-async function(event,session){
+supabaseClient
+.auth
+.onAuthStateChange(
+function(event,session){
 
-if(session && session.user){
+if(
+session &&
+session.user
+){
 
 currentUser =
 session.user;
@@ -993,7 +2024,10 @@ currentUser = null;
 
 async function enterApp(){
 
-if(!currentUser) return;
+if(!currentUser){
+return;
+}
+
 
 document
 .getElementById("authScreen")
@@ -1003,13 +2037,14 @@ document
 .getElementById("mainApp")
 .classList.remove("hidden");
 
+
 updateUser();
 
 await loadWallet();
 
 await loadFundingHistory();
 
-loadOrders();
+await loadOrders();
 
 }
 
@@ -1020,19 +2055,22 @@ loadOrders();
 
 function updateUser(){
 
-if(!currentUser) return;
+if(!currentUser){
+return;
+}
+
 
 const metadata =
 currentUser.user_metadata || {};
 
 const name =
 metadata.name ||
-currentUser.email
-.split("@")[0] ||
+currentUser.email?.split("@")[0] ||
 "Customer";
 
 const email =
 currentUser.email || "";
+
 
 document
 .getElementById("welcomeName")
@@ -1049,7 +2087,9 @@ document
 document
 .getElementById("accountAvatar")
 .textContent =
-name.charAt(0).toUpperCase();
+name
+.charAt(0)
+.toUpperCase();
 
 }
 
@@ -1062,7 +2102,9 @@ async function logout(){
 
 try{
 
-await supabaseClient.auth.signOut();
+await supabaseClient
+.auth
+.signOut();
 
 }catch(error){
 
@@ -1070,8 +2112,8 @@ console.error(error);
 
 }
 
-currentUser = null;
 
+currentUser = null;
 balance = 0;
 
 document
@@ -1100,11 +2142,16 @@ function goTo(page){
 document
 .querySelectorAll(".page")
 .forEach(
-p => p.classList.remove("active")
+p =>
+p.classList.remove("active")
 );
 
+
 const target =
-document.getElementById(page + "Page");
+document.getElementById(
+page + "Page"
+);
+
 
 if(target){
 
@@ -1112,11 +2159,14 @@ target.classList.add("active");
 
 }
 
+
 document
 .querySelectorAll(".nav-btn")
 .forEach(
-btn => btn.classList.remove("active")
+btn =>
+btn.classList.remove("active")
 );
+
 
 const nav =
 document.getElementById(
@@ -1125,17 +2175,20 @@ page.charAt(0).toUpperCase() +
 page.slice(1)
 );
 
+
 if(nav){
 
 nav.classList.add("active");
 
 }
 
+
 if(page === "orders"){
 
 loadOrders();
 
 }
+
 
 if(page === "account"){
 
@@ -1144,6 +2197,7 @@ loadFundingHistory();
 loadWallet();
 
 }
+
 
 window.scrollTo({
 top:0,
@@ -1159,7 +2213,10 @@ behavior:"smooth"
 
 async function loadWallet(){
 
-if(!currentUser) return;
+if(!currentUser){
+return;
+}
+
 
 try{
 
@@ -1170,9 +2227,13 @@ await supabaseClient
 .eq("user_id",currentUser.id)
 .maybeSingle();
 
+
 if(error){
 
-console.error("Wallet error:",error);
+console.error(
+"Wallet error:",
+error
+);
 
 toast(
 "Unable to load wallet balance."
@@ -1182,10 +2243,15 @@ return;
 
 }
 
+
 balance =
-Number(data?.balance || 0);
+Number(
+data?.balance || 0
+);
+
 
 updateBalanceDisplay();
+
 
 }catch(error){
 
@@ -1215,10 +2281,13 @@ function formatMoney(amount){
 
 return "₦" +
 Number(amount || 0)
-.toLocaleString("en-NG",{
+.toLocaleString(
+"en-NG",
+{
 minimumFractionDigits:0,
 maximumFractionDigits:2
-});
+}
+);
 
 }
 
@@ -1227,13 +2296,19 @@ maximumFractionDigits:2
    SERVICES
 ========================================================= */
 
-function selectService(name,price){
+function selectService(name){
 
 const select =
-document.getElementById("orderService");
+document.getElementById(
+"orderService"
+);
 
-select.value =
-name + "|" + price;
+
+if(
+SERVICES[name]
+){
+
+select.value = name;
 
 updatePrice();
 
@@ -1241,35 +2316,60 @@ goTo("order");
 
 }
 
+}
+
+
+/* =========================================================
+   PRICE PREVIEW
+========================================================= */
 
 function updatePrice(){
 
 const selected =
-document.getElementById("orderService").value;
+document
+.getElementById("orderService")
+.value;
 
 const quantity =
 Number(
-document.getElementById("orderQuantity").value
+document
+.getElementById("orderQuantity")
+.value
 ) || 0;
+
 
 if(!selected){
 
 document
 .getElementById("orderTotal")
-.textContent = "₦0";
+.textContent =
+"₦0";
 
 return;
 
 }
 
-const parts =
-selected.split("|");
 
-const price =
-Number(parts[1]);
+const service =
+SERVICES[selected];
+
+
+if(!service){
+
+document
+.getElementById("orderTotal")
+.textContent =
+"₦0";
+
+return;
+
+}
+
 
 const total =
-price * (quantity / 1000);
+service.price *
+(quantity / 1000);
+
 
 document
 .getElementById("orderTotal")
@@ -1280,57 +2380,102 @@ formatMoney(total);
 
 
 /* =========================================================
-   ORDER
+   PLACE ORDER
 ========================================================= */
 
-function placeOrder(){
+async function placeOrder(){
+
+if(!currentUser){
+
+toast(
+"Please log in first."
+);
+
+return;
+
+}
+
 
 const selected =
-document.getElementById("orderService").value;
+document
+.getElementById("orderService")
+.value;
 
 const quantity =
 Number(
-document.getElementById("orderQuantity").value
+document
+.getElementById("orderQuantity")
+.value
 );
 
 const link =
-document.getElementById("orderLink")
-.value.trim();
+document
+.getElementById("orderLink")
+.value
+.trim();
+
 
 if(!selected){
 
-toast("Please select a service.");
+toast(
+"Please select a service."
+);
+
 return;
 
 }
+
 
 if(!quantity || quantity < 100){
 
-toast("Minimum quantity is 100.");
+toast(
+"Minimum quantity is 100."
+);
+
 return;
 
 }
+
 
 if(!link){
 
-toast("Please enter your link.");
+toast(
+"Please enter your link."
+);
+
 return;
 
 }
 
-const parts =
-selected.split("|");
 
-const service =
-parts[0];
+const serviceInfo =
+SERVICES[selected];
 
-const price =
-Number(parts[1]);
 
-const total =
-price * (quantity / 1000);
+if(!serviceInfo){
 
-if(balance < total){
+toast(
+"Invalid service selected."
+);
+
+return;
+
+}
+
+
+/*
+The displayed total is only a preview.
+
+The REAL price and deduction are calculated
+inside the secure Supabase place_order() RPC.
+*/
+
+const estimatedTotal =
+serviceInfo.price *
+(quantity / 1000);
+
+
+if(balance < estimatedTotal){
 
 toast(
 "Insufficient wallet balance. Please fund your account."
@@ -1342,77 +2487,208 @@ return;
 
 }
 
-/*
-The funding/wallet system is securely handled
-by Supabase.
 
-Orders are still stored locally in this version.
-A database order/RPC system should be added before
-real production order deductions are enabled.
-*/
-
-balance -= total;
-
-const order = {
-
-id:"AV" + Date.now(),
-
-service:service,
-
-quantity:quantity,
-
-link:link,
-
-total:total,
-
-status:"Pending",
-
-date:new Date().toLocaleString("en-NG")
-
-};
-
-orders.unshift(order);
-
-localStorage.setItem(
-"abdulOrders",
-JSON.stringify(orders)
+const button =
+document.getElementById(
+"placeOrderBtn"
 );
 
-updateBalanceDisplay();
+button.disabled = true;
+button.textContent =
+"Processing...";
+
+
+try{
+
+const {data,error} =
+await supabaseClient
+.rpc(
+"place_order",
+{
+p_platform:
+serviceInfo.platform,
+
+p_service:
+serviceInfo.service,
+
+p_quantity:
+quantity,
+
+p_link:
+link
+}
+);
+
+
+if(error){
+
+console.error(
+"Place order error:",
+error
+);
+
+toast(
+cleanRPCError(error.message)
+);
+
+button.disabled = false;
+button.textContent =
+"Place Order";
+
+return;
+
+}
+
+
+if(!data){
+
+toast(
+"Order could not be created."
+);
+
+button.disabled = false;
+button.textContent =
+"Place Order";
+
+return;
+
+}
+
+
+/*
+IMPORTANT:
+
+Do not deduct the balance manually here.
+
+The Supabase RPC already:
+
+1. Checks balance
+2. Creates the order
+3. Deducts wallet
+4. Creates wallet transaction
+
+We only refresh the wallet from Supabase.
+*/
+
+
+await loadWallet();
+
+await loadOrders();
+
 
 document
 .getElementById("orderLink")
 .value = "";
 
-toast("Order placed successfully!");
 
-setTimeout(function(){
+toast(
+"Order placed successfully!"
+);
+
+
+button.disabled = false;
+button.textContent =
+"Place Order";
+
+
+setTimeout(
+function(){
 
 goTo("orders");
 
-},700);
+},
+700
+);
+
+
+}catch(error){
+
+console.error(
+"Unexpected order error:",
+error
+);
+
+toast(
+error.message ||
+"Unable to place order."
+);
+
+button.disabled = false;
+button.textContent =
+"Place Order";
+
+}
 
 }
 
 
 /* =========================================================
-   ORDERS
+   CLEAN RPC ERROR
 ========================================================= */
 
-function loadOrders(){
+function cleanRPCError(message){
+
+if(!message){
+return "Unable to place order.";
+}
+
+
+if(
+message
+.toLowerCase()
+.includes("insufficient wallet balance")
+){
+
+return message;
+
+}
+
+
+if(
+message
+.toLowerCase()
+.includes("wallet not found")
+){
+
+return "Your wallet could not be found. Please contact support.";
+
+}
+
+
+if(
+message
+.toLowerCase()
+.includes("service is not available")
+){
+
+return "This service is currently unavailable.";
+
+}
+
+
+return message;
+
+}
+
+
+/* =========================================================
+   LOAD ORDERS FROM SUPABASE
+========================================================= */
+
+async function loadOrders(){
 
 const box =
-document.getElementById("ordersList");
+document.getElementById(
+"ordersList"
+);
 
-if(orders.length === 0){
 
-box.innerHTML = `
+if(!currentUser){
+
+box.innerHTML =
+`
 <div class="empty">
-<div style="font-size:35px;margin-bottom:10px">📦</div>
-<strong>No orders yet</strong>
-<p style="margin-top:7px">
-Your orders will appear here.
-</p>
+Please log in to view your orders.
 </div>
 `;
 
@@ -1420,61 +2696,295 @@ return;
 
 }
 
+
 box.innerHTML =
-orders.map(order => `
+`
+<div class="loading">
+Loading orders...
+</div>
+`;
+
+
+try{
+
+const {data,error} =
+await supabaseClient
+.from("orders")
+.select(
+`
+id,
+platform,
+service,
+quantity,
+link,
+unit_price,
+total_amount,
+status,
+admin_note,
+created_at,
+updated_at
+`
+)
+.eq(
+"user_id",
+currentUser.id
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
+
+if(error){
+
+console.error(
+"Orders error:",
+error
+);
+
+box.innerHTML =
+`
+<div class="empty">
+Unable to load your orders.
+<br><br>
+${escapeHTML(error.message)}
+</div>
+`;
+
+return;
+
+}
+
+
+if(
+!data ||
+data.length === 0
+){
+
+box.innerHTML =
+`
+<div class="empty">
+
+<div style="font-size:35px;margin-bottom:10px">
+📦
+</div>
+
+<strong>
+No orders yet
+</strong>
+
+<p style="margin-top:7px">
+Your orders will appear here.
+</p>
+
+</div>
+`;
+
+return;
+
+}
+
+
+box.innerHTML =
+data
+.map(
+order =>
+renderOrder(order)
+)
+.join("");
+
+
+}catch(error){
+
+console.error(error);
+
+box.innerHTML =
+`
+<div class="empty">
+Unable to load orders.
+</div>
+`;
+
+}
+
+}
+
+
+/* =========================================================
+   RENDER ORDER
+========================================================= */
+
+function renderOrder(order){
+
+const status =
+String(
+order.status || "pending"
+)
+.toLowerCase();
+
+
+let statusClass = "";
+
+if(status === "processing"){
+statusClass = "processing";
+}
+
+if(status === "completed"){
+statusClass = "completed";
+}
+
+if(status === "failed"){
+statusClass = "failed";
+}
+
+
+const statusText =
+status
+.charAt(0)
+.toUpperCase() +
+status.slice(1);
+
+
+const createdDate =
+order.created_at
+?
+new Date(
+order.created_at
+)
+.toLocaleString("en-NG")
+:
+"";
+
+
+const note =
+order.admin_note &&
+String(order.admin_note).trim()
+?
+`
+<div class="admin-note">
+<strong>Admin Note:</strong><br>
+${escapeHTML(order.admin_note)}
+</div>
+`
+:
+"";
+
+
+return `
 
 <div class="order-item">
 
 <div class="order-top">
 
 <div class="order-name">
-${escapeHTML(order.service)}
+
+${escapeHTML(
+order.platform
+)} ${escapeHTML(
+order.service
+)}
+
 </div>
 
-<div class="status">
-${escapeHTML(order.status)}
+<div class="status ${statusClass}">
+
+${escapeHTML(
+statusText
+)}
+
 </div>
 
 </div>
+
 
 <div class="order-details">
 
 Order ID:
+
+<div class="order-id">
 ${escapeHTML(order.id)}
-<br>
+</div>
 
 Quantity:
-${Number(order.quantity).toLocaleString()}
+<strong>
+${Number(
+order.quantity
+).toLocaleString("en-NG")}
+</strong>
+
 <br>
 
 Amount:
-${formatMoney(order.total)}
+<strong>
+${formatMoney(
+order.total_amount
+)}
+</strong>
+
+<br>
+
+Price:
+${formatMoney(
+order.unit_price
+)}
+ / 1,000
+
 <br>
 
 Date:
-${escapeHTML(order.date)}
+${escapeHTML(
+createdDate
+)}
+
 <br>
 
 Link:
-${escapeHTML(order.link)}
+${escapeHTML(
+order.link
+)}
+
+${note}
 
 </div>
 
 </div>
 
-`).join("");
+`;
 
 }
 
 
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
 function escapeHTML(value){
 
-return String(value)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+return String(
+value ?? ""
+)
+.replace(
+/&/g,
+"&amp;"
+)
+.replace(
+/</g,
+"&lt;"
+)
+.replace(
+/>/g,
+"&gt;"
+)
+.replace(
+/"/g,
+"&quot;"
+)
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
 
@@ -1487,18 +2997,25 @@ function openTopup(){
 
 if(!currentUser){
 
-toast("Please log in first.");
+toast(
+"Please log in first."
+);
+
 return;
 
 }
+
 
 document
 .getElementById("topupModal")
 .classList.add("show");
 
+
 document
 .getElementById("fundingMessage")
-.className = "message";
+.className =
+"message";
+
 
 document
 .getElementById("fundingMessage")
@@ -1520,7 +3037,8 @@ function setAmount(amount){
 
 document
 .getElementById("topupAmount")
-.value = amount;
+.value =
+amount;
 
 }
 
@@ -1541,22 +3059,35 @@ return;
 
 }
 
+
 const amount =
 Number(
-document.getElementById("topupAmount").value
+document
+.getElementById("topupAmount")
+.value
 );
 
+
 const bankName =
-document.getElementById("customerBankName")
-.value.trim();
+document
+.getElementById("customerBankName")
+.value
+.trim();
+
 
 const accountName =
-document.getElementById("customerAccountName")
-.value.trim();
+document
+.getElementById("customerAccountName")
+.value
+.trim();
+
 
 const reference =
-document.getElementById("transactionReference")
-.value.trim();
+document
+.getElementById("transactionReference")
+.value
+.trim();
+
 
 if(!amount || amount <= 0){
 
@@ -1568,6 +3099,7 @@ return;
 
 }
 
+
 if(!bankName){
 
 showFundingMessage(
@@ -1577,6 +3109,7 @@ showFundingMessage(
 return;
 
 }
+
 
 if(!accountName){
 
@@ -1588,6 +3121,7 @@ return;
 
 }
 
+
 if(!reference){
 
 showFundingMessage(
@@ -1598,11 +3132,16 @@ return;
 
 }
 
+
 const button =
-document.getElementById("submitFundingBtn");
+document.getElementById(
+"submitFundingBtn"
+);
 
 button.disabled = true;
-button.textContent = "Submitting...";
+button.textContent =
+"Submitting...";
+
 
 try{
 
@@ -1611,23 +3150,33 @@ await supabaseClient
 .from("funding_requests")
 .insert({
 
-user_id:currentUser.id,
+user_id:
+currentUser.id,
 
-customer_bank_name:bankName,
+customer_bank_name:
+bankName,
 
-customer_account_name:accountName,
+customer_account_name:
+accountName,
 
-amount:amount,
+amount:
+amount,
 
-transaction_reference:reference,
+transaction_reference:
+reference,
 
-status:"pending"
+status:
+"pending"
 
 });
 
+
 if(error){
 
-console.error("Funding request error:",error);
+console.error(
+"Funding request error:",
+error
+);
 
 showFundingMessage(
 error.message ||
@@ -1635,11 +3184,13 @@ error.message ||
 );
 
 button.disabled = false;
-button.textContent = "Submit Funding Request";
+button.textContent =
+"Submit Funding Request";
 
 return;
 
 }
+
 
 showFundingMessage(
 "Funding request for " +
@@ -1648,31 +3199,52 @@ formatMoney(amount) +
 "success"
 );
 
-toast("Funding request submitted!");
+
+toast(
+"Funding request submitted!"
+);
+
 
 document
-.getElementById("customerBankName")
+.getElementById(
+"customerBankName"
+)
 .value = "";
 
-document
-.getElementById("customerAccountName")
-.value = "";
 
 document
-.getElementById("transactionReference")
+.getElementById(
+"customerAccountName"
+)
 .value = "";
 
+
 document
-.getElementById("topupAmount")
+.getElementById(
+"transactionReference"
+)
 .value = "";
+
+
+document
+.getElementById(
+"topupAmount"
+)
+.value = "";
+
 
 await loadFundingHistory();
 
-setTimeout(function(){
+
+setTimeout(
+function(){
 
 closeTopup();
 
-},1800);
+},
+1800
+);
+
 
 }catch(error){
 
@@ -1685,8 +3257,10 @@ error.message ||
 
 }
 
+
 button.disabled = false;
-button.textContent = "Submit Funding Request";
+button.textContent =
+"Submit Funding Request";
 
 }
 
@@ -1697,20 +3271,32 @@ button.textContent = "Submit Funding Request";
 
 async function loadFundingHistory(){
 
-if(!currentUser) return;
+if(!currentUser){
+return;
+}
+
 
 const box =
-document.getElementById("fundingHistory");
+document.getElementById(
+"fundingHistory"
+);
+
 
 box.innerHTML =
-`<div class="loading">Loading funding history...</div>`;
+`
+<div class="loading">
+Loading funding history...
+</div>
+`;
+
 
 try{
 
 const {data,error} =
 await supabaseClient
 .from("funding_requests")
-.select(`
+.select(
+`
 id,
 amount,
 customer_bank_name,
@@ -1719,58 +3305,112 @@ status,
 admin_note,
 created_at,
 reviewed_at
-`)
-.eq("user_id",currentUser.id)
-.order("created_at",{ascending:false});
+`
+)
+.eq(
+"user_id",
+currentUser.id
+)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
+
 
 if(error){
 
-console.error("Funding history error:",error);
+console.error(
+"Funding history error:",
+error
+);
 
 box.innerHTML =
-`<div class="empty">
+`
+<div class="empty">
 Unable to load funding history.
-</div>`;
+</div>
+`;
 
 return;
 
 }
 
-if(!data || data.length === 0){
+
+if(
+!data ||
+data.length === 0
+){
 
 box.innerHTML =
-`<div class="empty">
-<div style="font-size:30px;margin-bottom:8px">💳</div>
+`
+<div class="empty">
+
+<div style="font-size:30px;margin-bottom:8px">
+💳
+</div>
+
 No funding requests yet.
-</div>`;
+
+</div>
+`;
 
 return;
 
 }
 
+
 box.innerHTML =
-data.map(request => {
+data
+.map(
+request => {
 
 let statusClass = "";
 
-if(request.status === "approved"){
-statusClass = "approved";
+
+if(
+request.status === "approved"
+){
+
+statusClass =
+"approved";
+
 }
 
-if(request.status === "rejected"){
-statusClass = "rejected";
+
+if(
+request.status === "rejected"
+){
+
+statusClass =
+"rejected";
+
 }
+
 
 const statusText =
-request.status.charAt(0).toUpperCase() +
+request.status
+.charAt(0)
+.toUpperCase() +
 request.status.slice(1);
+
 
 const note =
 request.admin_note
 ?
-`<br>Admin note: ${escapeHTML(request.admin_note)}`
+`
+<br>
+<div class="admin-note">
+<strong>Admin Note:</strong><br>
+${escapeHTML(
+request.admin_note
+)}
+</div>
+`
 :
 "";
+
 
 return `
 
@@ -1783,33 +3423,52 @@ Funding Request
 </div>
 
 <div class="status ${statusClass}">
-${escapeHTML(statusText)}
+${escapeHTML(
+statusText
+)}
 </div>
 
 </div>
+
 
 <div class="order-details">
 
+Request ID:
+<div class="order-id">
+${escapeHTML(
+request.id
+)}
+</div>
+
 Amount:
+
 <strong style="color:#58acff">
-${formatMoney(request.amount)}
+${formatMoney(
+request.amount
+)}
 </strong>
 
 <br>
 
 Bank:
-${escapeHTML(request.customer_bank_name)}
+${escapeHTML(
+request.customer_bank_name
+)}
 
 <br>
 
 Reference:
-${escapeHTML(request.transaction_reference)}
+${escapeHTML(
+request.transaction_reference
+)}
 
 <br>
 
 Date:
 ${escapeHTML(
-new Date(request.created_at)
+new Date(
+request.created_at
+)
 .toLocaleString("en-NG")
 )}
 
@@ -1821,16 +3480,21 @@ ${note}
 
 `;
 
-}).join("");
+}
+)
+.join("");
+
 
 }catch(error){
 
 console.error(error);
 
 box.innerHTML =
-`<div class="empty">
+`
+<div class="empty">
 Unable to load funding history.
-</div>`;
+</div>
+`;
 
 }
 
@@ -1843,23 +3507,36 @@ Unable to load funding history.
 
 let toastTimer;
 
+
 function toast(message){
 
 const box =
-document.getElementById("toast");
+document.getElementById(
+"toast"
+);
 
-box.textContent = message;
+
+box.textContent =
+message;
+
 
 box.classList.add("show");
 
-clearTimeout(toastTimer);
+
+clearTimeout(
+toastTimer
+);
+
 
 toastTimer =
-setTimeout(function(){
+setTimeout(
+function(){
 
 box.classList.remove("show");
 
-},3500);
+},
+3500
+);
 
 }
 
@@ -1873,4 +3550,4 @@ checkSession();
 </script>
 
 </body>
-                                                                                                                 </html>
+   </html>
