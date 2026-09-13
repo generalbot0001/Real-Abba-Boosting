@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Admin Panel - Real Abba Boosting</title>
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+  <style>
+    .admin-page {
+      min-height: 100vh;
+      padding: 20px;
+      background: #07111f;
+      color: #ffffff;
+    }
+
+    .admin-container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .admin-title h1 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .admin-title p {
+      margin: 6px 0 0;
+      color: #9fb0c5;
+      font-size: 14px;
+    }
+
+    .admin-refresh {
+      border: 0;
+      border-radius: 12px;
+      padding: 11px 16px;
+      background: #1683ff;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .admin-stats {
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .admin-stat {
+      background: #0d1b2d;
+      border: 1px solid #19304a;
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .admin-stat span {
+      display: block;
+      color: #9fb0c5;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .admin-stat strong {
+      font-size: 24px;
+    }
+
+    .admin-section {
+      background: #0d1b2d;
+      border: 1px solid #19304a;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .admin-section h2 {
+      margin: 0 0 18px;
+      font-size: 19px;
+    }
+
+    .funding-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .funding-card {
+      background: #091626;
+      border: 1px solid #1a3652;
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .funding-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .funding-card-top strong {
+      font-size: 22px;
+    }
+
+    .pending-badge {
+      background: #4b3905;
+      color: #ffd95a;
+      border-radius: 20px;
+      padding: 6px 11px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .approved-badge {
+      background: #063d28;
+      color: #50e6a5;
+      border-radius: 20px;
+      padding: 6px 11px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .rejected-badge {
+      background: #45151b;
+      color: #ff7c88;
+      border-radius: 20px;
+      padding: 6px 11px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .funding-info {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .funding-info-item {
+      background: #0d1d30;
+      border-radius: 10px;
+      padding: 11px;
+    }
+
+    .funding-info-item span {
+      display: block;
+      color: #7f93aa;
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    .funding-info-item strong {
+      display: block;
+      font-size: 14px;
+      word-break: break-word;
+    }
+
+    .admin-note {
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 15px;
+      min-height: 80px;
+      resize: vertical;
+      border: 1px solid #25425f;
+      border-radius: 10px;
+      background: #07111f;
+      color: white;
+      padding: 12px;
+      outline: none;
+    }
+
+    .admin-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .approve-btn,
+    .reject-btn {
+      flex: 1;
+      border: 0;
+      border-radius: 11px;
+      padding: 13px;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .approve-btn {
+      background: #07945c;
+    }
+
+    .reject-btn {
+      background: #c73848;
+    }
+
+    .approve-btn:disabled,
+    .reject-btn:disabled,
+    .admin-refresh:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .empty-admin {
+      text-align: center;
+      padding: 45px 20px;
+      color: #8fa2b8;
+    }
+
+    .admin-login {
+      max-width: 430px;
+      margin: 80px auto;
+      background: #0d1b2d;
+      border: 1px solid #19304a;
+      border-radius: 18px;
+      padding: 25px;
+    }
+
+    .admin-login h2 {
+      margin-top: 0;
+    }
+
+    .admin-login p {
+      color: #9fb0c5;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .admin-login input {
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 10px;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid #25425f;
+      background: #07111f;
+      color: white;
+      outline: none;
+    }
+
+    .admin-login button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 13px;
+      border: 0;
+      border-radius: 10px;
+      background: #1683ff;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .admin-message {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #ff8792;
+    }
+
+    .admin-toast {
+      position: fixed;
+      left: 50%;
+      bottom: 25px;
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 99999;
+      padding: 13px 18px;
+      border-radius: 12px;
+      background: #10243b;
+      color: white;
+      border: 1px solid #2b4c6e;
+      transition: .25s ease;
+      max-width: calc(100% - 40px);
+      text-align: center;
+    }
+
+    .admin-toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 650px) {
+
+      .admin-page {
+        padding: 14px;
+      }
+
+      .admin-header {
+        align-items: flex-start;
+      }
+
+      .admin-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .funding-info {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-actions {
+        flex-direction: column;
+      }
+
+      .admin-title h1 {
+        font-size: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="admin-page">
+
+    <div class="admin-container">
+
+      <!-- HEADER -->
+
+      <header class="admin-header">
+
+        <div class="admin-title">
+
+          <h1>
+            REAL ABBA BOOSTING
+          </h1>
+
+          <p>
+            Admin Funding Panel
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          class="admin-refresh"
+          id="refreshButton"
+        >
+          Refresh
+        </button>
+
+      </header>
+
+      <!-- LOGIN -->
+
+      <section
+        class="admin-login"
+        id="adminLogin"
+      >
+
+        <h2>
+          Admin Login
+        </h2>
+
+        <p>
+          Sign in with the Supabase account
+          that you use as the administrator.
+        </p>
+
+        <input
+          type="email"
+          id="adminEmail"
+          placeholder="Admin email"
+          autocomplete="email"
+        >
+
+        <input
+          type="password"
+          id="adminPassword"
+          placeholder="Password"
+          autocomplete="current-password"
+        >
+
+        <button
+          type="button"
+          id="adminLoginButton"
+        >
+          Login
+        </button>
+
+        <div
+          class="admin-message"
+          id="adminLoginMessage"
+        ></div>
+
+      </section>
+
+      <!-- ADMIN DASHBOARD -->
+
+      <section
+        id="adminDashboard"
+        style="display:none;"
+      >
+
+        <!-- STATS -->
+
+        <div class="admin-stats">
+
+          <div class="admin-stat">
+
+            <span>
+              Pending Requests
+            </span>
+
+            <strong id="pendingCount">
+              0
+            </strong>
+
+          </div>
+
+          <div class="admin-stat">
+
+            <span>
+              Pending Amount
+            </span>
+
+            <strong id="pendingAmount">
+              ₦0
+            </strong>
+
+          </div>
+
+          <div class="admin-stat">
+
+            <span>
+              Total Requests
+            </span>
+
+            <strong id="totalRequests">
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+        <!-- FUNDING REQUESTS -->
+
+        <section class="admin-section">
+
+          <h2>
+            Funding Requests
+          </h2>
+
+          <div
+            class="funding-list"
+            id="fundingList"
+          >
+
+            <div class="empty-admin">
+              Loading funding requests...
+            </div>
+
+          </div>
+
+        </section>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <div
+    class="admin-toast"
+    id="adminToast"
+  ></div>
+
+  <!-- SUPABASE -->
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
+
+  <script src="supabase.js"></script>
+
+  <script>
+    (() => {
+
+      "use strict";
+
+      let adminUser = null;
+
+      const supabase =
+        window.supabaseClient;
+
+      const formatNaira = (amount) => {
+
+        return "₦" +
+          Number(
+            amount || 0
+          ).toLocaleString(
+            "en-NG"
+          );
+
+      };
+
+      const escapeHtml = (value) => {
+
+        return String(
+          value ?? ""
+        )
+          .replace(
+            /&/g,
+            "&amp;"
+          )
+          .replace(
+            /</g,
+            "&lt;"
+          )
+          .replace(
+            />/g,
+            "&gt;"
+          )
+          .replace(
+            /"/g,
+            "&quot;"
+          )
+          .replace(
+            /'/g,
+            "&#039;"
+          );
+
+      };
+
+      const showToast = (
+        message
+      ) => {
+
+        const toast =
+          document.getElementById(
+            "adminToast"
+          );
+
+        toast.textContent =
+          message;
+
+        toast.classList.add(
+          "show"
+        );
+
+        setTimeout(() => {
+
+          toast.classList.remove(
+            "show"
+          );
+
+        }, 3500);
+
+      };
+
+      const showLoginMessage = (
+        message
+      ) => {
+
+        document.getElementById(
+          "adminLoginMessage"
+        ).textContent =
+          message;
+
+      };
+
+      async function checkSession() {
+
+        if (!supabase) {
+
+          showLoginMessage(
+            "Supabase is not connected."
+          );
+
+          return;
+
+        }
+
+        const {
+          data: {
+            session
+          }
+        } =
+          await supabase.auth.getSession();
+
+        if (session?.user) {
+
+          adminUser =
+            session.user;
+
+          showDashboard();
+
+        }
+
+      }
+
+      function showDashboard() {
+
+        document.getElementById(
+          "adminLogin"
+        ).style.display =
+          "none";
+
+        document.getElementById(
+          "adminDashboard"
+        ).style.display =
+          "block";
+
+        loadFundingRequests();
+
+      }
+
+      async function adminLogin() {
+
+        const email =
+          document.getElementById(
+            "adminEmail"
+          ).value.trim();
+
+        const password =
+          document.getElementById(
+            "adminPassword"
+          ).value;
+
+        if (!email || !password) {
+
+          showLoginMessage(
+            "Enter your email and password."
+          );
+
+          return;
+
+        }
+
+        const button =
+          document.getElementById(
+            "adminLoginButton"
+          );
+
+        button.disabled = true;
+
+        button.textContent =
+          "Logging in...";
+
+        showLoginMessage("");
+
+        try {
+
+          const {
+            data,
+            error
+          } =
+            await supabase.auth.signInWithPassword({
+              email,
+              password
+            });
+
+          if (error) {
+            throw error;
+          }
+
+          adminUser =
+            data.user;
+
+          showDashboard();
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+          showLoginMessage(
+            error.message ||
+            "Login failed."
+          );
+
+        } finally {
+
+          button.disabled =
+            false;
+
+          button.textContent =
+            "Login";
+
+        }
+
+      }
+
+      async function loadFundingRequests() {
+
+        const list =
+          document.getElementById(
+            "fundingList"
+          );
+
+        list.innerHTML = `
+          <div class="empty-admin">
+            Loading funding requests...
+          </div>
+        `;
+
+        try {
+
+          const {
+            data,
+            error
+          } =
+            await supabase
+              .from(
+                "funding_requests"
+              )
+              .select("*")
+              .order(
+                "created_at",
+                {
+                  ascending: false
+                }
+              );
+
+          if (error) {
+            throw error;
+          }
+
+          updateStats(
+            data || []
+          );
+
+          renderFundingRequests(
+            data || []
+          );
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+          list.innerHTML = `
+            <div class="empty-admin">
+              Could not load funding requests.
+              <br><br>
+              ${escapeHtml(
+                error.message ||
+                "Database error"
+              )}
+            </div>
+          `;
+
+        }
+
+      }
+
+      function updateStats(
+        requests
+      ) {
+
+        const pending =
+          requests.filter(
+            request =>
+              request.status ===
+              "pending"
+          );
+
+        const pendingAmount =
+          pending.reduce(
+            (
+              total,
+              request
+            ) =>
+              total +
+              Number(
+                request.amount ||
+                0
+              ),
+            0
+          );
+
+        document.getElementById(
+          "pendingCount"
+        ).textContent =
+          pending.length;
+
+        document.getElementById(
+          "pendingAmount"
+        ).textContent =
+          formatNaira(
+            pendingAmount
+          );
+
+        document.getElementById(
+          "totalRequests"
+        ).textContent =
+          requests.length;
+
+      }
+
+      function renderFundingRequests(
+        requests
+      ) {
+
+        const list =
+          document.getElementById(
+            "fundingList"
+          );
+
+        if (!requests.length) {
+
+          list.innerHTML = `
+            <div class="empty-admin">
+              <div style="font-size:40px;">
+                💳
+              </div>
+
+              <h3>
+                No funding requests
+              </h3>
+
+              <p>
+                Customer funding requests
+                will appear here.
+              </p>
+            </div>
+          `;
+
+          return;
+        }
+
+        list.innerHTML =
+          requests
+            .map(
+              request =>
+                createFundingCard(
+                  request
+                )
+            )
+            .join("");
+
+      }
+
+      function createFundingCard(
+        request
+      ) {
+
+        const status =
+          String(
+            request.status ||
+            "pending"
+          ).toLowerCase();
+
+        const date =
+          request.created_at
+            ? new Date(
+                request.created_at
+              ).toLocaleString(
+                "en-NG"
+              )
+            : "";
+
+        let badgeClass =
+          "pending-badge";
+
+        if (
+          status ===
+          "approved"
+        ) {
+
+          badgeClass =
+            "approved-badge";
+
+        } else if (
+          status ===
+          "rejected"
+        ) {
+
+          badgeClass =
+            "rejected-badge";
+
+        }
+
+        const actions =
+          status ===
+          "pending"
+            ? `
+              <textarea
+                class="admin-note"
+                id="note-${escapeHtml(
+                  request.id
+                )}"
+                placeholder="Optional admin note..."
+              ></textarea>
+
+              <div class="admin-actions">
+
+                <button
+                  type="button"
+                  class="approve-btn"
+                  onclick="approveFunding('${escapeHtml(
+                    request.id
+                  )}')"
+                >
+                  ✓ Approve & Credit
+                </button>
+
+                <button
+                  type="button"
+                  class="reject-btn"
+                  onclick="rejectFunding('${escapeHtml(
+                    request.id
+                  )}')"
+                >
+                  ✕ Reject
+                </button>
+
+              </div>
+            `
+            : `
+              <div
+                style="
+                  margin-top:15px;
+                  color:#91a5ba;
+                  font-size:13px;
+                "
+              >
+                ${
+                  request.admin_note
+                    ? escapeHtml(
+                        request.admin_note
+                      )
+                    : "No admin note."
+                }
+              </div>
+            `;
+
+        return `
+          <article
+            class="funding-card"
+          >
+
+            <div
+              class="funding-card-top"
+            >
+
+              <strong>
+                ${formatNaira(
+                  request.amount
+                )}
+              </strong>
+
+              <span
+                class="${badgeClass}"
+              >
+                ${escapeHtml(
+                  status
+                    .charAt(0)
+                    .toUpperCase() +
+                  status.slice(1)
+                )}
+              </span>
+
+            </div>
+
+            <div
+              class="funding-info"
+            >
+
+              <div
+                class="funding-info-item"
+              >
+                <span>
+                  Customer ID
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+                    request.user_id
+                  )}
+                </strong>
+              </div>
+
+              <div
+                class="funding-info-item"
+              >
+                <span>
+                  Customer Bank
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+                    request.customer_bank_name
+                  )}
+                </strong>
+              </div>
+
+              <div
+                class="funding-info-item"
+              >
+                <span>
+                  Customer Account Name
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+                    request.customer_account_name
+                  )}
+                </strong>
+              </div>
+
+              <div
+                class="funding-info-item"
+              >
+                <span>
+                  Transaction Reference
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+                    request.transaction_reference
+                  )}
+                </strong>
+              </div>
+
+              <div
+                class="funding-info-item"
+              >
+                <span>
+                  Submitted
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+                    date
+                  )}
+                </strong>
+              </div>
+
+              <div
+                class="funding-info-item"
+              >
+                <span>
+                  Request ID
+                </span>
+
+                <strong>
+                  ${escapeHtml(
+                    request.id
+                  )}
+                </strong>
+              </div>
+
+            </div>
+
+            ${actions}
+
+          </article>
+        `;
+
+      }
+
+      /*
+       * IMPORTANT:
+       * Approval currently calls a Supabase RPC.
+       * We will create the secure RPC in the
+       * next database step.
+       */
+
+      window.approveFunding =
+        async function (
+          requestId
+        ) {
+
+          const note =
+            document.getElementById(
+              `note-${requestId}`
+            )?.value.trim() ||
+            "";
+
+          if (
+            !confirm(
+              "Approve this funding request and credit the customer's wallet?"
+            )
+          ) {
+            return;
+          }
+
+          try {
+
+            const {
+              error
+            } =
+              await supabase.rpc(
+                "approve_funding_request",
+                {
+                  p_request_id:
+                    requestId,
+                  p_admin_note:
+                    note
+                }
+              );
+
+            if (error) {
+              throw error;
+            }
+
+            showToast(
+              "Funding approved and wallet credited."
+            );
+
+            await loadFundingRequests();
+
+          } catch (error) {
+
+            console.error(
+              error
+            );
+
+            showToast(
+              error.message ||
+              "Could not approve funding request."
+            );
+
+          }
+
+        };
+
+      window.rejectFunding =
+        async function (
+          requestId
+        ) {
+
+          const note =
+            document.getElementById(
+              `note-${requestId}`
+            )?.value.trim() ||
+            "";
+
+          if (
+            !confirm(
+              "Reject this funding request?"
+            )
+          ) {
+            return;
+          }
+
+          try {
+
+            const {
+              error
+            } =
+              await supabase.rpc(
+                "reject_funding_request",
+                {
+                  p_request_id:
+                    requestId,
+                  p_admin_note:
+                    note
+                }
+              );
+
+            if (error) {
+              throw error;
+            }
+
+            showToast(
+              "Funding request rejected."
+            );
+
+            await loadFundingRequests();
+
+          } catch (error) {
+
+            console.error(
+              error
+            );
+
+            showToast(
+              error.message ||
+              "Could not reject funding request."
+            );
+
+          }
+
+        };
+
+      document
+        .getElementById(
+          "adminLoginButton"
+        )
+        .addEventListener(
+          "click",
+          adminLogin
+        );
+
+      document
+        .getElementById(
+          "refreshButton"
+        )
+        .addEventListener(
+          "click",
+          loadFundingRequests
+        );
+
+      checkSession();
+
+    })();
+  </script>
+
+</body>
+</html>
