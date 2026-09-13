@@ -1,2290 +1,2085 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#07111f">
 
-<title>Admin Panel - ABDUL VIRAL BOOSTER</title>
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0"
+>
+
+<title>ABDUL VIRAL BOOSTER - Admin</title>
+
+<meta
+name="description"
+content="ABDUL VIRAL BOOSTER Admin Dashboard"
+>
 
 <style>
+
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+box-sizing:border-box;
+margin:0;
+padding:0
 }
 
 :root{
-  --blue:#1683ff;
-  --blue-dark:#0864d8;
-  --bg:#020914;
-  --card:#0d1b2d;
-  --card2:#11243a;
-  --text:#fff;
-  --muted:#91a4ba;
-  --border:rgba(255,255,255,.08);
-  --green:#19c37d;
-  --red:#ff5263;
-  --yellow:#ffc107;
+--blue:#1683ff;
+--blue-dark:#0864d8;
+--bg:#07111f;
+--card:#0d1b2d;
+--card2:#11243a;
+--text:#fff;
+--muted:#91a4ba;
+--border:rgba(255,255,255,.08);
+--green:#19c37d;
+--red:#ff5263;
+--yellow:#ffd45a;
 }
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#020914;
-  color:var(--text);
-  min-height:100vh;
+font-family:Arial,Helvetica,sans-serif;
+background:#020914;
+color:var(--text);
+min-height:100vh;
 }
 
 button,
 input,
+select,
 textarea{
-  font:inherit;
+font:inherit;
 }
 
 button{
-  cursor:pointer;
+cursor:pointer;
 }
 
 .hidden{
-  display:none!important;
+display:none!important;
 }
 
 .app{
-  width:100%;
-  max-width:650px;
-  min-height:100vh;
-  margin:auto;
-  background:var(--bg);
-  padding-bottom:30px;
+width:100%;
+max-width:480px;
+min-height:100vh;
+margin:auto;
+background:var(--bg);
+position:relative;
+overflow:hidden;
 }
 
-
-/* =========================================
+/* =========================
    LOGIN
-========================================= */
+========================= */
 
 .auth{
-  min-height:100vh;
-  padding:30px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.auth-card{
-  width:100%;
-  max-width:430px;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:25px;
-  padding:25px;
-  box-shadow:0 20px 60px rgba(0,0,0,.3);
+min-height:100vh;
+padding:35px 22px;
+display:flex;
+flex-direction:column;
+justify-content:center;
 }
 
 .logo{
-  text-align:center;
-  margin-bottom:28px;
+text-align:center;
+margin-bottom:35px;
 }
 
 .logo-icon{
-  width:75px;
-  height:75px;
-  border-radius:22px;
-  background:linear-gradient(135deg,var(--blue),#0054c7);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:auto;
-  font-size:30px;
-  font-weight:900;
-  box-shadow:0 12px 35px rgba(22,131,255,.3);
+width:76px;
+height:76px;
+border-radius:22px;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:auto;
+background:linear-gradient(
+135deg,
+var(--blue),
+#0054c7
+);
+box-shadow:
+0 12px 35px rgba(22,131,255,.3);
+font-size:30px;
+font-weight:900;
 }
 
 .logo h1{
-  font-size:22px;
-  margin-top:15px;
+font-size:24px;
+margin-top:15px;
 }
 
 .logo p{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:6px;
+color:var(--muted);
+font-size:13px;
+margin-top:7px;
+}
+
+.auth-card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:20px;
+padding:20px;
+box-shadow:
+0 20px 60px rgba(0,0,0,.25);
 }
 
 .form-group{
-  margin-bottom:16px;
+margin-bottom:15px;
 }
 
 .form-group label{
-  display:block;
-  color:#b7c6d7;
-  font-size:13px;
-  margin-bottom:7px;
+display:block;
+color:#b7c6d7;
+font-size:13px;
+margin-bottom:7px;
 }
 
 .form-group input,
+.form-group select,
 .form-group textarea{
-  width:100%;
-  border:1px solid var(--border);
-  background:#081523;
-  color:#fff;
-  padding:14px;
-  border-radius:12px;
-  outline:none;
+width:100%;
+border:1px solid var(--border);
+background:#081523;
+color:#fff;
+padding:14px;
+border-radius:12px;
+outline:none;
 }
 
 .form-group textarea{
-  min-height:90px;
-  resize:vertical;
+min-height:90px;
+resize:vertical;
 }
 
 .form-group input:focus,
+.form-group select:focus,
 .form-group textarea:focus{
-  border-color:var(--blue);
+border-color:var(--blue);
 }
 
 .primary-btn{
-  width:100%;
-  border:0;
-  padding:15px;
-  border-radius:13px;
-  background:linear-gradient(135deg,var(--blue),var(--blue-dark));
-  color:#fff;
-  font-weight:bold;
-  box-shadow:0 8px 25px rgba(22,131,255,.22);
+width:100%;
+border:0;
+padding:15px;
+border-radius:13px;
+background:
+linear-gradient(
+135deg,
+var(--blue),
+var(--blue-dark)
+);
+color:#fff;
+font-weight:bold;
+box-shadow:
+0 8px 25px rgba(22,131,255,.22);
 }
 
-.primary-btn:disabled,
-.action-btn:disabled{
-  opacity:.55;
-  cursor:not-allowed;
+.primary-btn:disabled{
+opacity:.55;
+cursor:not-allowed;
 }
 
 .message{
-  margin-bottom:15px;
-  padding:12px;
-  border-radius:10px;
-  font-size:13px;
-  display:none;
-  line-height:1.5;
+margin-bottom:15px;
+padding:12px;
+border-radius:10px;
+font-size:13px;
+display:none;
+line-height:1.5;
 }
 
 .message.show{
-  display:block;
+display:block;
 }
 
 .message.success{
-  background:rgba(25,195,125,.12);
-  color:#5ce0a8;
+background:rgba(25,195,125,.12);
+color:#5ce0a8;
 }
 
 .message.error{
-  background:rgba(255,82,99,.12);
-  color:#ff7d89;
+background:rgba(255,82,99,.12);
+color:#ff7d89;
 }
 
-
-/* =========================================
+/* =========================
    ADMIN APP
-========================================= */
+========================= */
 
-.admin-app{
-  min-height:100vh;
+.main-app{
+min-height:100vh;
+padding-bottom:25px;
 }
 
 .topbar{
-  padding:22px 18px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--border);
+padding:22px 18px 15px;
+display:flex;
+align-items:center;
+justify-content:space-between;
 }
 
 .brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
+display:flex;
+align-items:center;
+gap:10px;
 }
 
 .brand-icon{
-  width:45px;
-  height:45px;
-  border-radius:14px;
-  background:linear-gradient(135deg,var(--blue),#0054c7);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:900;
+width:42px;
+height:42px;
+border-radius:13px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+background:
+linear-gradient(
+135deg,
+var(--blue),
+#0054c7
+);
 }
 
 .brand-text strong{
-  display:block;
-  font-size:14px;
+display:block;
+font-size:14px;
 }
 
 .brand-text span{
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-  margin-top:3px;
+display:block;
+color:var(--muted);
+font-size:10px;
+margin-top:2px;
 }
 
 .logout-btn{
-  border:1px solid var(--border);
-  background:var(--card);
-  color:#fff;
-  width:42px;
-  height:42px;
-  border-radius:12px;
+border:1px solid var(--border);
+background:var(--card);
+color:#fff;
+width:40px;
+height:40px;
+border-radius:12px;
 }
 
-
-/* =========================================
-   CONTENT
-========================================= */
-
-.content{
-  padding:20px 17px;
+.page{
+padding:5px 17px 25px;
 }
 
 .page-title{
-  font-size:25px;
-  font-weight:800;
-  margin-bottom:5px;
+font-size:25px;
+font-weight:800;
+margin:10px 0 5px;
 }
 
 .page-subtitle{
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:20px;
+color:var(--muted);
+font-size:13px;
+margin-bottom:20px;
 }
 
+/* =========================
+   ADMIN HEADER
+========================= */
 
-/* =========================================
+.admin-card{
+background:
+linear-gradient(
+135deg,
+#0d70df,
+#084b9c
+);
+border-radius:22px;
+padding:20px;
+margin-bottom:18px;
+position:relative;
+overflow:hidden;
+}
+
+.admin-card:after{
+content:"";
+position:absolute;
+width:130px;
+height:130px;
+border-radius:50%;
+border:25px solid rgba(255,255,255,.06);
+right:-40px;
+top:-40px;
+}
+
+.admin-label{
+color:#d8eaff;
+font-size:12px;
+}
+
+.admin-title{
+font-size:24px;
+font-weight:900;
+margin-top:7px;
+}
+
+.admin-email{
+font-size:11px;
+color:#d8eaff;
+margin-top:6px;
+}
+
+/* =========================
    STATS
-========================================= */
+========================= */
 
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-  margin-bottom:22px;
+.stats-grid{
+display:grid;
+grid-template-columns:
+repeat(2,1fr);
+gap:10px;
+margin-bottom:20px;
 }
 
 .stat-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:15px 11px;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:16px;
+padding:16px;
 }
 
 .stat-icon{
-  font-size:20px;
-  margin-bottom:9px;
+font-size:22px;
+margin-bottom:9px;
 }
 
-.stat-label{
-  color:var(--muted);
-  font-size:10px;
-  line-height:1.3;
+.stat-card strong{
+display:block;
+font-size:21px;
 }
 
-.stat-value{
-  font-size:18px;
-  font-weight:900;
-  margin-top:5px;
+.stat-card span{
+display:block;
+color:var(--muted);
+font-size:11px;
+margin-top:4px;
 }
 
+/* =========================
+   TOOLBAR
+========================= */
 
-/* =========================================
-   SECTION
-========================================= */
-
-.section-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:13px;
-}
-
-.section-title{
-  font-size:18px;
-  font-weight:800;
+.toolbar{
+display:flex;
+gap:9px;
+margin-bottom:15px;
 }
 
 .refresh-btn{
-  border:1px solid var(--border);
-  background:var(--card2);
-  color:#fff;
-  padding:9px 12px;
-  border-radius:10px;
-  font-size:11px;
-  font-weight:bold;
+flex:1;
+border:1px solid var(--border);
+background:var(--card2);
+color:#fff;
+padding:13px;
+border-radius:12px;
+font-weight:bold;
 }
 
-
-/* =========================================
-   REQUEST CARD
-========================================= */
-
-.request-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:19px;
-  padding:17px;
-  margin-bottom:13px;
+.filter-select{
+flex:1;
+border:1px solid var(--border);
+background:#081523;
+color:#fff;
+padding:13px;
+border-radius:12px;
+outline:none;
 }
 
-.request-card.pending-card{
-  border-color:rgba(255,193,7,.2);
+/* =========================
+   ORDER CARD
+========================= */
+
+.order-card{
+background:var(--card);
+border:1px solid var(--border);
+border-radius:19px;
+padding:17px;
+margin-bottom:12px;
 }
 
-.request-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:10px;
-  margin-bottom:14px;
+.order-top{
+display:flex;
+justify-content:space-between;
+gap:10px;
+margin-bottom:13px;
 }
 
-.request-amount{
-  font-size:23px;
-  font-weight:900;
-}
-
-.request-date{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:4px;
+.order-name{
+font-size:15px;
+font-weight:800;
 }
 
 .status{
-  display:inline-block;
-  padding:6px 9px;
-  border-radius:20px;
-  font-size:9px;
-  font-weight:800;
+font-size:10px;
+padding:6px 9px;
+border-radius:20px;
+background:
+rgba(255,212,90,.12);
+color:var(--yellow);
+white-space:nowrap;
 }
 
-.status.pending{
-  background:rgba(255,193,7,.12);
-  color:#ffd45a;
+.status.processing{
+background:rgba(22,131,255,.12);
+color:#58acff;
 }
 
-.status.approved{
-  background:rgba(25,195,125,.12);
-  color:#5ce0a8;
+.status.completed{
+background:rgba(25,195,125,.12);
+color:#5ce0a8;
 }
 
-.status.rejected{
-  background:rgba(255,82,99,.12);
-  color:#ff7d89;
+.status.failed{
+background:rgba(255,82,99,.12);
+color:#ff7d89;
 }
 
-.details{
-  background:#081523;
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:12px;
-  margin-bottom:14px;
+.order-details{
+color:var(--muted);
+font-size:11px;
+line-height:1.9;
+word-break:break-word;
 }
 
-.detail-row{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  padding:8px 0;
-  border-bottom:1px solid var(--border);
-  font-size:11px;
+.order-details strong{
+color:#fff;
 }
 
-.detail-row:last-child{
-  border-bottom:0;
+.order-id{
+color:#58acff!important;
+font-size:10px;
 }
 
-.detail-row span{
-  color:var(--muted);
-  flex-shrink:0;
+.order-link{
+color:#58acff;
+word-break:break-all;
 }
 
-.detail-row strong{
-  text-align:right;
-  word-break:break-word;
+.order-actions{
+border-top:1px solid var(--border);
+margin-top:14px;
+padding-top:14px;
 }
 
-
-/* =========================================
-   ADMIN NOTE
-========================================= */
-
-.note-group{
-  margin-bottom:12px;
+.action-label{
+font-size:12px;
+color:#b7c6d7;
+margin-bottom:8px;
+font-weight:bold;
 }
 
-.note-group label{
-  display:block;
-  color:var(--muted);
-  font-size:11px;
-  margin-bottom:6px;
+.action-row{
+display:flex;
+gap:8px;
+}
+
+.status-select{
+flex:1;
+background:#081523;
+border:1px solid var(--border);
+color:#fff;
+padding:11px;
+border-radius:11px;
+outline:none;
+}
+
+.update-btn{
+background:var(--blue);
+color:#fff;
+border:0;
+padding:11px 14px;
+border-radius:11px;
+font-weight:bold;
+}
+
+.update-btn:disabled{
+opacity:.5;
 }
 
 .note-input{
-  width:100%;
-  min-height:65px;
-  background:#081523;
-  color:#fff;
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:11px;
-  outline:none;
-  resize:vertical;
-  font-size:12px;
+width:100%;
+margin-top:9px;
+background:#081523;
+border:1px solid var(--border);
+color:#fff;
+padding:11px;
+border-radius:11px;
+outline:none;
 }
 
 .note-input:focus{
-  border-color:var(--blue);
+border-color:var(--blue);
 }
 
-
-/* =========================================
-   ACTIONS
-========================================= */
-
-.actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+.loading{
+text-align:center;
+color:var(--muted);
+padding:30px;
+font-size:13px;
 }
-
-.action-btn{
-  border:0;
-  padding:13px;
-  border-radius:11px;
-  color:#fff;
-  font-weight:800;
-  font-size:12px;
-}
-
-.approve-btn{
-  background:var(--green);
-}
-
-.reject-btn{
-  background:var(--red);
-}
-
-.action-btn:disabled{
-  opacity:.55;
-}
-
-
-/* =========================================
-   EMPTY
-========================================= */
 
 .empty{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:19px;
-  padding:35px 20px;
-  text-align:center;
+background:var(--card);
+border:1px solid var(--border);
+border-radius:17px;
+padding:30px;
+text-align:center;
+color:var(--muted);
+font-size:12px;
 }
 
 .empty-icon{
-  font-size:42px;
-  margin-bottom:12px;
+font-size:38px;
+margin-bottom:10px;
 }
 
-.empty strong{
-  display:block;
-  font-size:15px;
-}
-
-.empty p{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:7px;
-  line-height:1.5;
-}
-
-
-/* =========================================
-   LOADING
-========================================= */
-
-.loading{
-  text-align:center;
-  color:var(--muted);
-  padding:35px 15px;
-  font-size:12px;
-}
-
-
-/* =========================================
+/* =========================
    TOAST
-========================================= */
+========================= */
 
 .toast{
-  position:fixed;
-  left:50%;
-  bottom:25px;
-  transform:translateX(-50%) translateY(20px);
-  background:#15283d;
-  border:1px solid var(--border);
-  color:#fff;
-  padding:12px 17px;
-  border-radius:12px;
-  font-size:12px;
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
-  z-index:500;
-  width:max-content;
-  max-width:90%;
-  text-align:center;
+position:fixed;
+left:50%;
+bottom:25px;
+transform:
+translateX(-50%)
+translateY(20px);
+background:#15283d;
+border:1px solid var(--border);
+color:#fff;
+padding:12px 17px;
+border-radius:12px;
+font-size:12px;
+opacity:0;
+pointer-events:none;
+transition:.25s;
+z-index:200;
+width:max-content;
+max-width:90%;
+text-align:center;
 }
 
 .toast.show{
-  opacity:1;
-  transform:translateX(-50%) translateY(0);
+opacity:1;
+transform:
+translateX(-50%)
+translateY(0);
 }
 
+@media(min-width:600px){
 
-/* =========================================
-   MOBILE
-========================================= */
+body{
+padding:20px 0;
+}
 
-@media(max-width:420px){
-
-  .stats{
-    grid-template-columns:1fr;
-  }
-
-  .stat-card{
-    display:flex;
-    align-items:center;
-    gap:12px;
-  }
-
-  .stat-icon{
-    margin:0;
-  }
-
-  .stat-value{
-    font-size:17px;
-  }
+.app{
+border-radius:28px;
+min-height:calc(100vh - 40px);
+box-shadow:
+0 0 60px rgba(0,0,0,.45);
+}
 
 }
 
-
-/* =========================================
-   DESKTOP
-========================================= */
-
-@media(min-width:700px){
-
-  body{
-    padding:20px 0;
-  }
-
-  .app{
-    min-height:calc(100vh - 40px);
-    border-radius:28px;
-    box-shadow:0 0 60px rgba(0,0,0,.45);
-    overflow:hidden;
-  }
-
-}
 </style>
+
 </head>
 
 <body>
 
 <div class="app">
 
-
-<!-- =====================================
+<!-- =========================
      ADMIN LOGIN
-===================================== -->
+========================= -->
 
-<section id="authScreen" class="auth">
+<section
+id="authScreen"
+class="auth"
+>
 
-  <div class="auth-card">
+<div class="logo">
 
-    <div class="logo">
+<div class="logo-icon">
+AV
+</div>
 
-      <div class="logo-icon">
-        AV
-      </div>
+<h1>
+ABDUL VIRAL BOOSTER
+</h1>
 
-      <h1>ADMIN PANEL</h1>
+<p>
+Administrator Dashboard
+</p>
 
-      <p>
-        ABDUL VIRAL BOOSTER
-      </p>
+</div>
 
-    </div>
+<div class="auth-card">
 
+<div
+id="authMessage"
+class="message"
+></div>
 
-    <div id="authMessage" class="message"></div>
+<form id="loginForm">
 
+<div class="form-group">
 
-    <form id="loginForm">
+<label>
+Admin Email
+</label>
 
-      <div class="form-group">
+<input
+id="loginEmail"
+type="email"
+placeholder="Admin email"
+required
+>
 
-        <label>
-          Admin Email
-        </label>
+</div>
 
-        <input
-          id="loginEmail"
-          type="email"
-          value="abdulmajeedyunusaaliyu@gmail.com"
-          placeholder="Admin email"
-          required
-        >
+<div class="form-group">
 
-      </div>
+<label>
+Password
+</label>
 
+<input
+id="loginPassword"
+type="password"
+placeholder="Admin password"
+required
+>
 
-      <div class="form-group">
+</div>
 
-        <label>
-          Password
-        </label>
+<button
+id="loginBtn"
+class="primary-btn"
+type="submit"
+>
+Admin Login
+</button>
 
-        <input
-          id="loginPassword"
-          type="password"
-          placeholder="Enter admin password"
-          required
-        >
+</form>
 
-      </div>
-
-
-      <button
-        class="primary-btn"
-        type="submit"
-        id="loginButton"
-      >
-        Admin Login
-      </button>
-
-    </form>
-
-  </div>
+</div>
 
 </section>
 
 
-<!-- =====================================
+<!-- =========================
      ADMIN APP
-===================================== -->
+========================= -->
 
-<section id="adminApp" class="admin-app hidden">
-
+<section
+id="mainApp"
+class="main-app hidden"
+>
 
 <header class="topbar">
 
-  <div class="brand">
+<div class="brand">
 
-    <div class="brand-icon">
-      AV
-    </div>
+<div class="brand-icon">
+AV
+</div>
 
-    <div class="brand-text">
+<div class="brand-text">
 
-      <strong>
-        ABDUL VIRAL BOOSTER
-      </strong>
+<strong>
+ABDUL VIRAL BOOSTER
+</strong>
 
-      <span>
-        ADMIN DASHBOARD
-      </span>
+<span>
+ADMIN PANEL
+</span>
 
-    </div>
+</div>
 
-  </div>
+</div>
 
-
-  <button
-    class="logout-btn"
-    onclick="logout()"
-    title="Logout"
-  >
-    ↪
-  </button>
+<button
+class="logout-btn"
+onclick="logout()"
+>
+↪
+</button>
 
 </header>
 
 
-<div class="content">
+<main class="page">
+
+<h2 class="page-title">
+Admin Dashboard
+</h2>
+
+<p class="page-subtitle">
+Manage customer orders and update their status.
+</p>
 
 
-  <h1 class="page-title">
-    Admin Dashboard
-  </h1>
+<!-- ADMIN INFO -->
 
-  <p class="page-subtitle">
-    Manage customer funding requests.
-  </p>
+<div class="admin-card">
 
+<div class="admin-label">
+Administrator
+</div>
 
-  <!-- STATS -->
+<div
+class="admin-title"
+>
+ABDUL VIRAL BOOSTER
+</div>
 
-  <div class="stats">
-
-    <div class="stat-card">
-
-      <div class="stat-icon">
-        ⏳
-      </div>
-
-      <div>
-
-        <div class="stat-label">
-          Pending Requests
-        </div>
-
-        <div
-          class="stat-value"
-          id="pendingCount"
-        >
-          0
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="stat-card">
-
-      <div class="stat-icon">
-        💰
-      </div>
-
-      <div>
-
-        <div class="stat-label">
-          Pending Amount
-        </div>
-
-        <div
-          class="stat-value"
-          id="pendingAmount"
-        >
-          ₦0
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="stat-card">
-
-      <div class="stat-icon">
-        📋
-      </div>
-
-      <div>
-
-        <div class="stat-label">
-          Total Requests
-        </div>
-
-        <div
-          class="stat-value"
-          id="totalCount"
-        >
-          0
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- FUNDING REQUESTS -->
-
-  <div class="section-header">
-
-    <div class="section-title">
-      Funding Requests
-    </div>
-
-    <button
-      class="refresh-btn"
-      onclick="loadRequests()"
-      id="refreshButton"
-    >
-      ↻ Refresh
-    </button>
-
-  </div>
-
-
-  <div id="requestsList">
-
-    <div class="loading">
-      Loading funding requests...
-    </div>
-
-  </div>
-
+<div
+id="adminEmail"
+class="admin-email"
+>
+Loading...
+</div>
 
 </div>
+
+
+<!-- STATS -->
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📦
+</div>
+
+<strong id="totalOrders">
+0
+</strong>
+
+<span>
+Total Orders
+</span>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+⏳
+</div>
+
+<strong id="pendingOrders">
+0
+</strong>
+
+<span>
+Pending
+</span>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+⚙️
+</div>
+
+<strong id="processingOrders">
+0
+</strong>
+
+<span>
+Processing
+</span>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+✅
+</div>
+
+<strong id="completedOrders">
+0
+</strong>
+
+<span>
+Completed
+</span>
+
+</div>
+
+</div>
+
+
+<!-- TOOLBAR -->
+
+<div class="toolbar">
+
+<select
+id="statusFilter"
+class="filter-select"
+onchange="renderOrders()"
+>
+
+<option value="all">
+All Orders
+</option>
+
+<option value="pending">
+Pending
+</option>
+
+<option value="processing">
+Processing
+</option>
+
+<option value="completed">
+Completed
+</option>
+
+<option value="failed">
+Failed
+</option>
+
+</select>
+
+
+<button
+class="refresh-btn"
+onclick="loadOrders()"
+>
+🔄 Refresh
+</button>
+
+</div>
+
+
+<!-- ORDERS -->
+
+<div id="ordersList">
+
+<div class="loading">
+Loading orders...
+</div>
+
+</div>
+
+</main>
 
 </section>
 
+</div>
+
 
 <div
-  id="toast"
-  class="toast"
+id="toast"
+class="toast"
 ></div>
-
-
-</div>
 
 
 <!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <script>
 
-/* =========================================
+/* =========================================================
    SUPABASE
-========================================= */
+========================================================= */
 
 const SUPABASE_URL =
-  "https://vehfhjfhciszkgshohls.supabase.co";
+"https://vehfhjfhciszkgshohls.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_twl8rzLjHfsqKikAMKw8FQ_JmyvI7C4";
+"sb_publishable_twl8rzLjHfsqKikAMKw8FQ_JmyvI7C4";
 
 const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY,
-    {
-      auth:{
-        persistSession:true,
-        autoRefreshToken:true,
-        detectSessionInUrl:true
-      }
-    }
-  );
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY,
+{
+auth:{
+persistSession:true,
+autoRefreshToken:true,
+detectSessionInUrl:true
+}
+}
+);
 
 
-/* =========================================
-   ADMIN DETAILS
-========================================= */
+/* =========================================================
+   ADMIN
+========================================================= */
 
 const ADMIN_EMAIL =
-  "abdulmajeedyunusaaliyu@gmail.com";
+"abdulmajeedyunusaaliyu@gmail.com";
 
 
 let currentUser = null;
+let orders = [];
 
 
-/* =========================================
+/* =========================================================
    MESSAGE
-========================================= */
+========================================================= */
 
 function showMessage(
-  message,
-  type="error"
+text,
+type="error"
 ){
 
-  const box =
-    document.getElementById(
-      "authMessage"
-    );
+const box =
+document.getElementById(
+"authMessage"
+);
 
-  box.textContent =
-    message;
+box.textContent = text;
 
-  box.className =
-    "message show " + type;
-
-}
-
-
-/* =========================================
-   FRIENDLY AUTH ERROR
-========================================= */
-
-function friendlyAuthError(error){
-
-  const message =
-    String(
-      error?.message || ""
-    );
-
-  const lower =
-    message.toLowerCase();
-
-
-  if(
-    lower.includes(
-      "invalid login credentials"
-    )
-  ){
-
-    return "Incorrect admin email or password.";
-
-  }
-
-
-  if(
-    lower.includes(
-      "email not confirmed"
-    )
-  ){
-
-    return "The admin email has not been confirmed yet.";
-
-  }
-
-
-  if(
-    lower.includes(
-      "email not confirmed"
-    )
-  ){
-
-    return "Please confirm the admin email first.";
-
-  }
-
-
-  return message ||
-    "Login failed. Please try again.";
+box.className =
+"message show " + type;
 
 }
 
 
-/* =========================================
+function clearMessage(){
+
+const box =
+document.getElementById(
+"authMessage"
+);
+
+box.className =
+"message";
+
+box.textContent = "";
+
+}
+
+
+/* =========================================================
    LOGIN
-========================================= */
+========================================================= */
 
 document
 .getElementById("loginForm")
 .addEventListener(
-  "submit",
-  async function(e){
+"submit",
+async function(e){
 
-    e.preventDefault();
+e.preventDefault();
 
+clearMessage();
 
-    const email =
-      document
-        .getElementById("loginEmail")
-        .value
-        .trim();
+const email =
+document
+.getElementById("loginEmail")
+.value
+.trim();
 
+const password =
+document
+.getElementById("loginPassword")
+.value;
 
-    const password =
-      document
-        .getElementById("loginPassword")
-        .value;
+if(!email || !password){
 
-
-    if(!email || !password){
-
-      showMessage(
-        "Enter the admin email and password."
-      );
-
-      return;
-
-    }
-
-
-    const button =
-      document.getElementById(
-        "loginButton"
-      );
-
-
-    button.disabled =
-      true;
-
-    button.textContent =
-      "Signing in...";
-
-
-    showMessage(
-      "Signing in to admin panel...",
-      "success"
-    );
-
-
-    try{
-
-      const {
-        data,
-        error
-      } =
-        await supabaseClient
-          .auth
-          .signInWithPassword({
-            email,
-            password
-          });
-
-
-      if(error)
-        throw error;
-
-
-      if(!data || !data.user){
-
-        throw new Error(
-          "Could not sign in."
-        );
-
-      }
-
-
-      const signedInEmail =
-        String(
-          data.user.email || ""
-        ).toLowerCase();
-
-
-      if(
-        signedInEmail !==
-        ADMIN_EMAIL.toLowerCase()
-      ){
-
-        await supabaseClient
-          .auth
-          .signOut();
-
-        throw new Error(
-          "This account is not authorized to access the admin panel."
-        );
-
-      }
-
-
-      if(
-        !data.user.email_confirmed_at
-      ){
-
-        await supabaseClient
-          .auth
-          .signOut();
-
-        throw new Error(
-          "Please confirm the admin email before logging in."
-        );
-
-      }
-
-
-      /*
-        Verify admin status through
-        the secure database function.
-      */
-
-      const {
-        data:isAdmin,
-        error:adminError
-      } =
-        await supabaseClient
-          .rpc("is_admin");
-
-
-      if(adminError){
-
-        console.error(
-          "Admin verification error:",
-          adminError
-        );
-
-        throw new Error(
-          "Could not verify admin access."
-        );
-
-      }
-
-
-      if(isAdmin !== true){
-
-        await supabaseClient
-          .auth
-          .signOut();
-
-        throw new Error(
-          "You are not authorized as an admin."
-        );
-
-      }
-
-
-      currentUser =
-        data.user;
-
-
-      enterAdmin();
-
-
-    }catch(error){
-
-      console.error(
-        "Admin login error:",
-        error
-      );
-
-      showMessage(
-        friendlyAuthError(error)
-      );
-
-    }finally{
-
-      button.disabled =
-        false;
-
-      button.textContent =
-        "Admin Login";
-
-    }
-
-  }
+showMessage(
+"Enter your email and password."
 );
 
-
-/* =========================================
-   ENTER ADMIN
-========================================= */
-
-function enterAdmin(){
-
-  document
-    .getElementById("authScreen")
-    .classList.add("hidden");
-
-
-  document
-    .getElementById("adminApp")
-    .classList.remove("hidden");
-
-
-  loadRequests();
+return;
 
 }
 
 
-/* =========================================
-   CHECK SESSION
-========================================= */
+/*
+Only the configured administrator
+email is allowed to use this page.
+*/
+
+if(
+email.toLowerCase() !==
+ADMIN_EMAIL.toLowerCase()
+){
+
+showMessage(
+"Access denied. This account is not an administrator."
+);
+
+return;
+
+}
+
+
+const button =
+document.getElementById("loginBtn");
+
+button.disabled = true;
+button.textContent = "Signing in...";
+
+
+try{
+
+const {data,error} =
+await supabaseClient
+.auth
+.signInWithPassword({
+
+email:email,
+password:password
+
+});
+
+
+if(error){
+
+showMessage(
+error.message
+);
+
+button.disabled = false;
+button.textContent =
+"Admin Login";
+
+return;
+
+}
+
+
+if(
+!data ||
+!data.user
+){
+
+showMessage(
+"Unable to log in."
+);
+
+button.disabled = false;
+button.textContent =
+"Admin Login";
+
+return;
+
+}
+
+
+currentUser =
+data.user;
+
+
+/*
+Double-check the logged-in email.
+*/
+
+if(
+(currentUser.email || "")
+.toLowerCase() !==
+ADMIN_EMAIL.toLowerCase()
+){
+
+await supabaseClient
+.auth
+.signOut();
+
+currentUser = null;
+
+showMessage(
+"Access denied."
+);
+
+button.disabled = false;
+button.textContent =
+"Admin Login";
+
+return;
+
+}
+
+
+await enterAdmin();
+
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+error.message ||
+"Unable to log in."
+);
+
+}
+
+button.disabled = false;
+button.textContent =
+"Admin Login";
+
+});
+
+
+/* =========================================================
+   ENTER ADMIN
+========================================================= */
+
+async function enterAdmin(){
+
+if(!currentUser) return;
+
+
+document
+.getElementById("authScreen")
+.classList.add("hidden");
+
+document
+.getElementById("mainApp")
+.classList.remove("hidden");
+
+
+document
+.getElementById("adminEmail")
+.textContent =
+currentUser.email || ADMIN_EMAIL;
+
+
+await loadOrders();
+
+}
+
+
+/* =========================================================
+   SESSION CHECK
+========================================================= */
 
 async function checkSession(){
 
-  try{
+try{
 
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .auth
-        .getSession();
+const {data,error} =
+await supabaseClient
+.auth
+.getSession();
 
 
-    if(error){
+if(error){
 
-      console.error(
-        "Session error:",
-        error
-      );
-
-      return;
-
-    }
-
-
-    const session =
-      data?.session;
-
-
-    if(
-      !session ||
-      !session.user
-    ){
-
-      return;
-
-    }
-
-
-    const email =
-      String(
-        session.user.email || ""
-      ).toLowerCase();
-
-
-    if(
-      email !==
-      ADMIN_EMAIL.toLowerCase()
-    ){
-
-      await supabaseClient
-        .auth
-        .signOut();
-
-      return;
-
-    }
-
-
-    /*
-      Check secure admin function.
-    */
-
-    const {
-      data:isAdmin,
-      error:adminError
-    } =
-      await supabaseClient
-        .rpc("is_admin");
-
-
-    if(
-      adminError ||
-      isAdmin !== true
-    ){
-
-      await supabaseClient
-        .auth
-        .signOut();
-
-      return;
-
-    }
-
-
-    currentUser =
-      session.user;
-
-
-    enterAdmin();
-
-
-  }catch(error){
-
-    console.error(
-      "Session check error:",
-      error
-    );
-
-  }
+console.error(error);
+return;
 
 }
 
 
-/* =========================================
+if(
+data.session &&
+data.session.user
+){
+
+const email =
+(
+data.session.user.email ||
+""
+).toLowerCase();
+
+
+if(
+email ===
+ADMIN_EMAIL.toLowerCase()
+){
+
+currentUser =
+data.session.user;
+
+await enterAdmin();
+
+}else{
+
+await supabaseClient
+.auth
+.signOut();
+
+}
+
+}
+
+}catch(error){
+
+console.error(error);
+
+}
+
+}
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+supabaseClient
+.auth
+.onAuthStateChange(
+function(event,session){
+
+if(
+event === "SIGNED_OUT"
+){
+
+currentUser = null;
+
+document
+.getElementById("mainApp")
+.classList.add("hidden");
+
+document
+.getElementById("authScreen")
+.classList.remove("hidden");
+
+}
+
+});
+
+
+/* =========================================================
    LOGOUT
-========================================= */
+========================================================= */
 
 async function logout(){
 
-  await supabaseClient
-    .auth
-    .signOut();
+try{
 
-  currentUser =
-    null;
+await supabaseClient
+.auth
+.signOut();
 
+}catch(error){
 
-  document
-    .getElementById("adminApp")
-    .classList.add("hidden");
+console.error(error);
 
+}
 
-  document
-    .getElementById("authScreen")
-    .classList.remove("hidden");
+currentUser = null;
 
+document
+.getElementById("mainApp")
+.classList.add("hidden");
 
-  document
-    .getElementById("loginPassword")
-    .value = "";
+document
+.getElementById("authScreen")
+.classList.remove("hidden");
 
-
-  showMessage(
-    "You have been logged out.",
-    "success"
-  );
+document
+.getElementById("loginPassword")
+.value = "";
 
 }
 
 
-/* =========================================
-   LOAD REQUESTS
-========================================= */
+/* =========================================================
+   LOAD ORDERS
+========================================================= */
 
-async function loadRequests(){
+async function loadOrders(){
 
-  if(!currentUser){
+if(!currentUser){
 
-    return;
+toast(
+"Please log in as administrator."
+);
 
-  }
-
-
-  const box =
-    document.getElementById(
-      "requestsList"
-    );
-
-
-  const refresh =
-    document.getElementById(
-      "refreshButton"
-    );
-
-
-  refresh.disabled =
-    true;
-
-  refresh.textContent =
-    "Loading...";
-
-
-  box.innerHTML = `
-    <div class="loading">
-      Loading funding requests...
-    </div>
-  `;
-
-
-  try{
-
-    /*
-      Get all funding requests.
-
-      Admin SELECT policy allows the
-      admin email to read all rows.
-    */
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("funding_requests")
-        .select(`
-          id,
-          user_id,
-          customer_bank_name,
-          customer_account_name,
-          amount,
-          transaction_reference,
-          screenshot_url,
-          status,
-          admin_note,
-          created_at,
-          reviewed_at
-        `)
-        .order(
-          "created_at",
-          {
-            ascending:false
-          }
-        );
-
-
-    if(error)
-      throw error;
-
-
-    const requests =
-      data || [];
-
-
-    updateStats(
-      requests
-    );
-
-
-    if(
-      requests.length === 0
-    ){
-
-      box.innerHTML = `
-        <div class="empty">
-
-          <div class="empty-icon">
-            📭
-          </div>
-
-          <strong>
-            No funding requests
-          </strong>
-
-          <p>
-            Customer funding requests will appear here.
-          </p>
-
-        </div>
-      `;
-
-      return;
-
-    }
-
-
-    box.innerHTML =
-      requests
-        .map(
-          request =>
-            renderRequest(
-              request
-            )
-        )
-        .join("");
-
-
-  }catch(error){
-
-    console.error(
-      "Load requests error:",
-      error
-    );
-
-
-    box.innerHTML = `
-      <div class="empty">
-
-        <div class="empty-icon">
-          ⚠️
-        </div>
-
-        <strong>
-          Could not load requests
-        </strong>
-
-        <p>
-          ${escapeHTML(
-            error?.message ||
-            "Unknown error"
-          )}
-        </p>
-
-      </div>
-    `;
-
-
-  }finally{
-
-    refresh.disabled =
-      false;
-
-    refresh.textContent =
-      "↻ Refresh";
-
-  }
+return;
 
 }
 
 
-/* =========================================
-   UPDATE STATS
-========================================= */
+const box =
+document.getElementById(
+"ordersList"
+);
 
-function updateStats(
-  requests
-){
-
-  const pending =
-    requests.filter(
-      request =>
-        String(
-          request.status || ""
-        ).toLowerCase()
-        === "pending"
-    );
+box.innerHTML =
+`
+<div class="loading">
+Loading orders...
+</div>
+`;
 
 
-  const pendingAmount =
-    pending.reduce(
-      (total,request) =>
-        total +
-        Number(
-          request.amount || 0
-        ),
-      0
-    );
+try{
+
+const {data,error} =
+await supabaseClient
+.from("orders")
+.select(`
+id,
+user_id,
+platform,
+service,
+quantity,
+link,
+amount,
+unit_price,
+total_amount,
+status,
+admin_note,
+created_at,
+updated_at
+`)
+.order(
+"created_at",
+{
+ascending:false
+}
+);
 
 
-  document
-    .getElementById(
-      "pendingCount"
-    )
-    .textContent =
-      pending.length.toLocaleString();
+if(error){
 
+console.error(
+"Orders error:",
+error
+);
 
-  document
-    .getElementById(
-      "pendingAmount"
-    )
-    .textContent =
-      formatMoney(
-        pendingAmount
-      );
+box.innerHTML =
+`
+<div class="empty">
 
+<div class="empty-icon">
+⚠️
+</div>
 
-  document
-    .getElementById(
-      "totalCount"
-    )
-    .textContent =
-      requests.length.toLocaleString();
+Unable to load orders.
+
+<p style="margin-top:8px">
+${escapeHTML(error.message)}
+</p>
+
+</div>
+`;
+
+return;
 
 }
 
 
-/* =========================================
-   RENDER REQUEST
-========================================= */
+orders = data || [];
 
-function renderRequest(
-  request
-){
+updateStats();
 
-  const status =
-    String(
-      request.status ||
-      "pending"
-    ).toLowerCase();
+renderOrders();
 
 
-  const created =
-    request.created_at
-      ? new Date(
-          request.created_at
-        ).toLocaleString()
-      : "Unknown";
+}catch(error){
 
+console.error(error);
 
-  const reviewed =
-    request.reviewed_at
-      ? new Date(
-          request.reviewed_at
-        ).toLocaleString()
-      : "";
+box.innerHTML =
+`
+<div class="empty">
 
+<div class="empty-icon">
+⚠️
+</div>
 
-  const isPending =
-    status === "pending";
+Unable to load orders.
 
+</div>
+`;
 
-  return `
-
-    <div
-      class="request-card ${
-        isPending
-          ? "pending-card"
-          : ""
-      }"
-    >
-
-      <div class="request-header">
-
-        <div>
-
-          <div class="request-amount">
-            ${formatMoney(
-              request.amount
-            )}
-          </div>
-
-          <div class="request-date">
-            Submitted:
-            ${escapeHTML(
-              created
-            )}
-          </div>
-
-        </div>
-
-
-        <span
-          class="status ${escapeHTML(
-            status
-          )}"
-        >
-          ${escapeHTML(
-            status.toUpperCase()
-          )}
-        </span>
-
-      </div>
-
-
-      <div class="details">
-
-        <div class="detail-row">
-
-          <span>
-            Customer ID
-          </span>
-
-          <strong>
-            ${escapeHTML(
-              request.user_id
-            )}
-          </strong>
-
-        </div>
-
-
-        <div class="detail-row">
-
-          <span>
-            Customer Bank
-          </span>
-
-          <strong>
-            ${escapeHTML(
-              request.customer_bank_name
-            )}
-          </strong>
-
-        </div>
-
-
-        <div class="detail-row">
-
-          <span>
-            Account Name
-          </span>
-
-          <strong>
-            ${escapeHTML(
-              request.customer_account_name
-            )}
-          </strong>
-
-        </div>
-
-
-        <div class="detail-row">
-
-          <span>
-            Amount
-          </span>
-
-          <strong>
-            ${formatMoney(
-              request.amount
-            )}
-          </strong>
-
-        </div>
-
-
-        <div class="detail-row">
-
-          <span>
-            Transaction Reference
-          </span>
-
-          <strong>
-            ${escapeHTML(
-              request.transaction_reference
-            )}
-          </strong>
-
-        </div>
-
-
-        <div class="detail-row">
-
-          <span>
-            Request ID
-          </span>
-
-          <strong>
-            ${escapeHTML(
-              request.id
-            )}
-          </strong>
-
-        </div>
-
-
-        ${
-          request.screenshot_url
-          ? `
-            <div class="detail-row">
-
-              <span>
-                Screenshot
-              </span>
-
-              <strong>
-                <a
-                  href="${escapeHTML(
-                    request.screenshot_url
-                  )}"
-                  target="_blank"
-                  rel="noopener"
-                  style="color:#58acff;"
-                >
-                  View
-                </a>
-              </strong>
-
-            </div>
-          `
-          : ""
-        }
-
-
-        ${
-          reviewed
-          ? `
-            <div class="detail-row">
-
-              <span>
-                Reviewed
-              </span>
-
-              <strong>
-                ${escapeHTML(
-                  reviewed
-                )}
-              </strong>
-
-            </div>
-          `
-          : ""
-        }
-
-      </div>
-
-
-      ${
-        isPending
-        ? `
-
-          <div class="note-group">
-
-            <label>
-              Admin Note (optional)
-            </label>
-
-            <textarea
-              class="note-input"
-              id="note-${escapeHTML(
-                request.id
-              )}"
-              placeholder="Example: Payment verified successfully."
-            ></textarea>
-
-          </div>
-
-
-          <div class="actions">
-
-            <button
-              class="action-btn approve-btn"
-              onclick="approveRequest('${escapeJS(
-                request.id
-              )}')"
-            >
-              ✓ Approve & Credit
-            </button>
-
-
-            <button
-              class="action-btn reject-btn"
-              onclick="rejectRequest('${escapeJS(
-                request.id
-              )}')"
-            >
-              ✕ Reject
-            </button>
-
-          </div>
-
-        `
-        : `
-
-          ${
-            request.admin_note
-            ? `
-              <div
-                style="
-                  background:#081523;
-                  border:1px solid var(--border);
-                  border-radius:11px;
-                  padding:11px;
-                  color:#b7c6d7;
-                  font-size:11px;
-                  line-height:1.5;
-                "
-              >
-                <strong>
-                  Admin Note:
-                </strong>
-
-                ${escapeHTML(
-                  request.admin_note
-                )}
-              </div>
-            `
-            : ""
-          }
-
-        `
-      }
-
-    </div>
-
-  `;
+}
 
 }
 
 
-/* =========================================
-   APPROVE
-========================================= */
+/* =========================================================
+   STATS
+========================================================= */
 
-async function approveRequest(
-  requestId
-){
+function updateStats(){
 
-  if(!currentUser){
+const total =
+orders.length;
 
-    toast(
-      "Admin session expired. Please log in again."
-    );
+const pending =
+orders.filter(
+order =>
+order.status === "pending"
+).length;
 
-    return;
+const processing =
+orders.filter(
+order =>
+order.status === "processing"
+).length;
 
-  }
-
-
-  const noteElement =
-    document.getElementById(
-      "note-" + requestId
-    );
-
-
-  const note =
-    noteElement
-      ? noteElement.value.trim()
-      : "";
+const completed =
+orders.filter(
+order =>
+order.status === "completed"
+).length;
 
 
-  const confirmed =
-    window.confirm(
-      "Approve this funding request and credit the customer's wallet?"
-    );
+document
+.getElementById("totalOrders")
+.textContent =
+total;
 
 
-  if(!confirmed){
-
-    return;
-
-  }
-
-
-  const buttons =
-    document.querySelectorAll(
-      `[onclick*="${requestId}"]`
-    );
+document
+.getElementById("pendingOrders")
+.textContent =
+pending;
 
 
-  buttons.forEach(
-    button=>{
-      button.disabled =
-        true;
-    }
-  );
+document
+.getElementById("processingOrders")
+.textContent =
+processing;
 
 
-  toast(
-    "Approving funding request..."
-  );
-
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .rpc(
-          "approve_funding_request",
-          {
-            p_request_id:
-              requestId,
-
-            p_admin_note:
-              note
-          }
-        );
-
-
-    if(error)
-      throw error;
-
-
-    console.log(
-      "Approval result:",
-      data
-    );
-
-
-    toast(
-      "Funding approved and wallet credited successfully."
-    );
-
-
-    await loadRequests();
-
-
-  }catch(error){
-
-    console.error(
-      "Approve error:",
-      error
-    );
-
-
-    toast(
-      error?.message ||
-      "Could not approve funding request."
-    );
-
-
-    buttons.forEach(
-      button=>{
-        button.disabled =
-          false;
-      }
-    );
-
-  }
+document
+.getElementById("completedOrders")
+.textContent =
+completed;
 
 }
 
 
-/* =========================================
-   REJECT
-========================================= */
+/* =========================================================
+   RENDER ORDERS
+========================================================= */
 
-async function rejectRequest(
-  requestId
-){
+function renderOrders(){
 
-  if(!currentUser){
+const box =
+document.getElementById(
+"ordersList"
+);
 
-    toast(
-      "Admin session expired. Please log in again."
-    );
-
-    return;
-
-  }
+const filter =
+document.getElementById(
+"statusFilter"
+).value;
 
 
-  const noteElement =
-    document.getElementById(
-      "note-" + requestId
-    );
+let filtered =
+orders;
 
 
-  const note =
-    noteElement
-      ? noteElement.value.trim()
-      : "";
+if(filter !== "all"){
 
-
-  const confirmed =
-    window.confirm(
-      "Reject this funding request?"
-    );
-
-
-  if(!confirmed){
-
-    return;
-
-  }
-
-
-  const buttons =
-    document.querySelectorAll(
-      `[onclick*="${requestId}"]`
-    );
-
-
-  buttons.forEach(
-    button=>{
-      button.disabled =
-        true;
-    }
-  );
-
-
-  toast(
-    "Rejecting funding request..."
-  );
-
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .rpc(
-          "reject_funding_request",
-          {
-            p_request_id:
-              requestId,
-
-            p_admin_note:
-              note
-          }
-        );
-
-
-    if(error)
-      throw error;
-
-
-    console.log(
-      "Rejection result:",
-      data
-    );
-
-
-    toast(
-      "Funding request rejected."
-    );
-
-
-    await loadRequests();
-
-
-  }catch(error){
-
-    console.error(
-      "Reject error:",
-      error
-    );
-
-
-    toast(
-      error?.message ||
-      "Could not reject funding request."
-    );
-
-
-    buttons.forEach(
-      button=>{
-        button.disabled =
-          false;
-      }
-    );
-
-  }
+filtered =
+orders.filter(
+order =>
+order.status === filter
+);
 
 }
 
 
-/* =========================================
+if(filtered.length === 0){
+
+box.innerHTML =
+`
+<div class="empty">
+
+<div class="empty-icon">
+📦
+</div>
+
+<strong>
+No orders found
+</strong>
+
+<p style="margin-top:7px">
+There are no orders in this category.
+</p>
+
+</div>
+`;
+
+return;
+
+}
+
+
+box.innerHTML =
+filtered
+.map(
+order =>
+createOrderHTML(order)
+)
+.join("");
+
+}
+
+
+/* =========================================================
+   ORDER HTML
+========================================================= */
+
+function createOrderHTML(order){
+
+const status =
+String(
+order.status || "pending"
+)
+.toLowerCase();
+
+
+let statusClass = "";
+
+if(status === "processing"){
+statusClass =
+"processing";
+}
+
+if(status === "completed"){
+statusClass =
+"completed";
+}
+
+if(status === "failed"){
+statusClass =
+"failed";
+}
+
+
+const statusText =
+status
+.charAt(0)
+.toUpperCase() +
+status.slice(1);
+
+
+const created =
+order.created_at
+?
+new Date(
+order.created_at
+).toLocaleString(
+"en-NG"
+)
+:
+"—";
+
+
+const updated =
+order.updated_at
+?
+new Date(
+order.updated_at
+).toLocaleString(
+"en-NG"
+)
+:
+"—";
+
+
+const amount =
+Number(
+order.total_amount ??
+order.amount ??
+0
+);
+
+
+const unitPrice =
+Number(
+order.unit_price || 0
+);
+
+
+return `
+
+<div
+class="order-card"
+id="order-${escapeHTML(order.id)}"
+>
+
+<div class="order-top">
+
+<div class="order-name">
+
+${escapeHTML(
+order.platform
+)} ${escapeHTML(
+order.service
+)}
+
+</div>
+
+<div
+class="status ${statusClass}"
+>
+
+${escapeHTML(
+statusText
+)}
+
+</div>
+
+</div>
+
+
+<div class="order-details">
+
+Order ID:
+
+<strong class="order-id">
+${escapeHTML(order.id)}
+</strong>
+
+<br>
+
+Customer ID:
+
+<strong>
+${escapeHTML(order.user_id)}
+</strong>
+
+<br>
+
+Platform:
+
+<strong>
+${escapeHTML(order.platform)}
+</strong>
+
+<br>
+
+Service:
+
+<strong>
+${escapeHTML(order.service)}
+</strong>
+
+<br>
+
+Quantity:
+
+<strong>
+${Number(
+order.quantity || 0
+).toLocaleString()}
+</strong>
+
+<br>
+
+Price:
+
+<strong>
+${formatMoney(unitPrice)}
+ / 1,000
+</strong>
+
+<br>
+
+Amount:
+
+<strong style="color:#58acff">
+${formatMoney(amount)}
+</strong>
+
+<br>
+
+Created:
+
+${escapeHTML(created)}
+
+<br>
+
+Updated:
+
+${escapeHTML(updated)}
+
+<br>
+
+Link:
+
+<a
+class="order-link"
+href="${escapeHTML(order.link)}"
+target="_blank"
+rel="noopener noreferrer"
+>
+${escapeHTML(order.link)}
+</a>
+
+${
+order.admin_note
+?
+`
+<br>
+Admin Note:
+
+<strong>
+${escapeHTML(
+order.admin_note
+)}
+</strong>
+`
+:
+""
+}
+
+</div>
+
+
+<div class="order-actions">
+
+<div class="action-label">
+Update Order
+</div>
+
+
+<div class="action-row">
+
+<select
+class="status-select"
+id="status-${escapeHTML(order.id)}"
+>
+
+<option
+value="pending"
+${status === "pending" ? "selected" : ""}
+>
+Pending
+</option>
+
+<option
+value="processing"
+${status === "processing" ? "selected" : ""}
+>
+Processing
+</option>
+
+<option
+value="completed"
+${status === "completed" ? "selected" : ""}
+>
+Completed
+</option>
+
+<option
+value="failed"
+${status === "failed" ? "selected" : ""}
+>
+Failed
+</option>
+
+</select>
+
+
+<button
+class="update-btn"
+id="update-${escapeHTML(order.id)}"
+onclick="updateOrder('${escapeJS(order.id)}')"
+>
+Update
+</button>
+
+</div>
+
+
+<input
+class="note-input"
+id="note-${escapeHTML(order.id)}"
+type="text"
+placeholder="Admin note (optional)"
+value="${escapeHTML(order.admin_note || "")}"
+>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   UPDATE ORDER
+========================================================= */
+
+async function updateOrder(orderId){
+
+if(!currentUser){
+
+toast(
+"Please log in first."
+);
+
+return;
+
+}
+
+
+const statusSelect =
+document.getElementById(
+"status-" + orderId
+);
+
+const noteInput =
+document.getElementById(
+"note-" + orderId
+);
+
+const button =
+document.getElementById(
+"update-" + orderId
+);
+
+
+if(!statusSelect){
+
+toast(
+"Order control not found."
+);
+
+return;
+
+}
+
+
+const status =
+statusSelect.value;
+
+const note =
+noteInput
+?
+noteInput.value.trim()
+:
+"";
+
+
+button.disabled = true;
+button.textContent =
+"Saving...";
+
+
+try{
+
+const {data,error} =
+await supabaseClient
+.rpc(
+"update_order_status",
+{
+p_order_id:orderId,
+p_status:status,
+p_admin_note:note
+}
+);
+
+
+if(error){
+
+console.error(
+"Update order error:",
+error
+);
+
+toast(
+error.message ||
+"Unable to update order."
+);
+
+button.disabled = false;
+button.textContent =
+"Update";
+
+return;
+
+}
+
+
+if(!data){
+
+toast(
+"Order was not updated."
+);
+
+button.disabled = false;
+button.textContent =
+"Update";
+
+return;
+
+}
+
+
+toast(
+"Order updated successfully."
+);
+
+
+/*
+Reload from Supabase so the admin
+panel always shows the database value.
+*/
+
+await loadOrders();
+
+
+}catch(error){
+
+console.error(error);
+
+toast(
+error.message ||
+"Unable to update order."
+);
+
+}
+
+
+button.disabled = false;
+button.textContent =
+"Update";
+
+}
+
+
+/* =========================================================
    MONEY
-========================================= */
+========================================================= */
 
-function formatMoney(
-  amount
-){
+function formatMoney(amount){
 
-  return "₦" +
-    Number(
-      amount || 0
-    ).toLocaleString(
-      "en-NG",
-      {
-        minimumFractionDigits:0,
-        maximumFractionDigits:2
-      }
-    );
+return "₦" +
+Number(
+amount || 0
+)
+.toLocaleString(
+"en-NG",
+{
+minimumFractionDigits:0,
+maximumFractionDigits:2
+}
+);
 
 }
 
 
-/* =========================================
+/* =========================================================
    ESCAPE HTML
-========================================= */
+========================================================= */
 
-function escapeHTML(
-  value
-){
+function escapeHTML(value){
 
-  return String(
-    value ?? ""
-  )
-  .replace(
-    /&/g,
-    "&amp;"
-  )
-  .replace(
-    /</g,
-    "&lt;"
-  )
-  .replace(
-    />/g,
-    "&gt;"
-  )
-  .replace(
-    /"/g,
-    "&quot;"
-  )
-  .replace(
-    /'/g,
-    "&#039;"
-  );
+return String(
+value ?? ""
+)
+.replace(
+/&/g,
+"&amp;"
+)
+.replace(
+/</g,
+"&lt;"
+)
+.replace(
+/>/g,
+"&gt;"
+)
+.replace(
+/"/g,
+"&quot;"
+)
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
 
 
-/* =========================================
+/* =========================================================
    ESCAPE JS
-========================================= */
+========================================================= */
 
-function escapeJS(
-  value
-){
+function escapeJS(value){
 
-  return String(
-    value ?? ""
-  )
-  .replace(
-    /\\/g,
-    "\\\\"
-  )
-  .replace(
-    /'/g,
-    "\\'"
-  )
-  .replace(
-    /"/g,
-    '\\"'
-  );
+return String(
+value ?? ""
+)
+.replace(
+/\\/g,
+"\\\\"
+)
+.replace(
+/'/g,
+"\\'"
+)
+.replace(
+/"/g,
+'\\"'
+)
+.replace(
+/\n/g,
+"\\n"
+)
+.replace(
+/\r/g,
+"\\r"
+);
 
 }
 
 
-/* =========================================
+/* =========================================================
    TOAST
-========================================= */
+========================================================= */
 
 let toastTimer;
 
+function toast(message){
 
-function toast(
-  message
-){
+const box =
+document.getElementById(
+"toast"
+);
 
-  const box =
-    document.getElementById(
-      "toast"
-    );
+box.textContent =
+message;
 
+box.classList.add("show");
 
-  box.textContent =
-    message;
+clearTimeout(
+toastTimer
+);
 
+toastTimer =
+setTimeout(
+function(){
 
-  box.classList.add(
-    "show"
-  );
+box.classList.remove(
+"show"
+);
 
-
-  clearTimeout(
-    toastTimer
-  );
-
-
-  toastTimer =
-    setTimeout(
-      ()=>{
-        box.classList.remove(
-          "show"
-        );
-      },
-      4000
-    );
+},
+3500
+);
 
 }
 
 
-/* =========================================
-   AUTH STATE
-========================================= */
-
-supabaseClient
-  .auth
-  .onAuthStateChange(
-    async (
-      event,
-      session
-    )=>{
-
-      if(
-        event ===
-        "SIGNED_OUT"
-      ){
-
-        currentUser =
-          null;
-
-        document
-          .getElementById(
-            "adminApp"
-          )
-          .classList.add(
-            "hidden"
-          );
-
-        document
-          .getElementById(
-            "authScreen"
-          )
-          .classList.remove(
-            "hidden"
-          );
-
-      }
-
-    }
-  );
-
-
-/* =========================================
+/* =========================================================
    START
-========================================= */
+========================================================= */
 
 checkSession();
 
