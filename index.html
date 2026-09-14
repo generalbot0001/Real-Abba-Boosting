@@ -628,6 +628,66 @@ margin-bottom:4px
 color:#48a5ff
 }
 
+/* =========================================================
+   FLOATING WHATSAPP CUSTOMER CARE
+========================================================= */
+
+.whatsapp-float{
+position:fixed;
+right:18px;
+bottom:92px;
+width:58px;
+height:58px;
+border-radius:50%;
+background:#25D366;
+display:flex;
+align-items:center;
+justify-content:center;
+text-decoration:none;
+z-index:80;
+box-shadow:0 8px 25px rgba(0,0,0,.45),0 0 0 4px rgba(37,211,102,.12);
+transition:transform .2s ease,box-shadow .2s ease
+}
+
+.whatsapp-float:hover{
+transform:scale(1.08);
+box-shadow:0 10px 30px rgba(0,0,0,.5),0 0 0 6px rgba(37,211,102,.15)
+}
+
+.whatsapp-float:active{
+transform:scale(.95)
+}
+
+.whatsapp-icon{
+font-size:30px;
+line-height:1
+}
+
+.whatsapp-badge{
+position:absolute;
+top:-3px;
+right:-3px;
+width:17px;
+height:17px;
+border-radius:50%;
+background:#ff3b30;
+border:2px solid var(--bg)
+}
+
+.whatsapp-label{
+position:absolute;
+right:68px;
+white-space:nowrap;
+background:#10243a;
+border:1px solid var(--border);
+color:#fff;
+padding:8px 11px;
+border-radius:10px;
+font-size:10px;
+font-weight:800;
+box-shadow:0 6px 20px rgba(0,0,0,.3)
+}
+
 .modal{
 position:fixed;
 inset:0;
@@ -733,6 +793,11 @@ box-shadow:0 0 60px rgba(0,0,0,.45)
 bottom:20px;
 border-radius:18px;
 width:480px
+}
+
+.whatsapp-float{
+right:calc(50% - 220px);
+bottom:112px
 }
 
 .modal{
@@ -1273,6 +1338,22 @@ Loading funding history...
 </main>
 
 
+<!-- FLOATING WHATSAPP CUSTOMER CARE -->
+
+<a
+class="whatsapp-float"
+href="https://wa.me/2348103397413?text=Hello%20ABDUL%20VIRAL%20BOOSTER%20Customer%20Care%2C%20I%20need%20help."
+target="_blank"
+rel="noopener noreferrer"
+aria-label="Customer Care on WhatsApp"
+title="Customer Care"
+>
+<span class="whatsapp-icon">💬</span>
+<span class="whatsapp-badge"></span>
+<span class="whatsapp-label">Customer Care</span>
+</a>
+
+
 <nav class="bottom-nav">
 
 <button
@@ -1489,10 +1570,6 @@ Cancel
 
 <script>
 
-/* =========================================================
-   SUPABASE
-========================================================= */
-
 const SUPABASE_URL =
 "https://vehfhjfhciszkgshohls.supabase.co";
 
@@ -1511,11 +1588,6 @@ detectSessionInUrl:true
 }
 }
 );
-
-
-/* =========================================================
-   SERVICES
-========================================================= */
 
 const SERVICES = {
 
@@ -1581,18 +1653,8 @@ price:5000
 
 };
 
-
-/* =========================================================
-   APP STATE
-========================================================= */
-
 let currentUser = null;
 let balance = 0;
-
-
-/* =========================================================
-   AUTH UI
-========================================================= */
 
 function showAuth(type){
 
@@ -1630,7 +1692,6 @@ loginTab.classList.add("active");
 
 }
 
-
 function showMessage(text,type="error"){
 
 const box =
@@ -1643,7 +1704,6 @@ box.className =
 
 }
 
-
 function clearMessage(){
 
 const box =
@@ -1653,7 +1713,6 @@ box.className = "message";
 box.textContent = "";
 
 }
-
 
 function showFundingMessage(text,type="error"){
 
@@ -1666,11 +1725,6 @@ box.className =
 "message show " + type;
 
 }
-
-
-/* =========================================================
-   SIGN UP
-========================================================= */
 
 document
 .getElementById("signupForm")
@@ -1704,7 +1758,6 @@ document
 .getElementById("signupConfirm")
 .value;
 
-
 if(password !== confirm){
 
 showMessage(
@@ -1715,7 +1768,6 @@ return;
 
 }
 
-
 if(password.length < 6){
 
 showMessage(
@@ -1725,7 +1777,6 @@ showMessage(
 return;
 
 }
-
 
 try{
 
@@ -1749,14 +1800,12 @@ emailRedirectTo:redirectUrl
 
 });
 
-
 if(error){
 
 showMessage(error.message);
 return;
 
 }
-
 
 if(data.session){
 
@@ -1768,7 +1817,7 @@ await enterApp();
 }else{
 
 showMessage(
-"Account created. Please check your email and click the confirmation link before logging in.",
+"Account created successfully. You can now log in.",
 "success"
 );
 
@@ -1785,11 +1834,6 @@ error.message ||
 
 }
 );
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
 
 document
 .getElementById("loginForm")
@@ -1812,7 +1856,6 @@ document
 .getElementById("loginPassword")
 .value;
 
-
 if(!email || !password){
 
 showMessage(
@@ -1822,7 +1865,6 @@ showMessage(
 return;
 
 }
-
 
 try{
 
@@ -1834,7 +1876,6 @@ password:password
 
 });
 
-
 if(error){
 
 showMessage(error.message);
@@ -1842,14 +1883,12 @@ return;
 
 }
 
-
 if(!data.user){
 
 showMessage("Login failed.");
 return;
 
 }
-
 
 currentUser =
 data.user;
@@ -1868,11 +1907,6 @@ error.message ||
 }
 );
 
-
-/* =========================================================
-   FORGOT PASSWORD
-========================================================= */
-
 async function forgotPassword(){
 
 const email =
@@ -1880,7 +1914,6 @@ document
 .getElementById("loginEmail")
 .value
 .trim();
-
 
 if(!email){
 
@@ -1891,7 +1924,6 @@ showMessage(
 return;
 
 }
-
 
 try{
 
@@ -1909,14 +1941,12 @@ redirectTo:redirectUrl
 }
 );
 
-
 if(error){
 
 showMessage(error.message);
 return;
 
 }
-
 
 showMessage(
 "Password reset email sent. Check your inbox.",
@@ -1934,11 +1964,6 @@ error.message ||
 
 }
 
-
-/* =========================================================
-   SESSION
-========================================================= */
-
 async function checkSession(){
 
 try{
@@ -1948,14 +1973,12 @@ await supabaseClient
 .auth
 .getSession();
 
-
 if(error){
 
 console.error(error);
 return;
 
 }
-
 
 if(
 data.session &&
@@ -1987,11 +2010,6 @@ console.error(error);
 
 }
 
-
-/* =========================================================
-   AUTH STATE
-========================================================= */
-
 supabaseClient
 .auth
 .onAuthStateChange(
@@ -2017,17 +2035,11 @@ currentUser = null;
 }
 );
 
-
-/* =========================================================
-   ENTER APP
-========================================================= */
-
 async function enterApp(){
 
 if(!currentUser){
 return;
 }
-
 
 document
 .getElementById("authScreen")
@@ -2036,7 +2048,6 @@ document
 document
 .getElementById("mainApp")
 .classList.remove("hidden");
-
 
 updateUser();
 
@@ -2048,17 +2059,11 @@ await loadOrders();
 
 }
 
-
-/* =========================================================
-   USER
-========================================================= */
-
 function updateUser(){
 
 if(!currentUser){
 return;
 }
-
 
 const metadata =
 currentUser.user_metadata || {};
@@ -2070,7 +2075,6 @@ currentUser.email?.split("@")[0] ||
 
 const email =
 currentUser.email || "";
-
 
 document
 .getElementById("welcomeName")
@@ -2093,11 +2097,6 @@ name
 
 }
 
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
 async function logout(){
 
 try{
@@ -2111,7 +2110,6 @@ await supabaseClient
 console.error(error);
 
 }
-
 
 currentUser = null;
 balance = 0;
@@ -2132,11 +2130,6 @@ document
 
 }
 
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
 function goTo(page){
 
 document
@@ -2146,19 +2139,16 @@ p =>
 p.classList.remove("active")
 );
 
-
 const target =
 document.getElementById(
 page + "Page"
 );
-
 
 if(target){
 
 target.classList.add("active");
 
 }
-
 
 document
 .querySelectorAll(".nav-btn")
@@ -2167,7 +2157,6 @@ btn =>
 btn.classList.remove("active")
 );
 
-
 const nav =
 document.getElementById(
 "nav" +
@@ -2175,20 +2164,17 @@ page.charAt(0).toUpperCase() +
 page.slice(1)
 );
 
-
 if(nav){
 
 nav.classList.add("active");
 
 }
 
-
 if(page === "orders"){
 
 loadOrders();
 
 }
-
 
 if(page === "account"){
 
@@ -2198,7 +2184,6 @@ loadWallet();
 
 }
 
-
 window.scrollTo({
 top:0,
 behavior:"smooth"
@@ -2206,17 +2191,11 @@ behavior:"smooth"
 
 }
 
-
-/* =========================================================
-   WALLET
-========================================================= */
-
 async function loadWallet(){
 
 if(!currentUser){
 return;
 }
-
 
 try{
 
@@ -2226,7 +2205,6 @@ await supabaseClient
 .select("balance")
 .eq("user_id",currentUser.id)
 .maybeSingle();
-
 
 if(error){
 
@@ -2243,15 +2221,12 @@ return;
 
 }
 
-
 balance =
 Number(
 data?.balance || 0
 );
 
-
 updateBalanceDisplay();
-
 
 }catch(error){
 
@@ -2260,7 +2235,6 @@ console.error(error);
 }
 
 }
-
 
 function updateBalanceDisplay(){
 
@@ -2276,7 +2250,6 @@ formatMoney(balance);
 
 }
 
-
 function formatMoney(amount){
 
 return "₦" +
@@ -2291,18 +2264,12 @@ maximumFractionDigits:2
 
 }
 
-
-/* =========================================================
-   SERVICES
-========================================================= */
-
 function selectService(name){
 
 const select =
 document.getElementById(
 "orderService"
 );
-
 
 if(
 SERVICES[name]
@@ -2318,11 +2285,6 @@ goTo("order");
 
 }
 
-
-/* =========================================================
-   PRICE PREVIEW
-========================================================= */
-
 function updatePrice(){
 
 const selected =
@@ -2337,7 +2299,6 @@ document
 .value
 ) || 0;
 
-
 if(!selected){
 
 document
@@ -2349,10 +2310,8 @@ return;
 
 }
 
-
 const service =
 SERVICES[selected];
-
 
 if(!service){
 
@@ -2365,11 +2324,9 @@ return;
 
 }
 
-
 const total =
 service.price *
 (quantity / 1000);
-
 
 document
 .getElementById("orderTotal")
@@ -2377,11 +2334,6 @@ document
 formatMoney(total);
 
 }
-
-
-/* =========================================================
-   PLACE ORDER
-========================================================= */
 
 async function placeOrder(){
 
@@ -2394,7 +2346,6 @@ toast(
 return;
 
 }
-
 
 const selected =
 document
@@ -2414,7 +2365,6 @@ document
 .value
 .trim();
 
-
 if(!selected){
 
 toast(
@@ -2424,7 +2374,6 @@ toast(
 return;
 
 }
-
 
 if(!quantity || quantity < 100){
 
@@ -2436,7 +2385,6 @@ return;
 
 }
 
-
 if(!link){
 
 toast(
@@ -2447,10 +2395,8 @@ return;
 
 }
 
-
 const serviceInfo =
 SERVICES[selected];
-
 
 if(!serviceInfo){
 
@@ -2462,18 +2408,9 @@ return;
 
 }
 
-
-/*
-The displayed total is only a preview.
-
-The REAL price and deduction are calculated
-inside the secure Supabase place_order() RPC.
-*/
-
 const estimatedTotal =
 serviceInfo.price *
 (quantity / 1000);
-
 
 if(balance < estimatedTotal){
 
@@ -2487,7 +2424,6 @@ return;
 
 }
 
-
 const button =
 document.getElementById(
 "placeOrderBtn"
@@ -2496,7 +2432,6 @@ document.getElementById(
 button.disabled = true;
 button.textContent =
 "Processing...";
-
 
 try{
 
@@ -2519,7 +2454,6 @@ link
 }
 );
 
-
 if(error){
 
 console.error(
@@ -2539,7 +2473,6 @@ return;
 
 }
 
-
 if(!data){
 
 toast(
@@ -2554,42 +2487,21 @@ return;
 
 }
 
-
-/*
-IMPORTANT:
-
-Do not deduct the balance manually here.
-
-The Supabase RPC already:
-
-1. Checks balance
-2. Creates the order
-3. Deducts wallet
-4. Creates wallet transaction
-
-We only refresh the wallet from Supabase.
-*/
-
-
 await loadWallet();
 
 await loadOrders();
-
 
 document
 .getElementById("orderLink")
 .value = "";
 
-
 toast(
 "Order placed successfully!"
 );
 
-
 button.disabled = false;
 button.textContent =
 "Place Order";
-
 
 setTimeout(
 function(){
@@ -2599,7 +2511,6 @@ goTo("orders");
 },
 700
 );
-
 
 }catch(error){
 
@@ -2621,17 +2532,11 @@ button.textContent =
 
 }
 
-
-/* =========================================================
-   CLEAN RPC ERROR
-========================================================= */
-
 function cleanRPCError(message){
 
 if(!message){
 return "Unable to place order.";
 }
-
 
 if(
 message
@@ -2643,7 +2548,6 @@ return message;
 
 }
 
-
 if(
 message
 .toLowerCase()
@@ -2653,7 +2557,6 @@ message
 return "Your wallet could not be found. Please contact support.";
 
 }
-
 
 if(
 message
@@ -2665,15 +2568,9 @@ return "This service is currently unavailable.";
 
 }
 
-
 return message;
 
 }
-
-
-/* =========================================================
-   LOAD ORDERS FROM SUPABASE
-========================================================= */
 
 async function loadOrders(){
 
@@ -2681,7 +2578,6 @@ const box =
 document.getElementById(
 "ordersList"
 );
-
 
 if(!currentUser){
 
@@ -2696,14 +2592,12 @@ return;
 
 }
 
-
 box.innerHTML =
 `
 <div class="loading">
 Loading orders...
 </div>
 `;
-
 
 try{
 
@@ -2736,7 +2630,6 @@ ascending:false
 }
 );
 
-
 if(error){
 
 console.error(
@@ -2756,7 +2649,6 @@ ${escapeHTML(error.message)}
 return;
 
 }
-
 
 if(
 !data ||
@@ -2786,7 +2678,6 @@ return;
 
 }
 
-
 box.innerHTML =
 data
 .map(
@@ -2795,7 +2686,6 @@ renderOrder(order)
 )
 .join("");
 
-
 }catch(error){
 
 console.error(error);
@@ -2803,18 +2693,13 @@ console.error(error);
 box.innerHTML =
 `
 <div class="empty">
-Unable to load orders.
+Unable to load your orders.
 </div>
 `;
 
 }
 
 }
-
-
-/* =========================================================
-   RENDER ORDER
-========================================================= */
 
 function renderOrder(order){
 
@@ -2823,7 +2708,6 @@ String(
 order.status || "pending"
 )
 .toLowerCase();
-
 
 let statusClass = "";
 
@@ -2839,13 +2723,11 @@ if(status === "failed"){
 statusClass = "failed";
 }
 
-
 const statusText =
 status
 .charAt(0)
 .toUpperCase() +
 status.slice(1);
-
 
 const createdDate =
 order.created_at
@@ -2856,7 +2738,6 @@ order.created_at
 .toLocaleString("en-NG")
 :
 "";
-
 
 const note =
 order.admin_note &&
@@ -2870,7 +2751,6 @@ ${escapeHTML(order.admin_note)}
 `
 :
 "";
-
 
 return `
 
@@ -2897,7 +2777,6 @@ statusText
 </div>
 
 </div>
-
 
 <div class="order-details">
 
@@ -2955,11 +2834,6 @@ ${note}
 
 }
 
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
 function escapeHTML(value){
 
 return String(
@@ -2988,11 +2862,6 @@ value ?? ""
 
 }
 
-
-/* =========================================================
-   FUNDING MODAL
-========================================================= */
-
 function openTopup(){
 
 if(!currentUser){
@@ -3005,24 +2874,20 @@ return;
 
 }
 
-
 document
 .getElementById("topupModal")
 .classList.add("show");
-
 
 document
 .getElementById("fundingMessage")
 .className =
 "message";
 
-
 document
 .getElementById("fundingMessage")
 .textContent = "";
 
 }
-
 
 function closeTopup(){
 
@@ -3032,7 +2897,6 @@ document
 
 }
 
-
 function setAmount(amount){
 
 document
@@ -3041,11 +2905,6 @@ document
 amount;
 
 }
-
-
-/* =========================================================
-   SUBMIT FUNDING REQUEST
-========================================================= */
 
 async function submitFundingRequest(){
 
@@ -3059,7 +2918,6 @@ return;
 
 }
 
-
 const amount =
 Number(
 document
@@ -3067,13 +2925,11 @@ document
 .value
 );
 
-
 const bankName =
 document
 .getElementById("customerBankName")
 .value
 .trim();
-
 
 const accountName =
 document
@@ -3081,13 +2937,11 @@ document
 .value
 .trim();
 
-
 const reference =
 document
 .getElementById("transactionReference")
 .value
 .trim();
-
 
 if(!amount || amount <= 0){
 
@@ -3099,7 +2953,6 @@ return;
 
 }
 
-
 if(!bankName){
 
 showFundingMessage(
@@ -3109,7 +2962,6 @@ showFundingMessage(
 return;
 
 }
-
 
 if(!accountName){
 
@@ -3121,7 +2973,6 @@ return;
 
 }
 
-
 if(!reference){
 
 showFundingMessage(
@@ -3132,7 +2983,6 @@ return;
 
 }
 
-
 const button =
 document.getElementById(
 "submitFundingBtn"
@@ -3141,7 +2991,6 @@ document.getElementById(
 button.disabled = true;
 button.textContent =
 "Submitting...";
-
 
 try{
 
@@ -3170,7 +3019,6 @@ status:
 
 });
 
-
 if(error){
 
 console.error(
@@ -3191,7 +3039,6 @@ return;
 
 }
 
-
 showFundingMessage(
 "Funding request for " +
 formatMoney(amount) +
@@ -3199,11 +3046,9 @@ formatMoney(amount) +
 "success"
 );
 
-
 toast(
 "Funding request submitted!"
 );
-
 
 document
 .getElementById(
@@ -3211,13 +3056,11 @@ document
 )
 .value = "";
 
-
 document
 .getElementById(
 "customerAccountName"
 )
 .value = "";
-
 
 document
 .getElementById(
@@ -3225,16 +3068,13 @@ document
 )
 .value = "";
 
-
 document
 .getElementById(
 "topupAmount"
 )
 .value = "";
 
-
 await loadFundingHistory();
-
 
 setTimeout(
 function(){
@@ -3244,7 +3084,6 @@ closeTopup();
 },
 1800
 );
-
 
 }catch(error){
 
@@ -3257,17 +3096,11 @@ error.message ||
 
 }
 
-
 button.disabled = false;
 button.textContent =
 "Submit Funding Request";
 
 }
-
-
-/* =========================================================
-   FUNDING HISTORY
-========================================================= */
 
 async function loadFundingHistory(){
 
@@ -3275,12 +3108,10 @@ if(!currentUser){
 return;
 }
 
-
 const box =
 document.getElementById(
 "fundingHistory"
 );
-
 
 box.innerHTML =
 `
@@ -3288,7 +3119,6 @@ box.innerHTML =
 Loading funding history...
 </div>
 `;
-
 
 try{
 
@@ -3318,7 +3148,6 @@ ascending:false
 }
 );
 
-
 if(error){
 
 console.error(
@@ -3336,7 +3165,6 @@ Unable to load funding history.
 return;
 
 }
-
 
 if(
 !data ||
@@ -3360,14 +3188,12 @@ return;
 
 }
 
-
 box.innerHTML =
 data
 .map(
 request => {
 
 let statusClass = "";
-
 
 if(
 request.status === "approved"
@@ -3378,7 +3204,6 @@ statusClass =
 
 }
 
-
 if(
 request.status === "rejected"
 ){
@@ -3388,13 +3213,11 @@ statusClass =
 
 }
 
-
 const statusText =
 request.status
 .charAt(0)
 .toUpperCase() +
 request.status.slice(1);
-
 
 const note =
 request.admin_note
@@ -3410,7 +3233,6 @@ request.admin_note
 `
 :
 "";
-
 
 return `
 
@@ -3429,7 +3251,6 @@ statusText
 </div>
 
 </div>
-
 
 <div class="order-details">
 
@@ -3484,7 +3305,6 @@ ${note}
 )
 .join("");
 
-
 }catch(error){
 
 console.error(error);
@@ -3500,13 +3320,7 @@ Unable to load funding history.
 
 }
 
-
-/* =========================================================
-   TOAST
-========================================================= */
-
 let toastTimer;
-
 
 function toast(message){
 
@@ -3515,18 +3329,14 @@ document.getElementById(
 "toast"
 );
 
-
 box.textContent =
 message;
 
-
 box.classList.add("show");
-
 
 clearTimeout(
 toastTimer
 );
-
 
 toastTimer =
 setTimeout(
@@ -3539,11 +3349,6 @@ box.classList.remove("show");
 );
 
 }
-
-
-/* =========================================================
-   START
-========================================================= */
 
 checkSession();
 
